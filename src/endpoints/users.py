@@ -177,3 +177,9 @@ class Users(Base):
 			self.endpoint + '/login/switch',
 			options
 		)
+
+	def get_user_teams(self, user_id, options=None):
+		return self.client.get(
+			self.endpoint + '/' + user_id + '/teams',
+			options
+		)
