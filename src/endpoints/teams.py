@@ -10,12 +10,11 @@ class Teams(Base):
 			options
 		)
 
-	def get_teams(self, query=None, options=None):
-		query_string = self.build_query(query)
-
+	def get_teams(self, params=None, options=None):
 		return self.client.get(
-			self.endpoint + query_string,
-			options
+			self.endpoint,
+			options=options,
+			params=params
 		)
 
 	def get_team(self, team_id, options=None):
@@ -30,11 +29,11 @@ class Teams(Base):
 			options
 		)
 
-	def delete_team(self, team_id, query=None, options=None):
-		query_string = self.build_query(query)
+	def delete_team(self, team_id, params=None, options=None):
 		return self.client.delete(
-			self.endpoint + '/' + team_id + query_string,
-			options
+			self.endpoint + '/' + team_id,
+			options=options,
+			params=params
 		)
 
 	def patch_team(self, team_id, options=None):
