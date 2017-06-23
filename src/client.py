@@ -26,9 +26,13 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	def make_request(self, method, endpoint, options=None):
+	def make_request(self, method, endpoint, options=None, params=None, data=None):
 		if options is None:
 			options = {}
+		if params is None:
+			params = {}
+		if data is None:
+			data = {}
 		method = method.lower()
 		request = requests.get
 		if method == 'post':
@@ -42,27 +46,29 @@ class Client:
 				self.url + endpoint,
 				headers=self.auth_header(),
 				verify=self._verify,
-				json=options
+				json=options,
+				params=params,
+				data=data
 			)
 		response.raise_for_status()
 		return response
 
-	def get(self, endpoint, options=None):
+	def get(self, endpoint, options=None, params=None):
 		return json.loads(
-			self.make_request('get', endpoint, options).text
+			self.make_request('get', endpoint, options=options, params=params).text
 		)
 
-	def post(self, endpoint, options=None):
+	def post(self, endpoint, options=None, params=None, data=None):
 		return json.loads(
-			self.make_request('post', endpoint, options).text
+			self.make_request('post', endpoint, options=options, params=params, data=data).text
 		)
 
-	def put(self, endpoint, options=None):
+	def put(self, endpoint, options=None, params=None, data=None):
 		return json.loads(
-			self.make_request('put', endpoint, options).text
+			self.make_request('put', endpoint, options=options, params=params, data=data).text
 		)
 
-	def delete(self, endpoint, options=None):
+	def delete(self, endpoint, options=None, params=None, data=None):
 		return json.loads(
-			self.make_request('delete', endpoint, options).text
+			self.make_request('delete', endpoint, options=options, params=params, data=data).text
 		)
