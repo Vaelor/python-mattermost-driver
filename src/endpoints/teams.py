@@ -131,10 +131,10 @@ class Teams(Base):
 			options
 		)
 
-	def import_team_from_other_app(self, team_id, form=None):
+	def import_team_from_other_app(self, team_id, data=None):
 		return self.client.post(
 			self.endpoint + '/' + team_id + '/import',
-			form=form
+			data=data
 		)
 
 	def get_invite_info_for_team(self, invite_id):

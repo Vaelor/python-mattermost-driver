@@ -13,8 +13,8 @@ class Users(Base):
 	def create_user(self, options=None):
 		return self.client.post(self.endpoint, options)
 
-	def get_users(self, options=None):
-		return self.client.get(	self.endpoint, options)
+	def get_users(self, params=None):
+		return self.client.get(	self.endpoint, params=params)
 
 	def get_users_by_ids(self, options=None):
 		return self.client.post(
@@ -34,16 +34,15 @@ class Users(Base):
 			options
 		)
 
-	def autocomplete_users(self, options=None):
+	def autocomplete_users(self, params=None):
 		return self.client.get(
 			self.endpoint + '/autocomplete',
-			options
+			params=params
 		)
 
-	def get_user(self, user_id, options=None):
+	def get_user(self, user_id):
 		return self.client.get(
-			self.endpoint + '/' + user_id,
-			options
+			self.endpoint + '/' + user_id
 		)
 
 	def update_user(self, user_id, options=None):
@@ -52,10 +51,9 @@ class Users(Base):
 			options
 		)
 
-	def deactivate_user(self, user_id, options=None):
+	def deactivate_user(self, user_id):
 		return self.client.delete(
-			self.endpoint + '/' + user_id,
-			options
+			self.endpoint + '/' + user_id
 		)
 
 	def patch_user(self, user_id, options=None):
@@ -76,22 +74,20 @@ class Users(Base):
 			options
 		)
 
-	def get_user_profile_image(self, user_id, options=None):
+	def get_user_profile_image(self, user_id):
 		return self.client.get(
-			self.endpoint + '/' + user_id + '/image',
-			options
+			self.endpoint + '/' + user_id + '/image'
 		)
 
-	def set_user_profile_image(self, user_id, options=None):
+	def set_user_profile_image(self, user_id, data=None):
 		return self.client.post(
 			self.endpoint + '/' + user_id + '/image',
-			options
+			data=data
 		)
 
-	def get_user_by_username(self, username, options=None):
+	def get_user_by_username(self, username):
 		return self.client.get(
-			self.endpoint + '/username/' + username,
-			options
+			self.endpoint + '/username/' + username
 		)
 
 	def reset_password(self, options=None):
@@ -106,10 +102,9 @@ class Users(Base):
 			options
 		)
 
-	def generate_mfa(self, user_id, options=None):
+	def generate_mfa(self, user_id):
 		return self.client.post(
-			self.endpoint + '/' + user_id + '/mfa/generate',
-			options
+			self.endpoint + '/' + user_id + '/mfa/generate'
 		)
 
 	def check_mfa(self, options=None):
@@ -130,16 +125,14 @@ class Users(Base):
 			options
 		)
 
-	def get_user_by_email(self, email, options=None):
+	def get_user_by_email(self, email):
 		return self.client.post(
-			self.endpoint + '/email/' + email,
-			options
+			self.endpoint + '/email/' + email
 		)
 
-	def get_user_sessions(self, user_id, options=None):
+	def get_user_sessions(self, user_id):
 		return self.client.get(
-			self.endpoint + '/' + user_id + '/sessions',
-			options
+			self.endpoint + '/' + user_id + '/sessions'
 		)
 
 	def revoke_user_session(self, user_id, options=None):
@@ -154,10 +147,9 @@ class Users(Base):
 			options
 		)
 
-	def get_user_audits(self, user_id, options=None):
+	def get_user_audits(self, user_id):
 		return self.client.get(
-			self.endpoint + '/' + user_id + '/audits',
-			options
+			self.endpoint + '/' + user_id + '/audits'
 		)
 
 	def verify_user_email(self, options=None):
