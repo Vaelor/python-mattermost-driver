@@ -2,7 +2,7 @@
 
 ## Usage
 
-``` Python
+```python
 foo = Driver({
     'url': 'mattermost.server.com',
     'login_id': 'user.name',
