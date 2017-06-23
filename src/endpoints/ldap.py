@@ -10,6 +10,6 @@ class LDAP(Base):
 		)
 
 	def test_ldap_config(self):
-		return self.client.get(
+		return self.client.post(
 			self.endpoint + '/test'
 		)
