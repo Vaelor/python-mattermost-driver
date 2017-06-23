@@ -3,7 +3,7 @@ from src.endpoints.teams import Teams
 from src.endpoints.users import Users
 
 
-class Posts(Base):
+class Channels(Base):
 	endpoint = '/channels'
 
 	def create_channel(self, options):
