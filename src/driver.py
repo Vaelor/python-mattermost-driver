@@ -56,7 +56,7 @@ class Driver:
 			self.client.token = result.headers['Token']
 		return result
 
-	def users(self):
+	def users_api(self):
 		if 'users' not in self.routes:
 			self.routes['users'] = Users(self.client)
 		return self.routes['users']
