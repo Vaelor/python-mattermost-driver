@@ -1,4 +1,5 @@
 from src.endpoints.base import Base
+from src.endpoints.users import Users
 
 
 class Teams(Base):
@@ -10,17 +11,15 @@ class Teams(Base):
 			options
 		)
 
-	def get_teams(self, params=None, options=None):
+	def get_teams(self, params=None):
 		return self.client.get(
 			self.endpoint,
-			options=options,
 			params=params
 		)
 
-	def get_team(self, team_id, options=None):
+	def get_team(self, team_id):
 		return self.client.get(
 			self.endpoint + '/' + team_id,
-			options
 		)
 
 	def update_team(self, team_id, options=None):
@@ -29,10 +28,9 @@ class Teams(Base):
 			options
 		)
 
-	def delete_team(self, team_id, params=None, options=None):
+	def delete_team(self, team_id, params=None):
 		return self.client.delete(
 			self.endpoint + '/' + team_id,
-			options=options,
 			params=params
 		)
 
@@ -42,10 +40,9 @@ class Teams(Base):
 			options
 		)
 
-	def get_team_by_name(self, name, options=None):
+	def get_team_by_name(self, name):
 		return self.client.get(
-			self.endpoint + '/name/' + name,
-			options
+			self.endpoint + '/name/' + name
 		)
 
 	def search_teams(self, options=None):
@@ -54,8 +51,111 @@ class Teams(Base):
 			options
 		)
 
-	def check_team_exists(self, name, options=None):
+	def check_team_exists(self, name):
 		return self.client.get(
-			self.endpoint + '/name/' + name + '/exists',
+			self.endpoint + '/name/' + name + '/exists'
+		)
+
+	def get_user_teams(self, user_id):
+		return self.client.get(
+			Users.endpoint + '/' + user_id + '/teams'
+		)
+
+	def get_team_members(self, team_id, params=None):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/members',
+			params=params
+		)
+
+	def add_user_to_team(self, team_id, params=None, options=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/members',
+			options=options,
+			params=params
+		)
+
+	def add_multiple_users_to_team(self, team_id, options=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/members/batch',
+			options=options
+		)
+
+	def get_team_members_for_user(self, user_id):
+		return self.client.get(
+			Users.endpoint + '/' + user_id + '/teams/members'
+		)
+
+	def get_team_member(self, team_id, user_id):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/members/' + user_id,
+			options,
+		)
+
+	def remove_user_from_team(self, team_id, user_id):
+		return self.client.delete(
+			self.endpoint + '/' + team_id + '/members/' + user_id,
+			options,
+		)
+
+	def get_team_members_by_id(self, team_id, options=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/members/ids',
 			options
+		)
+
+	def get_team_stats(self, team_id):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/stats'
+		)
+
+	def update_team_member_roles(self, team_id, user_id, options=None):
+		return self.client.put(
+			self.endpoint + '/' + team_id + '/members/' + user_id + '/roles',
+			options
+		)
+
+	def get_team_unreads_for_user(self, user_id, params=None):
+		return self.client.get(
+			Users.endpoint + '/' + user_id + '/teams/unread',
+			params=params
+		)
+
+	def get_unreads_for_team(self, user_id, team_id):
+		return self.client.get(
+			Users.endpoint + '/' + user_id + '/teams/' + team_id + '/unread',
+		)
+
+	def invite_users_to_team_by_mail(self, team_id, options=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/invite/email',
+			options
+		)
+
+	def import_team_from_other_app(self, team_id, form=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/import',
+			form=form
+		)
+
+	def get_invite_info_for_team(self, invite_id):
+		return self.client.get(
+			self.endpoint + '/invite/' + invite_id,
+		)
+
+	def get_public_channels(self, team_id, params=None):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/channels',
+			params=params
+		)
+
+	def get_deleted_channels(self, team_id, params=None):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/channels/deleted',
+			params=params
+		)
+
+	def search_channels(self, team_id, options=None):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/channels/search',
+			options=options
 		)
