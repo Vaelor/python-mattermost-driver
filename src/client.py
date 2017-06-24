@@ -1,17 +1,21 @@
 import json
-
 import requests
 
 
 class Client:
 	def __init__(self, options):
-		self.url = '{scheme:s}://{url:s}{basePath:s}'.format(
+		self.url = '{scheme:s}://{url:s}{basepath:s}'.format(
 			scheme=options['scheme'],
 			url=options['url'],
-			basePath=options['basePath']
+			basepath=options['basepath']
 		)
+		self._scheme = options['scheme']
+		self._url = options['url']
+		self._basepath = options['basepath']
+		self._port = options['port']
 		self._verify = options['verify']
 		self._token = ''
+		self._cookie = None
 
 	@property
 	def token(self):

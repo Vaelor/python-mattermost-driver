@@ -1,4 +1,6 @@
 import json
+
+import asyncio
 import requests
 import logging
 import time
@@ -20,6 +22,7 @@ from src.endpoints.system import System
 from src.endpoints.teams import Teams
 from src.endpoints.users import Users
 from src.endpoints.webhooks import Webhooks
+from src.websocket import Websocket
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermost.api')
@@ -30,7 +33,8 @@ class Driver:
 	defaultOptions = {
 		'scheme': 'https',
 		'url': 'localhost',
-		'basePath': '/api/v4',
+		'port': 8065,
+		'basepath': '/api/v4',
 		'verify': True,
 		'timeout': 30,
 		'login_id': None,
@@ -43,6 +47,13 @@ class Driver:
 		self.driver = self.options
 		self.client = Client(self.options)
 		self.routes = {}
+		self.websocket = None
+
+	def init_websocket(self, event_handler):
+		self.websocket = Websocket(self.options, self.client.token)
+		loop = asyncio.get_event_loop()
+		loop.run_until_complete(self.websocket.connect(event_handler))
+		return loop
 
 	def login(self):
 		result = self.users_api().login_user({
