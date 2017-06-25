@@ -1,28 +1,26 @@
 import json
 
 import asyncio
-import requests
 import logging
-import time
 
-from src.client import Client
-from src.endpoints.brand import Brand
-from src.endpoints.channels import Channels
-from src.endpoints.cluster import Cluster
-from src.endpoints.commands import Commands
-from src.endpoints.compliance import Compliance
-from src.endpoints.files import Files
-from src.endpoints.jobs import Jobs
-from src.endpoints.ldap import LDAP
-from src.endpoints.oauth import OAuth
-from src.endpoints.posts import Posts
-from src.endpoints.preferences import Preferences
-from src.endpoints.saml import SAML
-from src.endpoints.system import System
-from src.endpoints.teams import Teams
-from src.endpoints.users import Users
-from src.endpoints.webhooks import Webhooks
-from src.websocket import Websocket
+from .client import Client
+from .websocket import Websocket
+from .endpoints.brand import Brand
+from .endpoints.channels import Channels
+from .endpoints.cluster import Cluster
+from .endpoints.commands import Commands
+from .endpoints.compliance import Compliance
+from .endpoints.files import Files
+from .endpoints.jobs import Jobs
+from .endpoints.ldap import LDAP
+from .endpoints.oauth import OAuth
+from .endpoints.posts import Posts
+from .endpoints.preferences import Preferences
+from .endpoints.saml import SAML
+from .endpoints.system import System
+from .endpoints.teams import Teams
+from .endpoints.users import Users
+from .endpoints.webhooks import Webhooks
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermost.api')
