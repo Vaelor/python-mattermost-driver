@@ -44,11 +44,23 @@ class Driver:
 		self.options.update(options)
 		self.driver = self.options
 		self.client = Client(self.options)
-		self.routes = {}
-		# TODO: Maybe this makes more sense
-		# self.api = {
-		# 	'users': Users(self.client)
-		# }
+		self.api = {
+			'users': Users(self.client),
+			'teams': Teams(self.client),
+			'channels': Channels(self.client),
+			'posts': Posts(self.client),
+			'files': Files(self.client),
+			'preferences': Preferences(self.client),
+			'webhooks': Webhooks(self.client),
+			'commands': Commands(self.client),
+			'compliance': Compliance(self.client),
+			'cluster': Cluster(self.client),
+			'brand': Brand(self.client),
+			'oauth': OAuth(self.client),
+			'saml': SAML(self.client),
+			'ldap': LDAP(self.client),
+			'jobs': Jobs(self.client),
+		}
 		self.websocket = None
 
 	def init_websocket(self, event_handler):
@@ -68,83 +80,3 @@ class Driver:
 
 	def logout(self):
 		self.users_api().logout_user()
-
-	def users_api(self):
-		if 'users' not in self.routes:
-			self.routes['users'] = Users(self.client)
-		return self.routes['users']
-
-	def teams_api(self):
-		if 'teams' not in self.routes:
-			self.routes['teams'] = Teams(self.client)
-		return self.routes['teams']
-
-	def channels_api(self):
-		if 'channels' not in self.routes:
-			self.routes['channels'] = Channels(self.client)
-		return self.routes['channels']
-
-	def posts_api(self):
-		if 'posts' not in self.routes:
-			self.routes['posts'] = Posts(self.client)
-		return self.routes['posts']
-
-	def files_api(self):
-		if 'files' not in self.routes:
-			self.routes['files'] = Files(self.client)
-		return self.routes['files']
-
-	def preferences_api(self):
-		if 'preferences' not in self.routes:
-			self.routes['preferences'] = Preferences(self.client)
-		return self.routes['preferences']
-
-	def webhooks_api(self):
-		if 'webhooks' not in self.routes:
-			self.routes['webhooks'] = Webhooks(self.client)
-		return self.routes['webhooks']
-
-	def commands_api(self):
-		if 'commands' not in self.routes:
-			self.routes['commands'] = Commands(self.client)
-		return self.routes['commands']
-
-	def system_api(self):
-		if 'system' not in self.routes:
-			self.routes['system'] = System(self.client)
-		return self.routes['system']
-
-	def compliance_api(self):
-		if 'compliance' not in self.routes:
-			self.routes['compliance'] = Compliance(self.client)
-		return self.routes['compliance']
-
-	def cluster_api(self):
-		if 'cluster' not in self.routes:
-			self.routes['cluster'] = Cluster(self.client)
-		return self.routes['cluster']
-
-	def brand_api(self):
-		if 'brand' not in self.routes:
-			self.routes['brand'] = Brand(self.client)
-		return self.routes['brand']
-
-	def oauth_api(self):
-		if 'oauth' not in self.routes:
-			self.routes['oauth'] = OAuth(self.client)
-		return self.routes['oauth']
-
-	def saml_api(self):
-		if 'saml' not in self.routes:
-			self.routes['saml'] = SAML(self.client)
-		return self.routes['saml']
-
-	def ldap_api(self):
-		if 'ldap' not in self.routes:
-			self.routes['ldap'] = LDAP(self.client)
-		return self.routes['ldap']
-
-	def jobs_api(self):
-		if 'jobs' not in self.routes:
-			self.routes['jobs'] = Jobs(self.client)
-		return self.routes['jobs']
