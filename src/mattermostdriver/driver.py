@@ -47,6 +47,10 @@ class Driver:
 		self.driver = self.options
 		self.client = Client(self.options)
 		self.routes = {}
+		# TODO: Maybe this makes more sense
+		# self.api = {
+		# 	'users': Users(self.client)
+		# }
 		self.websocket = None
 
 	def init_websocket(self, event_handler):

@@ -1,7 +1,7 @@
-from src.endpoints.base import Base
-from src.endpoints.teams import Teams
-from src.endpoints.users import Users
-from src.endpoints.channels import Channels
+from .base import Base
+from .teams import Teams
+from .users import Users
+from .channels import Channels
 
 
 class Posts(Base):

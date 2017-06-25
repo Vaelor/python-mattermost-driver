@@ -1,4 +1,4 @@
-from src.endpoints.base import Base
+from .base import Base
 
 
 class Files(Base):

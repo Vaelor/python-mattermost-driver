@@ -1,5 +1,4 @@
-from src.endpoints.base import Base
-
+from .base import Base
 
 class Brand(Base):
 	endpoint = '/brand'
