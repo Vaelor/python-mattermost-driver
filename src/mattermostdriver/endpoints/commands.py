@@ -1,5 +1,5 @@
-from src.endpoints.base import Base
-from src.endpoints.teams import Teams
+from .base import Base
+from .teams import Teams
 
 
 class Commands(Base):
