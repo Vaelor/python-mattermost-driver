@@ -40,6 +40,6 @@ setup(
 	},
 	install_requires=[
 		'websockets>=3.2',
-
+		'requests>=2.1'
 	]
 )
