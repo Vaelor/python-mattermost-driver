@@ -1,5 +1,3 @@
-import json
-
 import asyncio
 import logging
 
@@ -23,7 +21,7 @@ from .endpoints.users import Users
 from .endpoints.webhooks import Webhooks
 
 logging.basicConfig(level=logging.INFO)
-log = logging.getLogger('mattermost.api')
+log = logging.getLogger('mattermostdriver.api')
 
 
 class Driver:
@@ -51,6 +49,7 @@ class Driver:
 			'posts': Posts(self.client),
 			'files': Files(self.client),
 			'preferences': Preferences(self.client),
+			'system': System(self.client),
 			'webhooks': Webhooks(self.client),
 			'commands': Commands(self.client),
 			'compliance': Compliance(self.client),
@@ -70,7 +69,7 @@ class Driver:
 		return loop
 
 	def login(self):
-		result = self.users_api().login_user({
+		result = self.api['users'].login_user({
 			'login_id': self.options['login_id'],
 			'password': self.options['password'],
 		})
@@ -79,4 +78,4 @@ class Driver:
 		return result
 
 	def logout(self):
-		self.users_api().logout_user()
+		self.api['users'].logout_user()
