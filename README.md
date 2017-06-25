@@ -22,7 +22,7 @@ foo = Driver({
 	'scheme': 'https',
 	'port': 8065,
 	'basepath': '/api/v4',
-	# Use if self signed/insecure certificate
+	# Use False if self signed/insecure certificate
 	'verify': True,
 	# The interval the websocket will ping the server to keep the connection alive
 	'timeout': 30,
