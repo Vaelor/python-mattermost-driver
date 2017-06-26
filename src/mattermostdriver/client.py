@@ -60,6 +60,7 @@ class Client:
 				data=data
 			)
 		response.raise_for_status()
+		log.debug(json.loads(response.text))
 		return response
 
 	def get(self, endpoint, options=None, params=None):
