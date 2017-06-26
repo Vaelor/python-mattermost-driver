@@ -87,14 +87,12 @@ class Teams(Base):
 
 	def get_team_member(self, team_id, user_id):
 		return self.client.get(
-			self.endpoint + '/' + team_id + '/members/' + user_id,
-			options,
+			self.endpoint + '/' + team_id + '/members/' + user_id
 		)
 
 	def remove_user_from_team(self, team_id, user_id):
 		return self.client.delete(
-			self.endpoint + '/' + team_id + '/members/' + user_id,
-			options,
+			self.endpoint + '/' + team_id + '/members/' + user_id
 		)
 
 	def get_team_members_by_id(self, team_id, options=None):
