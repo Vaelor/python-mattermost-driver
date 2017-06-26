@@ -5,7 +5,7 @@
 Currently WIP / Unstable
 
 ## Installation
-
+NOT WORKING YET!
 `pip install mattermostdriver`
 
 ## Usage
