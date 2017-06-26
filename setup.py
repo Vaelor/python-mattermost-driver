@@ -16,7 +16,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version='0.1',
+	version='0.2.0',
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',
@@ -41,5 +41,5 @@ setup(
 	install_requires=[
 		'websockets>=3.2',
 		'requests>=2.1'
-	]
+	],
 )
