@@ -50,21 +50,12 @@ Usage
 
 If the mattermost api expects you to...
 
-- ... add a request body, use ``options`` with either a dict or array/list
-
 .. code:: python
+    # add a request body, use options with either a dict or array/list
     foo.api['channels'].create_channel(options={...})
-
-
-- ... add query parameters, use ``params`` with a dict
-
-.. code:: python
+    # add query parameters, use params with a dict
     foo.api['teams'].get_teams(params={...})
-
-
-- ... add a path parameter, use a normal parameter
-
-.. code:: python
+    # add a path parameter, use a normal parameter
     foo.api['user'].get_user(user_id='me')
 
 
