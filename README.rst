@@ -48,9 +48,10 @@ Usage
     foo.init_websocket(event_handler)
 
 
-If the mattermost api expects you to...
+If the mattermost api expects you to:
 
 .. code:: python
+
     # add a request body, use options with either a dict or array/list
     foo.api['channels'].create_channel(options={...})
     # add query parameters, use params with a dict
