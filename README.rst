@@ -35,7 +35,7 @@ Usage
 
     foo.login() # Returns the response
 
-    foo.api.users.get_user_by_username('another.name') # Returns JSON
+    foo.api['users'].get_user_by_username('another.name') # Returns JSON
 
     foo.api.channels.create_channel({
         'team_id': 'some_team_id',
