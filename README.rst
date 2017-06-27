@@ -38,7 +38,7 @@ Usage
 
     foo.api['users'].get_user_by_username('another.name') # Returns JSON
 
-    foo.api.channels.create_channel({
+    foo.api['channels'].create_channel(options={
         'team_id': 'some_team_id',
         'name': 'awesome-channel',
         'display_name': 'awesome channel',
@@ -46,6 +46,20 @@ Usage
     })
 
     foo.init_websocket(event_handler)
+
+
+If the mattermost api expects you to...
+- ... add a request body, use ``options`` with either a dict or array/list
+.. code:: python
+    foo.api['channels'].create_channel(options={...})
+
+- ... add query parameters, use ``params`` with a dict
+.. code:: python
+    foo.api['teams'].get_teams(params={...})
+
+- ... add a path parameter, use a normal parameter
+.. code:: python
+    foo.api['user'].get_user(user_id='me')
 
 Available endpoints:
 ''''''''''''''''''''
