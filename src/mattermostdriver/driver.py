@@ -63,18 +63,43 @@ class Driver:
 		self.websocket = None
 
 	def init_websocket(self, event_handler):
+		"""
+		Will initialize the websocket connection to the mattermost server.
+		This should be run after login(), because the websocket needs to make
+		an authentification.
+		See https://api.mattermost.com/v4/#tag/WebSocket for which
+		websocket events mattermost sends.
+
+		:param event_handler: The function to handle the websocket events.
+		:type event_handler: Function
+		:return: The event loop
+		"""
 		self.websocket = Websocket(self.options, self.client.token)
 		loop = asyncio.get_event_loop()
 		loop.run_until_complete(self.websocket.connect(event_handler))
 		return loop
 
 	def login(self):
+		"""
+		Log the user in.
+		The log in information is saved in the client.
+		- userid
+		- username
+		- cookies
+		:return: The raw response from the request
+		"""
 		result = self.api['users'].login_user({
 			'login_id': self.options['login_id'],
 			'password': self.options['password'],
 		})
+		log.debug(result)
 		if result.status_code == 200:
 			self.client.token = result.headers['Token']
+			self.client.cookies = result.cookies
+			if 'id' in result:
+				self.client.userid = result['id']
+			if 'username' in result:
+				self.client.username = result['username']
 		return result
 
 	def logout(self):
