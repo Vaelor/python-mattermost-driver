@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
 
-readme_file = os.path.join(root_dir, 'README.md')
+readme_file = os.path.join(root_dir, 'README.rst')
 with open(readme_file, encoding='utf-8') as f:
 	long_description = f.read()
 
@@ -16,7 +16,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version='0.3.0',
+	version='0.3.1',
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',
