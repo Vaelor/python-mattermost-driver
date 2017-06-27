@@ -5,6 +5,7 @@ Info
 ----
 
 Currently WIP / Unstable
+Breaking Changes are likely!
 
 Installation
 ------------
