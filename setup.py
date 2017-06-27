@@ -16,7 +16,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version='0.3.1',
+	version='0.3.2',
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',
