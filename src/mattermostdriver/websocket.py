@@ -31,7 +31,7 @@ class Websocket:
 			ssl=context,
 		)
 
-		yield from self._authenticate_websocket(websocket)
+		yield from self._authenticate_websocket(websocket, event_handler)
 		yield from self._start_loop(websocket, event_handler)
 
 	@asyncio.coroutine
@@ -54,12 +54,11 @@ class Websocket:
 				continue
 
 	@asyncio.coroutine
-	def _authenticate_websocket(self, websocket):
+	def _authenticate_websocket(self, websocket, event_handler):
 		"""
 		Sends a authentication challenge over a websocket.
 		This is not needed when we just send the cookie we got on login
 		when connecting to the websocket.
-		Currently (Mattermost 3.6.2) won't send all events when authenticated this way
 		"""
 		json_data = json.dumps({
 			"seq": 1,
@@ -68,16 +67,18 @@ class Websocket:
 				"token": self._token
 			}
 		}).encode('utf8')
+		yield from websocket.send(json_data)
 		while True:
-			yield from websocket.send(json_data)
-			response = yield from websocket.recv()
-			status = json.loads(response)
+			message = yield from websocket.recv()
+			status = json.loads(message)
 			log.debug(status)
+			# We want to pass the events to the event_handler already
+			# because the hello event could arrive before the authentication ok response
+			yield from event_handler(message)
 			if ('status' in status and status['status'] == 'OK') and \
 					('seq_reply' in status and status['seq_reply'] == 1):
-				log.info('Authentification OK')
+				log.info('Websocket authentification OK')
 				return True
-
 
 	@asyncio.coroutine
 	def wait_for_message(self, websocket, event_handler):
