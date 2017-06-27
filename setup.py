@@ -16,7 +16,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version='0.3.2',
+	version='0.4.0',
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',
@@ -24,7 +24,7 @@ setup(
 	author_email='github@kuuku.net',
 	license='MIT',
 	classifiers=[
-		'Development Status :: 1 - Planning',
+		'Development Status :: 2 - Pre-Alpha',
 		'Environment :: Web Environment',
 		'Intended Audience :: Developers',
 		'Programming Language :: Python',
