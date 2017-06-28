@@ -4,8 +4,8 @@ Python Mattermost Driver (APIv4)
 Info
 ----
 
-Currently WIP / Unstable
-Breaking Changes are likely!
+Breaking changes may happen but I try to avoid them.
+Mostly a bit more documentation to do now.
 
 Installation
 ------------
