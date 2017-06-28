@@ -1,3 +1,13 @@
+
+.. image:: https://img.shields.io/pypi/v/mattermostdriver.svg
+    :target: https://pypi.python.org/pypi/mattermostdriver
+
+.. image:: https://img.shields.io/pypi/l/mattermostdriver.svg
+    :target: https://pypi.python.org/pypi/mattermostdriver
+
+.. image:: https://img.shields.io/pypi/pyversions/mattermostdriver.svg
+    :target: https://pypi.python.org/pypi/mattermostdriver
+
 Python Mattermost Driver (APIv4)
 ================================
 
