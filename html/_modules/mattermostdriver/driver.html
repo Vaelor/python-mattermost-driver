@@ -1,0 +1,232 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mattermostdriver.driver &#8212; mattermostdriver 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for mattermostdriver.driver</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">.client</span> <span class="k">import</span> <span class="n">Client</span>
+<span class="kn">from</span> <span class="nn">.websocket</span> <span class="k">import</span> <span class="n">Websocket</span>
+<span class="kn">from</span> <span class="nn">.endpoints.brand</span> <span class="k">import</span> <span class="n">Brand</span>
+<span class="kn">from</span> <span class="nn">.endpoints.channels</span> <span class="k">import</span> <span class="n">Channels</span>
+<span class="kn">from</span> <span class="nn">.endpoints.cluster</span> <span class="k">import</span> <span class="n">Cluster</span>
+<span class="kn">from</span> <span class="nn">.endpoints.commands</span> <span class="k">import</span> <span class="n">Commands</span>
+<span class="kn">from</span> <span class="nn">.endpoints.compliance</span> <span class="k">import</span> <span class="n">Compliance</span>
+<span class="kn">from</span> <span class="nn">.endpoints.files</span> <span class="k">import</span> <span class="n">Files</span>
+<span class="kn">from</span> <span class="nn">.endpoints.jobs</span> <span class="k">import</span> <span class="n">Jobs</span>
+<span class="kn">from</span> <span class="nn">.endpoints.ldap</span> <span class="k">import</span> <span class="n">LDAP</span>
+<span class="kn">from</span> <span class="nn">.endpoints.oauth</span> <span class="k">import</span> <span class="n">OAuth</span>
+<span class="kn">from</span> <span class="nn">.endpoints.posts</span> <span class="k">import</span> <span class="n">Posts</span>
+<span class="kn">from</span> <span class="nn">.endpoints.preferences</span> <span class="k">import</span> <span class="n">Preferences</span>
+<span class="kn">from</span> <span class="nn">.endpoints.saml</span> <span class="k">import</span> <span class="n">SAML</span>
+<span class="kn">from</span> <span class="nn">.endpoints.system</span> <span class="k">import</span> <span class="n">System</span>
+<span class="kn">from</span> <span class="nn">.endpoints.teams</span> <span class="k">import</span> <span class="n">Teams</span>
+<span class="kn">from</span> <span class="nn">.endpoints.users</span> <span class="k">import</span> <span class="n">Users</span>
+<span class="kn">from</span> <span class="nn">.endpoints.webhooks</span> <span class="k">import</span> <span class="n">Webhooks</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;mattermostdriver.api&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Driver"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver">[docs]</a><span class="k">class</span> <span class="nc">Driver</span><span class="p">:</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Contains the client, api and provides you with functions for</span>
+<span class="sd">	login, logout and initializing a websocket connection.</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span>
+		<span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;localhost&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8065</span><span class="p">,</span>
+		<span class="s1">&#39;basepath&#39;</span><span class="p">:</span> <span class="s1">&#39;/api/v4&#39;</span><span class="p">,</span>
+		<span class="s1">&#39;verify&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+		<span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+		<span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+		<span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+	<span class="p">}</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	Required:</span>
+<span class="sd">		- login_id</span>
+<span class="sd">		- password</span>
+<span class="sd">	</span>
+<span class="sd">	Optional:</span>
+<span class="sd">		- scheme</span>
+<span class="sd">		- url (though it would be a good idea to change that)</span>
+<span class="sd">		- port</span>
+<span class="sd">		- verify</span>
+<span class="sd">		- timeout</span>
+<span class="sd">	</span>
+<span class="sd">	Should not be changed:</span>
+<span class="sd">		- basepath - unlikeliy this would do any good</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">default_options</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		:param options: A dict with the values from `default_options`</span>
+<span class="sd">		:type options: dict</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_options</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_options</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;users&#39;</span><span class="p">:</span> <span class="n">Users</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;teams&#39;</span><span class="p">:</span> <span class="n">Teams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;channels&#39;</span><span class="p">:</span> <span class="n">Channels</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;posts&#39;</span><span class="p">:</span> <span class="n">Posts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="n">Files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;preferences&#39;</span><span class="p">:</span> <span class="n">Preferences</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;system&#39;</span><span class="p">:</span> <span class="n">System</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;webhooks&#39;</span><span class="p">:</span> <span class="n">Webhooks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;commands&#39;</span><span class="p">:</span> <span class="n">Commands</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;compliance&#39;</span><span class="p">:</span> <span class="n">Compliance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;cluster&#39;</span><span class="p">:</span> <span class="n">Cluster</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;brand&#39;</span><span class="p">:</span> <span class="n">Brand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;oauth&#39;</span><span class="p">:</span> <span class="n">OAuth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;saml&#39;</span><span class="p">:</span> <span class="n">SAML</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;ldap&#39;</span><span class="p">:</span> <span class="n">LDAP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;jobs&#39;</span><span class="p">:</span> <span class="n">Jobs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+		<span class="p">}</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="Driver.init_websocket"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.init_websocket">[docs]</a>	<span class="k">def</span> <span class="nf">init_websocket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Will initialize the websocket connection to the mattermost server.</span>
+
+<span class="sd">		This should be run after login(), because the websocket needs to make</span>
+<span class="sd">		an authentification.</span>
+
+<span class="sd">		See https://api.mattermost.com/v4/#tag/WebSocket for which</span>
+<span class="sd">		websocket events mattermost sends.</span>
+
+<span class="sd">		:param event_handler: The function to handle the websocket events.</span>
+<span class="sd">		:type event_handler: Function</span>
+<span class="sd">		:return: The event loop</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="n">Websocket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+		<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+		<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">websocket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">event_handler</span><span class="p">))</span>
+		<span class="k">return</span> <span class="n">loop</span></div>
+
+<div class="viewcode-block" id="Driver.login"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.login">[docs]</a>	<span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Logs the user in.</span>
+
+<span class="sd">		The log in information is saved in the client:</span>
+
+<span class="sd">		- userid</span>
+<span class="sd">		- username</span>
+<span class="sd">		- cookies</span>
+
+<span class="sd">		:return: The raw response from the request</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">login_user</span><span class="p">({</span>
+			<span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;login_id&#39;</span><span class="p">],</span>
+			<span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+		<span class="p">})</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+		<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Token&#39;</span><span class="p">]</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cookies</span>
+			<span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+			<span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+		<span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="Driver.logout"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.logout">[docs]</a>	<span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		Log the user out.</span>
+
+<span class="sd">		:return: The JSON response from the server</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">logout_user</span><span class="p">()</span></div></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Christian Plümer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

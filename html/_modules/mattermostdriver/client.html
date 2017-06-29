@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mattermostdriver.client &#8212; mattermostdriver 0.5.0 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for mattermostdriver.client</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span>
+	<span class="n">InvalidOrMissingParameters</span><span class="p">,</span>
+	<span class="n">NoAccessTokenProvided</span><span class="p">,</span>
+	<span class="n">NotEnoughPermissions</span><span class="p">,</span>
+	<span class="n">ContentTooLarge</span><span class="p">,</span>
+	<span class="n">FeatureDisabled</span>
+<span class="p">)</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;mattermostdriver.websocket&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Client"><a class="viewcode-back" href="../../index.html#mattermostdriver.Client">[docs]</a><span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{scheme:s}</span><span class="s1">://</span><span class="si">{url:s}{basepath:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+			<span class="n">scheme</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;scheme&#39;</span><span class="p">],</span>
+			<span class="n">url</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
+			<span class="n">basepath</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;basepath&#39;</span><span class="p">]</span>
+		<span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_scheme</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;scheme&#39;</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_basepath</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;basepath&#39;</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_port</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;port&#39;</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_verify</span> <span class="o">=</span> <span class="n">options</span><span class="p">[</span><span class="s1">&#39;verify&#39;</span><span class="p">]</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_cookies</span> <span class="o">=</span> <span class="kc">None</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_userid</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_username</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">userid</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		:return: The user id of the logged in user</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_userid</span>
+
+	<span class="nd">@userid</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">userid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_userid</span> <span class="o">=</span> <span class="n">user_id</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">username</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		:return: The username of the logged in user. If none, returns an emtpy string.</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_username</span>
+
+	<span class="nd">@username</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">username</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">username</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_username</span> <span class="o">=</span> <span class="n">username</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		:return: The cookie given on login</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cookies</span>
+
+	<span class="nd">@cookies</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">cookies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cookies</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_cookies</span> <span class="o">=</span> <span class="n">cookies</span>
+
+	<span class="nd">@property</span>
+	<span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">		:return: The token for the login</span>
+<span class="sd">		&quot;&quot;&quot;</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span>
+
+	<span class="nd">@token</span><span class="o">.</span><span class="n">setter</span>
+	<span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">t</span>
+
+	<span class="k">def</span> <span class="nf">auth_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+			<span class="k">return</span> <span class="p">{}</span>
+		<span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer </span><span class="si">{token:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">)}</span>
+
+	<span class="k">def</span> <span class="nf">make_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">if</span> <span class="n">params</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">params</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+		<span class="n">method</span> <span class="o">=</span> <span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+		<span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span>
+		<span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;post&#39;</span><span class="p">:</span>
+			<span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span>
+		<span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;put&#39;</span><span class="p">:</span>
+			<span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">put</span>
+		<span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;delete&#39;</span><span class="p">:</span>
+			<span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span>
+
+		<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="n">endpoint</span><span class="p">,</span>
+				<span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_header</span><span class="p">(),</span>
+				<span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verify</span><span class="p">,</span>
+				<span class="n">json</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+				<span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+				<span class="n">data</span><span class="o">=</span><span class="n">data</span>
+			<span class="p">)</span>
+		<span class="k">try</span><span class="p">:</span>
+			<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+		<span class="k">except</span> <span class="n">requests</span><span class="o">.</span><span class="n">HTTPError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+			<span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+			<span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="n">InvalidOrMissingParameters</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+			<span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="n">NoAccessTokenProvided</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+			<span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">403</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="n">NotEnoughPermissions</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+			<span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">413</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="n">ContentTooLarge</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+			<span class="k">elif</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;status_code&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">501</span><span class="p">:</span>
+				<span class="k">raise</span> <span class="n">FeatureDisabled</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="k">raise</span>
+
+		<span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">text</span><span class="p">))</span>
+		<span class="k">return</span> <span class="n">response</span>
+
+	<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="s1">&#39;get&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+		<span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+		<span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">put</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="s1">&#39;put&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+		<span class="p">)</span>
+
+	<span class="k">def</span> <span class="nf">delete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="s1">&#39;delete&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
+		<span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Christian Plümer.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
