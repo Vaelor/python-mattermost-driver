@@ -15,7 +15,10 @@ Info
 ----
 
 Breaking changes may happen but I try to avoid them.
+
 Mostly a bit more documentation to do now.
+
+If something changes, it is most likely to change because the official mattermost api changed.
 
 Installation
 ------------
