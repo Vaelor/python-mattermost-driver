@@ -3,11 +3,17 @@ import sys
 
 from setuptools import setup, find_packages
 
+version = ''
+
 root_dir = os.path.abspath(os.path.dirname(__file__))
 
 readme_file = os.path.join(root_dir, 'README.rst')
 with open(readme_file, encoding='utf-8') as f:
 	long_description = f.read()
+
+version_module = os.path.join(root_dir, 'src', 'mattermostdriver', 'version.py')
+with open(version_module, encoding='utf-8') as f:
+	exec(f.read())
 
 py_version = sys.version_info[:2]
 
@@ -16,7 +22,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version='0.4.1',
+	version=version,
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',

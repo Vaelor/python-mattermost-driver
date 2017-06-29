@@ -25,8 +25,12 @@ log = logging.getLogger('mattermostdriver.api')
 
 
 class Driver:
+	"""
+	Contains the client, api and provides you with functions for
+	login, logout and initializing a websocket connection.
+	"""
 
-	defaultOptions = {
+	default_options = {
 		'scheme': 'https',
 		'url': 'localhost',
 		'port': 8065,
@@ -36,9 +40,30 @@ class Driver:
 		'login_id': None,
 		'password': None,
 	}
+	"""
+	Required:
+		- login_id
+		- password
+	
+	Optional:
+		- scheme
+		- url (though it would be a good idea to change that)
+		- port
+		- verify
+		- timeout
+	
+	Should not be changed:
+		- basepath - unlikeliy this would do any good
+	"""
 
-	def __init__(self, options):
-		self.options = self.defaultOptions.copy()
+	def __init__(self, options=default_options):
+		"""
+		:param options: A dict with the values from `default_options`
+		:type options: dict
+		"""
+		if options is None:
+			options = self.default_options
+		self.options = self.default_options.copy()
 		self.options.update(options)
 		self.driver = self.options
 		self.client = Client(self.options)
@@ -65,8 +90,10 @@ class Driver:
 	def init_websocket(self, event_handler):
 		"""
 		Will initialize the websocket connection to the mattermost server.
+
 		This should be run after login(), because the websocket needs to make
 		an authentification.
+
 		See https://api.mattermost.com/v4/#tag/WebSocket for which
 		websocket events mattermost sends.
 
@@ -81,11 +108,14 @@ class Driver:
 
 	def login(self):
 		"""
-		Log the user in.
-		The log in information is saved in the client.
+		Logs the user in.
+
+		The log in information is saved in the client:
+
 		- userid
 		- username
 		- cookies
+
 		:return: The raw response from the request
 		"""
 		result = self.api['users'].login_user({
@@ -103,4 +133,13 @@ class Driver:
 		return result
 
 	def logout(self):
-		self.api['users'].logout_user()
+		"""
+		Log the user out.
+
+		:return: The JSON response from the server
+		"""
+		self.client.token = ''
+		self.client.userid = ''
+		self.client.username = ''
+		self.client.cookies = None
+		return self.api['users'].logout_user()

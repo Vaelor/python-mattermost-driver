@@ -3,50 +3,16 @@ import json
 import logging
 import requests
 
+from .exceptions import (
+	InvalidOrMissingParameters,
+	NoAccessTokenProvided,
+	NotEnoughPermissions,
+	ContentTooLarge,
+	FeatureDisabled
+)
+
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.websocket')
-
-
-class InvalidOrMissingParameters(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	400 Invalid or missing parameters in URL or request body
-	"""
-
-
-class NoAccessTokenProvided(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	401 No access token provided
-	"""
-
-
-class NotEnoughPermissions(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	403 Do not have appropriate permissions
-	"""
-
-
-class ResourceNotFound(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	404 Resource not found
-	"""
-
-
-class ContentTooLarge(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	413 Content too large
-	"""
-
-
-class FeatureDisabled(requests.HTTPError):
-	"""
-	Raised when mattermost returns a
-	501 Feature is disabled
-	"""
 
 
 class Client:
@@ -67,6 +33,9 @@ class Client:
 
 	@property
 	def userid(self):
+		"""
+		:return: The user id of the logged in user
+		"""
 		return self._userid
 
 	@userid.setter
@@ -75,6 +44,9 @@ class Client:
 
 	@property
 	def username(self):
+		"""
+		:return: The username of the logged in user. If none, returns an emtpy string.
+		"""
 		return self._username
 
 	@username.setter
@@ -87,6 +59,9 @@ class Client:
 
 	@property
 	def cookies(self):
+		"""
+		:return: The cookie given on login
+		"""
 		return self._cookies
 
 	@cookies.setter
@@ -95,6 +70,9 @@ class Client:
 
 	@property
 	def token(self):
+		"""
+		:return: The token for the login
+		"""
 		return self._token
 
 	@token.setter
