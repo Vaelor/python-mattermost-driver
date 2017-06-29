@@ -23,11 +23,16 @@ If something changes, it is most likely to change because the official mattermos
 Installation
 ------------
 
+.. inclusion-marker-start-install
+
 ``pip install mattermostdriver``
+
+.. inclusion-marker-end-install
 
 Usage
 -----
 
+.. inclusion-marker-start-usage
 
 .. code:: python
 
@@ -84,7 +89,7 @@ Usage
     # See the API documentation for which events are available.
     foo.init_websocket(event_handler)
 
-
+.. inclusion-marker-end-usage
 
 Available endpoints:
 ''''''''''''''''''''
