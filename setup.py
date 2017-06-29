@@ -3,7 +3,7 @@ import sys
 
 from setuptools import setup, find_packages
 
-version = ''
+full_version = ''
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
 
@@ -22,7 +22,7 @@ if py_version < (3, 3):
 
 setup(
 	name='mattermostdriver',
-	version=version,
+	version=full_version,
 	description='A Python Mattermost Driver',
 	long_description=long_description,
 	url='https://github.com/Vaelor/python-mattermost-driver',
