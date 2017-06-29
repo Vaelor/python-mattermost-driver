@@ -29,6 +29,10 @@ Installation
 
 .. inclusion-marker-end-install
 
+Documentation
+-------------
+Documentation can be found at https://vaelor.github.io/python-mattermost-driver/ .
+
 Usage
 -----
 
