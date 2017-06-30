@@ -67,10 +67,15 @@ class Teams(Base):
 			params=params
 		)
 
-	def add_user_to_team(self, team_id, params=None, options=None):
+	def add_user_to_team(self, team_id, options=None):
 		return self.client.post(
 			self.endpoint + '/' + team_id + '/members',
-			options=options,
+			options=options
+		)
+
+	def add_user_to_team_from_invite(self, params=None):
+		return self.client.post(
+			self.endpoint + '/members/invite',
 			params=params
 		)
 
