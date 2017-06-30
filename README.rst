@@ -113,7 +113,6 @@ Available endpoints:
 -  oauth
 -  saml
 -  ldap
--  jobs
 
 See https://api.mattermost.com/v4/ to see which api requests are
 available.

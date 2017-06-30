@@ -83,7 +83,6 @@ class Driver:
 			'oauth': OAuth(self.client),
 			'saml': SAML(self.client),
 			'ldap': LDAP(self.client),
-			'jobs': Jobs(self.client),
 		}
 		self.websocket = None
 
