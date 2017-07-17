@@ -1,8 +1,6 @@
 import asyncio
 import logging
 
-from src.mattermostdriver.endpoints.elasticsearch import Elasticsearch
-from src.mattermostdriver.endpoints.emoji import Emoji
 from .client import Client
 from .websocket import Websocket
 from .endpoints.brand import Brand
@@ -20,6 +18,8 @@ from .endpoints.system import System
 from .endpoints.teams import Teams
 from .endpoints.users import Users
 from .endpoints.webhooks import Webhooks
+from .endpoints.elasticsearch import Elasticsearch
+from .endpoints.emoji import Emoji
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.api')
