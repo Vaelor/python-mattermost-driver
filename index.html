@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to mattermostdriver’s documentation! &#8212; mattermostdriver 0.5.0 documentation</title>
+    <title>Welcome to mattermostdriver’s documentation! &#8212; mattermostdriver 1.0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.5.0',
+        VERSION:     '1.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -45,6 +45,7 @@
 <h1>Welcome to mattermostdriver’s documentation!<a class="headerlink" href="#welcome-to-mattermostdriver-s-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<p>See <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver">https://github.com/Vaelor/python-mattermost-driver</a> for the github repository.</p>
 <p>You interact with this module mainly by using the Driver class.
 If you want to access information about the logged in user, like the user id,
 you can access them by using <cite>Driver.client.userid</cite>.</p>
@@ -113,12 +114,12 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘url’: ‘localhost’</em>, <em>’scheme’: ‘https’</em>, <em>’login_id’: None</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’timeout’: 30</em>, <em>’port’: 8065</em>, <em>’verify’: True</em>, <em>’password’: None}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘scheme’: ‘https’</em>, <em>’url’: ‘localhost’</em>, <em>’password’: None</em>, <em>’login_id’: None</em>, <em>’port’: 8065</em>, <em>’timeout’: 30</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’verify’: True}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {‘url’: ‘localhost’, ‘scheme’: ‘https’, ‘login_id’: None, ‘basepath’: ‘/api/v4’, ‘timeout’: 30, ‘port’: 8065, ‘verify’: True, ‘password’: None}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {‘scheme’: ‘https’, ‘url’: ‘localhost’, ‘password’: None, ‘login_id’: None, ‘port’: 8065, ‘timeout’: 30, ‘basepath’: ‘/api/v4’, ‘verify’: True}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required:</dt>
 <dd><ul class="first last simple">

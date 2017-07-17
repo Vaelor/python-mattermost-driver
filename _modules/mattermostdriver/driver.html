@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>mattermostdriver.driver &#8212; mattermostdriver 0.5.0 documentation</title>
+    <title>mattermostdriver.driver &#8212; mattermostdriver 1.0.1 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '0.5.0',
+        VERSION:     '1.0.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -53,7 +53,6 @@
 <span class="kn">from</span> <span class="nn">.endpoints.commands</span> <span class="k">import</span> <span class="n">Commands</span>
 <span class="kn">from</span> <span class="nn">.endpoints.compliance</span> <span class="k">import</span> <span class="n">Compliance</span>
 <span class="kn">from</span> <span class="nn">.endpoints.files</span> <span class="k">import</span> <span class="n">Files</span>
-<span class="kn">from</span> <span class="nn">.endpoints.jobs</span> <span class="k">import</span> <span class="n">Jobs</span>
 <span class="kn">from</span> <span class="nn">.endpoints.ldap</span> <span class="k">import</span> <span class="n">LDAP</span>
 <span class="kn">from</span> <span class="nn">.endpoints.oauth</span> <span class="k">import</span> <span class="n">OAuth</span>
 <span class="kn">from</span> <span class="nn">.endpoints.posts</span> <span class="k">import</span> <span class="n">Posts</span>
@@ -63,6 +62,8 @@
 <span class="kn">from</span> <span class="nn">.endpoints.teams</span> <span class="k">import</span> <span class="n">Teams</span>
 <span class="kn">from</span> <span class="nn">.endpoints.users</span> <span class="k">import</span> <span class="n">Users</span>
 <span class="kn">from</span> <span class="nn">.endpoints.webhooks</span> <span class="k">import</span> <span class="n">Webhooks</span>
+<span class="kn">from</span> <span class="nn">.endpoints.elasticsearch</span> <span class="k">import</span> <span class="n">Elasticsearch</span>
+<span class="kn">from</span> <span class="nn">.endpoints.emoji</span> <span class="k">import</span> <span class="n">Emoji</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;mattermostdriver.api&#39;</span><span class="p">)</span>
@@ -118,6 +119,7 @@
 			<span class="s1">&#39;posts&#39;</span><span class="p">:</span> <span class="n">Posts</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="n">Files</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;preferences&#39;</span><span class="p">:</span> <span class="n">Preferences</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;emoji&#39;</span><span class="p">:</span> <span class="n">Emoji</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;system&#39;</span><span class="p">:</span> <span class="n">System</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;webhooks&#39;</span><span class="p">:</span> <span class="n">Webhooks</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;commands&#39;</span><span class="p">:</span> <span class="n">Commands</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
@@ -127,7 +129,7 @@
 			<span class="s1">&#39;oauth&#39;</span><span class="p">:</span> <span class="n">OAuth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;saml&#39;</span><span class="p">:</span> <span class="n">SAML</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;ldap&#39;</span><span class="p">:</span> <span class="n">LDAP</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
-			<span class="s1">&#39;jobs&#39;</span><span class="p">:</span> <span class="n">Jobs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
+			<span class="s1">&#39;elasticsearch&#39;</span><span class="p">:</span> <span class="n">Elasticsearch</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 		<span class="p">}</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="kc">None</span>
 
