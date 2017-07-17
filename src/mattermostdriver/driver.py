@@ -1,6 +1,7 @@
 import asyncio
 import logging
 
+from src.mattermostdriver.endpoints.emoji import Emoji
 from .client import Client
 from .websocket import Websocket
 from .endpoints.brand import Brand
@@ -9,7 +10,6 @@ from .endpoints.cluster import Cluster
 from .endpoints.commands import Commands
 from .endpoints.compliance import Compliance
 from .endpoints.files import Files
-from .endpoints.jobs import Jobs
 from .endpoints.ldap import LDAP
 from .endpoints.oauth import OAuth
 from .endpoints.posts import Posts
@@ -74,6 +74,7 @@ class Driver:
 			'posts': Posts(self.client),
 			'files': Files(self.client),
 			'preferences': Preferences(self.client),
+			'emoji': Emoji(self.client),
 			'system': System(self.client),
 			'webhooks': Webhooks(self.client),
 			'commands': Commands(self.client),
