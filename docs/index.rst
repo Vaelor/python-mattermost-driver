@@ -10,6 +10,8 @@ Welcome to mattermostdriver's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+See https://github.com/Vaelor/python-mattermost-driver for the github repository.
+
 You interact with this module mainly by using the Driver class.
 If you want to access information about the logged in user, like the user id,
 you can access them by using `Driver.client.userid`.
