@@ -1,2 +1,2 @@
-full_version = '0.5.2'
+full_version = '1.0.0'
 short_version = '.'.join(full_version.split('.', 2)[:2])
