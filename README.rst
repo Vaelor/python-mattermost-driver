@@ -14,9 +14,7 @@ Python Mattermost Driver (APIv4)
 Info
 ----
 
-Breaking changes may happen but I try to avoid them.
-
-Mostly a bit more documentation to do now.
+The repository will try to keep up with the master of https://github.com/mattermost/mattermost-api-reference
 
 If something changes, it is most likely to change because the official mattermost api changed.
 
