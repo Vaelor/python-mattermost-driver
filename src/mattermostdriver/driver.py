@@ -1,6 +1,7 @@
 import asyncio
 import logging
 
+from src.mattermostdriver.endpoints.elasticsearch import Elasticsearch
 from src.mattermostdriver.endpoints.emoji import Emoji
 from .client import Client
 from .websocket import Websocket
@@ -84,6 +85,7 @@ class Driver:
 			'oauth': OAuth(self.client),
 			'saml': SAML(self.client),
 			'ldap': LDAP(self.client),
+			'elasticsearch': Elasticsearch(self.client),
 		}
 		self.websocket = None
 
