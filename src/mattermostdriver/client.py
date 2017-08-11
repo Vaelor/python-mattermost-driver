@@ -1,5 +1,3 @@
-import json
-
 import logging
 import requests
 
@@ -84,7 +82,7 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	def make_request(self, method, endpoint, options=None, params=None, data=None):
+	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None):
 		if options is None:
 			options = {}
 		if params is None:
@@ -106,12 +104,13 @@ class Client:
 				verify=self._verify,
 				json=options,
 				params=params,
-				data=data
+				data=data,
+				files=files
 			)
 		try:
 			response.raise_for_status()
 		except requests.HTTPError as e:
-			data = json.loads(e.response.text)
+			data = e.response.json()
 			if data['status_code'] == 400:
 				raise InvalidOrMissingParameters(data['message'])
 			elif data['status_code'] == 401:
@@ -125,25 +124,17 @@ class Client:
 			else:
 				raise
 
-		log.debug(json.loads(response.text))
+		log.debug(response.json())
 		return response
 
 	def get(self, endpoint, options=None, params=None):
-		return json.loads(
-			self.make_request('get', endpoint, options=options, params=params).text
-		)
+		return self.make_request('get', endpoint, options=options, params=params).json()
 
-	def post(self, endpoint, options=None, params=None, data=None):
-		return json.loads(
-			self.make_request('post', endpoint, options=options, params=params, data=data).text
-		)
+	def post(self, endpoint, options=None, params=None, data=None, files=None):
+		return self.make_request('post', endpoint, options=options, params=params, data=data, files=files).json()
 
 	def put(self, endpoint, options=None, params=None, data=None):
-		return json.loads(
-			self.make_request('put', endpoint, options=options, params=params, data=data).text
-		)
+		return self.make_request('put', endpoint, options=options, params=params, data=data).json()
 
 	def delete(self, endpoint, options=None, params=None, data=None):
-		return json.loads(
-			self.make_request('delete', endpoint, options=options, params=params, data=data).text
-		)
+		return self.make_request('delete', endpoint, options=options, params=params, data=data).json()
