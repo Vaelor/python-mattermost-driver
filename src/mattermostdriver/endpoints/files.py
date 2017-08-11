@@ -4,10 +4,11 @@ from .base import Base
 class Files(Base):
 	endpoint = '/files'
 
-	def upload_file(self, data):
+	def upload_file(self, channel_id, files):
 		return self.client.post(
 			self.endpoint,
-			data=data
+			data={'channel_id': channel_id},
+			files=files
 		)
 
 	def get_file(self, file_id):
