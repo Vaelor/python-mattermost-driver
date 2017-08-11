@@ -84,7 +84,7 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	def make_request(self, method, endpoint, options=None, params=None, data=None):
+	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None):
 		if options is None:
 			options = {}
 		if params is None:
@@ -106,7 +106,8 @@ class Client:
 				verify=self._verify,
 				json=options,
 				params=params,
-				data=data
+				data=data,
+				files=files
 			)
 		try:
 			response.raise_for_status()
@@ -133,9 +134,9 @@ class Client:
 			self.make_request('get', endpoint, options=options, params=params).text
 		)
 
-	def post(self, endpoint, options=None, params=None, data=None):
+	def post(self, endpoint, options=None, params=None, data=None, files=None):
 		return json.loads(
-			self.make_request('post', endpoint, options=options, params=params, data=data).text
+			self.make_request('post', endpoint, options=options, params=params, data=data, files=files).text
 		)
 
 	def put(self, endpoint, options=None, params=None, data=None):
