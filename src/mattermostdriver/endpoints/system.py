@@ -38,10 +38,10 @@ class System(Base):
 			params=params
 		)
 
-	def upload_license_file(self, data):
+	def upload_license_file(self, files):
 		return self.client.post(
 			'/license',
-			data=data
+			files=files
 		)
 
 	def remove_license_file(self):

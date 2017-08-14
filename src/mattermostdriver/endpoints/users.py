@@ -79,10 +79,10 @@ class Users(Base):
 			self.endpoint + '/' + user_id + '/image'
 		)
 
-	def set_user_profile_image(self, user_id, data=None):
+	def set_user_profile_image(self, user_id, files):
 		return self.client.post(
 			self.endpoint + '/' + user_id + '/image',
-			data=data
+			files=files
 		)
 
 	def get_user_by_username(self, username):

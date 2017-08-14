@@ -1,5 +1,6 @@
 from .base import Base
 
+
 class Brand(Base):
 	endpoint = '/brand'
 
@@ -8,8 +9,8 @@ class Brand(Base):
 			self.endpoint + '/image'
 		)
 
-	def upload_brand_image(self, data=None):
+	def upload_brand_image(self, files):
 		return self.client.post(
 			self.endpoint + '/image',
-			data=data
+			files=files
 		)
