@@ -9,10 +9,10 @@ class SAML(Base):
 			self.endpoint + '/metadata'
 		)
 
-	def upload_idp_certificate(self, data):
+	def upload_idp_certificate(self, files):
 		return self.client.post(
 			self.endpoint + '/certificate/idp',
-			data=data
+			files=files
 		)
 
 	def remove_idp_certificate(self):
@@ -20,10 +20,10 @@ class SAML(Base):
 			self.endpoint + '/certificate/idp'
 		)
 
-	def upload_public_certificate(self, data):
+	def upload_public_certificate(self, files):
 		return self.client.post(
 			self.endpoint + '/certificate/public',
-			data=data
+			files=files
 		)
 
 	def remove_public_certificate(self):
@@ -31,10 +31,10 @@ class SAML(Base):
 			self.endpoint + '/certificate/public'
 		)
 
-	def upload_private_key(self, data):
+	def upload_private_key(self, files):
 		return self.client.post(
 			self.endpoint + '/certificate/private',
-			data=data
+			files=files
 		)
 
 	def remove_private_key(self):

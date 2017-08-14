@@ -4,10 +4,11 @@ from .base import Base
 class Emoji(Base):
 	endpoint = '/emoji'
 
-	def create_custom_emoji(self, data):
+	def create_custom_emoji(self, emoji_name, files):
 		return self.client.post(
 			self.endpoint,
-			data=data
+			data={'emoji': {'name': emoji_name}},
+			files=files
 		)
 
 	def get_emoji_list(self, params=None):
