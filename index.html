@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to mattermostdriver’s documentation! &#8212; mattermostdriver 1.0.1 documentation</title>
+    <title>Mattermostdriver documentation &#8212; mattermostdriver 2.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '1.0.1',
+        VERSION:     '2.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -26,6 +26,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="CHANGELOG" href="changelog.html" />
    
   <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   
@@ -41,9 +42,13 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-mattermostdriver-s-documentation">
-<h1>Welcome to mattermostdriver’s documentation!<a class="headerlink" href="#welcome-to-mattermostdriver-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="mattermostdriver-documentation">
+<h1>Mattermostdriver documentation<a class="headerlink" href="#mattermostdriver-documentation" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
+</ul>
 </div>
 <p>See <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver">https://github.com/Vaelor/python-mattermost-driver</a> for the github repository.</p>
 <p>You interact with this module mainly by using the Driver class.
@@ -107,6 +112,18 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="c1"># Every Websocket event send by mattermost will be send to that event_handler.</span>
 <span class="c1"># See the API documentation for which events are available.</span>
 <span class="n">foo</span><span class="o">.</span><span class="n">init_websocket</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
+
+<span class="c1"># To upload a file you will need to pass a `files` dictionary</span>
+<span class="n">channel_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_channel_by_name_and_team_name</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">)[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">file_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;files&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+            <span class="n">channel_id</span><span class="o">=</span><span class="n">channel_id</span>
+            <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))})[</span><span class="s1">&#39;file_infos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id]</span>
+
+<span class="c1"># track the file id and pass it in `create_post` options, to attach the file</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;posts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
+    <span class="s1">&#39;channel_id&#39;</span><span class="p">:</span> <span class="n">channel_id</span><span class="p">,</span>
+    <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;This is the important file&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;file_ids&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">file_id</span><span class="p">]})</span>
 </pre></div>
 </div>
 </div>
@@ -114,12 +131,12 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘scheme’: ‘https’</em>, <em>’url’: ‘localhost’</em>, <em>’password’: None</em>, <em>’login_id’: None</em>, <em>’port’: 8065</em>, <em>’timeout’: 30</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’verify’: True}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘basepath’: ‘/api/v4’</em>, <em>’url’: ‘localhost’</em>, <em>’timeout’: 30</em>, <em>’port’: 8065</em>, <em>’password’: None</em>, <em>’scheme’: ‘https’</em>, <em>’verify’: True</em>, <em>’login_id’: None}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {‘scheme’: ‘https’, ‘url’: ‘localhost’, ‘password’: None, ‘login_id’: None, ‘port’: 8065, ‘timeout’: 30, ‘basepath’: ‘/api/v4’, ‘verify’: True}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {‘basepath’: ‘/api/v4’, ‘url’: ‘localhost’, ‘timeout’: 30, ‘port’: 8065, ‘password’: None, ‘scheme’: ‘https’, ‘verify’: True, ‘login_id’: None}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required:</dt>
 <dd><ul class="first last simple">
@@ -321,7 +338,7 @@ websocket events mattermost sends.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to mattermostdriver’s documentation!</a><ul>
+<li><a class="reference internal" href="#">Mattermostdriver documentation</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#usage">Usage</a></li>
 <li><a class="reference internal" href="#module-mattermostdriver">Classes</a></li>
@@ -334,6 +351,7 @@ websocket events mattermost sends.</p>
 <h3>Related Topics</h3>
 <ul>
   <li><a href="#">Documentation overview</a><ul>
+      <li>Next: <a href="changelog.html" title="next chapter">CHANGELOG</a></li>
   </ul></li>
 </ul>
 </div>
