@@ -15,9 +15,10 @@ log = logging.getLogger('mattermostdriver.websocket')
 
 class Client:
 	def __init__(self, options):
-		self._url = '{scheme:s}://{url:s}{basepath:s}'.format(
+		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
 			scheme=options['scheme'],
 			url=options['url'],
+			port=options['port'],
 			basepath=options['basepath']
 		)
 		self._scheme = options['scheme']
@@ -28,6 +29,7 @@ class Client:
 		self._cookies = None
 		self._userid = ''
 		self._username = ''
+
 
 	@property
 	def userid(self):
