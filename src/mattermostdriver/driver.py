@@ -57,7 +57,7 @@ class Driver:
 		- basepath - unlikeliy this would do any good
 	"""
 
-	def __init__(self, options=default_options):
+	def __init__(self, options=default_options, client_cls=Client):
 		"""
 		:param options: A dict with the values from `default_options`
 		:type options: dict
@@ -67,7 +67,7 @@ class Driver:
 		self.options = self.default_options.copy()
 		self.options.update(options)
 		self.driver = self.options
-		self.client = Client(self.options)
+		self.client = client_cls(self.options)
 		self.api = {
 			'users': Users(self.client),
 			'teams': Teams(self.client),
@@ -89,7 +89,7 @@ class Driver:
 		}
 		self.websocket = None
 
-	def init_websocket(self, event_handler):
+	def init_websocket(self, event_handler, websocket_cls=Websocket):
 		"""
 		Will initialize the websocket connection to the mattermost server.
 
@@ -103,7 +103,7 @@ class Driver:
 		:type event_handler: Function
 		:return: The event loop
 		"""
-		self.websocket = Websocket(self.options, self.client.token)
+		self.websocket = websocket_cls(self.options, self.client.token)
 		loop = asyncio.get_event_loop()
 		loop.run_until_complete(self.websocket.connect(event_handler))
 		return loop
