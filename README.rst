@@ -95,7 +95,7 @@ Usage
     channel_id = foo.api['channels'].get_channel_by_name_and_team_name('team', 'channel')['id']
     file_id = foo.api['files'].upload_file(
                 channel_id=channel_id
-                files={'files': (filename, open(filename))})['file_infos'][0]['id]
+                files={'files': (filename, open(filename))})['file_infos'][0]['id']
 
     # track the file id and pass it in `create_post` options, to attach the file
     foo.api['posts'].create_post(options={
