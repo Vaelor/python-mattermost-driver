@@ -30,6 +30,7 @@ class Websocket:
 		scheme = 'wss://'
 		if self.options['scheme'] != 'https':
 			scheme = 'ws://'
+			context = None
 
 		url = scheme + self.options['url'] + ':' + str(self.options['port']) + self.options['basepath'] + '/websocket'
 
