@@ -72,3 +72,8 @@ class Posts(Base):
 		return self.client.post(
 			self.endpoint + '/' + post_id + '/unpin'
 		)
+
+	def perform_post_action(self, post_id, action_id):
+		return self.client.post(
+			self.endpoint + '/' + post_id + '/actions/' + action_id
+		)
