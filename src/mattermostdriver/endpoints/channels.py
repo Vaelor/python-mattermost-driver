@@ -1,6 +1,10 @@
+import logging
 from .base import Base
 from .teams import Teams
 from .users import Users
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger('mattermostdriver.api.channels')
 
 
 class Channels(Base):
@@ -128,10 +132,18 @@ class Channels(Base):
 			Users.endpoint + '/' + user_id + '/teams/' + team_id + '/channels/members'
 		)
 
-	def get_channel_for_user(self, user_id, team_id):
+	def get_channels_for_user(self, user_id, team_id):
 		return self.client.get(
 			Users.endpoint + '/' + user_id + '/teams/' + team_id + '/channels'
 		)
+
+	def get_channel_for_user(self, user_id, team_id):
+		log.warning(
+			'Call to deprecated function get_channel_for_user, '
+			'which will be removed in the next major version.'
+			'Use get_channels_for_user instead.'
+		)
+		return self.get_channels_for_user(user_id, team_id)
 
 	def get_unread_messages(self, user_id, channel_id):
 		return self.client.get(
