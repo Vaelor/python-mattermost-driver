@@ -23,7 +23,7 @@ class Users(Base):
 		)
 
 	def get_users_by_usernames(self, options=None):
-		return self.client.get(
+		return self.client.post(
 			self.endpoint + '/usernames',
 			options
 		)
