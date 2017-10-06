@@ -45,6 +45,8 @@ Usage
         'url': 'mattermost.server.com',
         'login_id': 'user.name',
         'password': 'verySecret',
+        # Instead of login/password you can also use a personal access token
+        'token': 'YourPersonalAccessToken',
         # Optional / defaults to
         'scheme': 'https',
         'port': 8065,
@@ -53,11 +55,15 @@ Usage
         'verify': True,
         # The interval the websocket will ping the server to keep the connection alive
         'timeout': 30,
+        'mfa_token': 'YourMFAToken'
     })
 
     # Most of the requests need you to be logged in, so calling login()
     # should be the first thing you do after you created your Driver instance.
     # login() returns the raw response
+    # If using a personal access token, you still need to run login().
+    # In this case, does not make a login request, but a `get_user('me')`
+    # and sets everything up in the client.
     foo.login()
 
     # You can make api calls by using api['yourendpointofchoice'].
@@ -108,21 +114,24 @@ Usage
 Available endpoints:
 ''''''''''''''''''''
 
--  users
--  teams
+-  base
+-  brand
 -  channels
--  posts
--  files
--  preferences
--  system
--  webhooks
+-  cluster
 -  commands
 -  compliance
--  cluster
--  brand
--  oauth
--  saml
+-  elasticsearch
+-  emoji
+-  files
 -  ldap
+-  oauth
+-  posts
+-  preferences
+-  saml
+-  system
+-  teams
+-  users
+-  webhooks
 
 See https://api.mattermost.com/v4/ to see which api requests are
 available.
