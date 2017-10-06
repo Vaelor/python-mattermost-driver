@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Mattermostdriver documentation &#8212; mattermostdriver 2.0.0 documentation</title>
+    <title>Mattermostdriver documentation &#8212; mattermostdriver 2.2.0 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '2.0.0',
+        VERSION:     '2.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -67,6 +67,8 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;mattermost.server.com&#39;</span><span class="p">,</span>
     <span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="s1">&#39;user.name&#39;</span><span class="p">,</span>
     <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s1">&#39;verySecret&#39;</span><span class="p">,</span>
+    <span class="c1"># Instead of login/password you can also use a personal access token</span>
+    <span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="s1">&#39;YourPersonalAccessToken&#39;</span><span class="p">,</span>
     <span class="c1"># Optional / defaults to</span>
     <span class="s1">&#39;scheme&#39;</span><span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
     <span class="s1">&#39;port&#39;</span><span class="p">:</span> <span class="mi">8065</span><span class="p">,</span>
@@ -75,11 +77,15 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
     <span class="s1">&#39;verify&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="c1"># The interval the websocket will ping the server to keep the connection alive</span>
     <span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s1">&#39;mfa_token&#39;</span><span class="p">:</span> <span class="s1">&#39;YourMFAToken&#39;</span>
 <span class="p">})</span>
 
 <span class="c1"># Most of the requests need you to be logged in, so calling login()</span>
 <span class="c1"># should be the first thing you do after you created your Driver instance.</span>
 <span class="c1"># login() returns the raw response</span>
+<span class="c1"># If using a personal access token, you still need to run login().</span>
+<span class="c1"># In this case, does not make a login request, but a `get_user(&#39;me&#39;)`</span>
+<span class="c1"># and sets everything up in the client.</span>
 <span class="n">foo</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
 
 <span class="c1"># You can make api calls by using api[&#39;yourendpointofchoice&#39;].</span>
@@ -117,7 +123,7 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="n">channel_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_channel_by_name_and_team_name</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">)[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="n">file_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;files&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
             <span class="n">channel_id</span><span class="o">=</span><span class="n">channel_id</span>
-            <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))})[</span><span class="s1">&#39;file_infos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id]</span>
+            <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))})[</span><span class="s1">&#39;file_infos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
 <span class="c1"># track the file id and pass it in `create_post` options, to attach the file</span>
 <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;posts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
@@ -131,19 +137,19 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘basepath’: ‘/api/v4’</em>, <em>’url’: ‘localhost’</em>, <em>’timeout’: 30</em>, <em>’port’: 8065</em>, <em>’password’: None</em>, <em>’scheme’: ‘https’</em>, <em>’verify’: True</em>, <em>’login_id’: None}</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘timeout’: 30</em>, <em>’port’: 8065</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’url’: ‘localhost’</em>, <em>’scheme’: ‘https’</em>, <em>’login_id’: None</em>, <em>’mfa_token’: None</em>, <em>’token’: None</em>, <em>’password’: None</em>, <em>’verify’: True}</em>, <em>client_cls=&lt;class ‘mattermostdriver.client.Client’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {‘basepath’: ‘/api/v4’, ‘url’: ‘localhost’, ‘timeout’: 30, ‘port’: 8065, ‘password’: None, ‘scheme’: ‘https’, ‘verify’: True, ‘login_id’: None}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {‘timeout’: 30, ‘port’: 8065, ‘basepath’: ‘/api/v4’, ‘url’: ‘localhost’, ‘scheme’: ‘https’, ‘login_id’: None, ‘mfa_token’: None, ‘token’: None, ‘password’: None, ‘verify’: True}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required:</dt>
-<dd><ul class="first last simple">
-<li>login_id</li>
-<li>password</li>
-</ul>
-</dd>
+<dd>Either
+- login_id
+- password
+Or
+- token (<a class="reference external" href="https://docs.mattermost.com/developer/personal-access-tokens.html">https://docs.mattermost.com/developer/personal-access-tokens.html</a>)</dd>
 <dt>Optional:</dt>
 <dd><ul class="first last simple">
 <li>scheme</li>
@@ -151,6 +157,7 @@ login, logout and initializing a websocket connection.</p>
 <li>port</li>
 <li>verify</li>
 <li>timeout</li>
+<li>mfa_token</li>
 </ul>
 </dd>
 <dt>Should not be changed:</dt>
@@ -163,7 +170,7 @@ login, logout and initializing a websocket connection.</p>
 
 <dl class="method">
 <dt id="mattermostdriver.Driver.init_websocket">
-<code class="descname">init_websocket</code><span class="sig-paren">(</span><em>event_handler</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.init_websocket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver.init_websocket" title="Permalink to this definition">¶</a></dt>
+<code class="descname">init_websocket</code><span class="sig-paren">(</span><em>event_handler</em>, <em>websocket_cls=&lt;class ‘mattermostdriver.websocket.Websocket’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.init_websocket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver.init_websocket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Will initialize the websocket connection to the mattermost server.</p>
 <p>This should be run after login(), because the websocket needs to make
 an authentification.</p>

@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>mattermostdriver.driver &#8212; mattermostdriver 2.0.0 documentation</title>
+    <title>mattermostdriver.driver &#8212; mattermostdriver 2.2.0 documentation</title>
     
     <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.0.0',
+        VERSION:     '2.2.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -84,24 +84,30 @@
 		<span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
 		<span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
 		<span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+		<span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+		<span class="s1">&#39;mfa_token&#39;</span><span class="p">:</span> <span class="kc">None</span>
 	<span class="p">}</span>
 	<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">	Required:</span>
+<span class="sd">		Either</span>
 <span class="sd">		- login_id</span>
 <span class="sd">		- password</span>
-<span class="sd">	</span>
+<span class="sd">		Or</span>
+<span class="sd">		- token (https://docs.mattermost.com/developer/personal-access-tokens.html)</span>
+
 <span class="sd">	Optional:</span>
 <span class="sd">		- scheme</span>
 <span class="sd">		- url (though it would be a good idea to change that)</span>
 <span class="sd">		- port</span>
 <span class="sd">		- verify</span>
 <span class="sd">		- timeout</span>
+<span class="sd">		- mfa_token</span>
 <span class="sd">	</span>
 <span class="sd">	Should not be changed:</span>
 <span class="sd">		- basepath - unlikeliy this would do any good</span>
 <span class="sd">	&quot;&quot;&quot;</span>
 
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">default_options</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">default_options</span><span class="p">,</span> <span class="n">client_cls</span><span class="o">=</span><span class="n">Client</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		:param options: A dict with the values from `default_options`</span>
 <span class="sd">		:type options: dict</span>
@@ -111,7 +117,7 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_options</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">driver</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">Client</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">client</span> <span class="o">=</span> <span class="n">client_cls</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">api</span> <span class="o">=</span> <span class="p">{</span>
 			<span class="s1">&#39;users&#39;</span><span class="p">:</span> <span class="n">Users</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
 			<span class="s1">&#39;teams&#39;</span><span class="p">:</span> <span class="n">Teams</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="p">),</span>
@@ -133,7 +139,7 @@
 		<span class="p">}</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="kc">None</span>
 
-<div class="viewcode-block" id="Driver.init_websocket"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.init_websocket">[docs]</a>	<span class="k">def</span> <span class="nf">init_websocket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">):</span>
+<div class="viewcode-block" id="Driver.init_websocket"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.init_websocket">[docs]</a>	<span class="k">def</span> <span class="nf">init_websocket</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_handler</span><span class="p">,</span> <span class="n">websocket_cls</span><span class="o">=</span><span class="n">Websocket</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">		Will initialize the websocket connection to the mattermost server.</span>
 
@@ -147,7 +153,7 @@
 <span class="sd">		:type event_handler: Function</span>
 <span class="sd">		:return: The event loop</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="n">Websocket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">websocket</span> <span class="o">=</span> <span class="n">websocket_cls</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span><span class="p">)</span>
 		<span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
 		<span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">websocket</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">event_handler</span><span class="p">))</span>
 		<span class="k">return</span> <span class="n">loop</span></div>
@@ -164,18 +170,26 @@
 
 <span class="sd">		:return: The raw response from the request</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-		<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">login_user</span><span class="p">({</span>
-			<span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;login_id&#39;</span><span class="p">],</span>
-			<span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
-		<span class="p">})</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="s1">&#39;me&#39;</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">login_user</span><span class="p">({</span>
+				<span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;login_id&#39;</span><span class="p">],</span>
+				<span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">],</span>
+				<span class="s1">&#39;token&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;mfa_token&#39;</span><span class="p">]</span>
+			<span class="p">})</span>
+			<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Token&#39;</span><span class="p">]</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cookies</span>
+
 		<span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-		<span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span><span class="p">:</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span><span class="s1">&#39;Token&#39;</span><span class="p">]</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">cookies</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">cookies</span>
-			<span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
-				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-			<span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
-				<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+
+		<span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">userid</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+		<span class="k">if</span> <span class="s1">&#39;username&#39;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span>
+
 		<span class="k">return</span> <span class="n">result</span></div>
 
 <div class="viewcode-block" id="Driver.logout"><a class="viewcode-back" href="../../index.html#mattermostdriver.Driver.logout">[docs]</a>	<span class="k">def</span> <span class="nf">logout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
