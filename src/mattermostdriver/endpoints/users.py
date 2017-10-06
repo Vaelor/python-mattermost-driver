@@ -29,7 +29,7 @@ class Users(Base):
 		)
 
 	def search_users(self, options=None):
-		return self.client.get(
+		return self.client.post(
 			self.endpoint + '/search',
 			options
 		)
@@ -126,7 +126,7 @@ class Users(Base):
 		)
 
 	def get_user_by_email(self, email):
-		return self.client.post(
+		return self.client.get(
 			self.endpoint + '/email/' + email
 		)
 
