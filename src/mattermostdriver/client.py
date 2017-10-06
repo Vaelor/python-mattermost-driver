@@ -1,6 +1,6 @@
 import logging
 import requests
-from json import JSONDecodeError
+
 from .exceptions import (
 	InvalidOrMissingParameters,
 	NoAccessTokenProvided,
@@ -133,7 +133,7 @@ class Client:
 		response = self.make_request('get', endpoint, options=options, params=params)
 		try:
 			return response.json()
-		except JSONDecodeError:
+		except ValueError:
 			return response
 
 	def post(self, endpoint, options=None, params=None, data=None, files=None):
