@@ -40,18 +40,24 @@ class Driver:
 		'timeout': 30,
 		'login_id': None,
 		'password': None,
+		'token': None,
+		'mfa_token': None
 	}
 	"""
 	Required:
+		Either
 		- login_id
 		- password
-	
+		Or
+		- token (https://docs.mattermost.com/developer/personal-access-tokens.html)
+
 	Optional:
 		- scheme
 		- url (though it would be a good idea to change that)
 		- port
 		- verify
 		- timeout
+		- mfa_token
 	
 	Should not be changed:
 		- basepath - unlikeliy this would do any good
@@ -120,18 +126,26 @@ class Driver:
 
 		:return: The raw response from the request
 		"""
-		result = self.api['users'].login_user({
-			'login_id': self.options['login_id'],
-			'password': self.options['password'],
-		})
+		if self.options['token']:
+			self.client.token = self.options['token']
+			result = self.api['users'].get_user('me')
+		else:
+			result = self.api['users'].login_user({
+				'login_id': self.options['login_id'],
+				'password': self.options['password'],
+				'token': self.options['mfa_token']
+			})
+			if result.status_code == 200:
+				self.client.token = result.headers['Token']
+				self.client.cookies = result.cookies
+
 		log.debug(result)
-		if result.status_code == 200:
-			self.client.token = result.headers['Token']
-			self.client.cookies = result.cookies
-			if 'id' in result:
-				self.client.userid = result['id']
-			if 'username' in result:
-				self.client.username = result['username']
+
+		if 'id' in result:
+			self.client.userid = result['id']
+		if 'username' in result:
+			self.client.username = result['username']
+
 		return result
 
 	def logout(self):

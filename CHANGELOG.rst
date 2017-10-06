@@ -1,3 +1,7 @@
+2.2.0
+'''''
+Support for personal access tokens and MFA Token.
+
 2.0.0
 '''''
 
