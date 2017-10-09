@@ -1,3 +1,8 @@
+2.3.0
+'''''
+Make a `basepath` available in `Client.make_request()`.
+This is mainly needed for calling `/hooks`.
+
 2.2.0
 '''''
 Support for personal access tokens and MFA Token.

@@ -25,6 +25,7 @@ class Client:
 		self._basepath = options['basepath']
 		self._port = options['port']
 		self._verify = options['verify']
+		self._options = options
 		self._token = ''
 		self._cookies = None
 		self._userid = ''
@@ -84,13 +85,22 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None):
+	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
 		if options is None:
 			options = {}
 		if params is None:
 			params = {}
 		if data is None:
 			data = {}
+		if basepath:
+			url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
+				scheme=self._options['scheme'],
+				url=self._options['url'],
+				port=self._options['port'],
+				basepath=basepath
+			)
+		else:
+			url = self.url
 		method = method.lower()
 		request = requests.get
 		if method == 'post':
@@ -101,7 +111,7 @@ class Client:
 			request = requests.delete
 
 		response = request(
-				self.url + endpoint,
+				url + endpoint,
 				headers=self.auth_header(),
 				verify=self._verify,
 				json=options,

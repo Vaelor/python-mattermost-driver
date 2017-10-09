@@ -108,6 +108,12 @@ Usage
         'channel_id': channel_id,
         'message': 'This is the important file',
         'file_ids': [file_id]})
+    # If needed, you can make custom requests by calling `make_request`
+    foo.client.make_request('post', '/endpoint', options=None, params=None, data=None, files=None, basepath=None)
+    # If you want to call a webhook/execute it use the `call_webhook` method.
+    # This method does not exist on the mattermost api AFAIK, I added it for ease of use.
+    foo.api['hooks'].call_webhook('myHookId', options) # Options are optional
+
 
 .. inclusion-marker-end-usage
 
