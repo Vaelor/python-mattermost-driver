@@ -20,6 +20,7 @@ from .endpoints.users import Users
 from .endpoints.webhooks import Webhooks
 from .endpoints.elasticsearch import Elasticsearch
 from .endpoints.emoji import Emoji
+from .endpoints.data_retention import DataRetention
 
 logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.api')
@@ -92,6 +93,7 @@ class Driver:
 			'saml': SAML(self.client),
 			'ldap': LDAP(self.client),
 			'elasticsearch': Elasticsearch(self.client),
+			'data_retention': DataRetention(self.client),
 		}
 		self.websocket = None
 

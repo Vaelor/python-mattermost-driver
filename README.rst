@@ -138,6 +138,7 @@ Available endpoints:
 -  teams
 -  users
 -  webhooks
+-  data_retention
 
 See https://api.mattermost.com/v4/ to see which api requests are
 available.
