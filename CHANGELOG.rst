@@ -1,3 +1,8 @@
+3.0.0
+'''''
+ - Removed python 3.3 from supported versions
+ - Add data_retention endpoint
+
 2.3.0
 '''''
 Make a `basepath` available in `Client.make_request()`.
