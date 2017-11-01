@@ -3,9 +3,8 @@ from .base import Base
 from .teams import Teams
 from .users import Users
 
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.api.channels')
-
+log.setLevel(logging.INFO)
 
 class Channels(Base):
 	endpoint = '/channels'
