@@ -22,9 +22,8 @@ from .endpoints.elasticsearch import Elasticsearch
 from .endpoints.emoji import Emoji
 from .endpoints.data_retention import DataRetention
 
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.api')
-
+log.setLevel(logging.INFO)
 
 class Driver:
 	"""
