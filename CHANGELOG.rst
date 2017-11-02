@@ -1,3 +1,8 @@
+3.0.1
+'''''
+Thanks to SmartHoneyBee!
+ - Changed setup of the logger #14
+
 3.0.0
 '''''
  - Removed python 3.3 from supported versions
