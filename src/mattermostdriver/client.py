@@ -9,9 +9,8 @@ from .exceptions import (
 	FeatureDisabled
 )
 
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.websocket')
-
+log.setLevel(logging.INFO)
 
 class Client:
 	def __init__(self, options):

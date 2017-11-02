@@ -4,9 +4,8 @@ import asyncio
 import logging
 import websockets
 
-logging.basicConfig(level=logging.INFO)
 log = logging.getLogger('mattermostdriver.websocket')
-
+log.setLevel(logging.INFO)
 
 class Websocket:
 	def __init__(self, options, token):
