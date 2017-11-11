@@ -144,21 +144,3 @@ class Teams(Base):
 		return self.client.get(
 			self.endpoint + '/invite/' + invite_id,
 		)
-
-	def get_public_channels(self, team_id, params=None):
-		return self.client.get(
-			self.endpoint + '/' + team_id + '/channels',
-			params=params
-		)
-
-	def get_deleted_channels(self, team_id, params=None):
-		return self.client.get(
-			self.endpoint + '/' + team_id + '/channels/deleted',
-			params=params
-		)
-
-	def search_channels(self, team_id, options=None):
-		return self.client.post(
-			self.endpoint + '/' + team_id + '/channels/search',
-			options=options
-		)
