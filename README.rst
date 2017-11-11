@@ -67,6 +67,9 @@ Usage
     foo.login()
 
     # You can make api calls by using api['yourendpointofchoice'].
+    # Since v4.0.0 you can now also call the endpoint directly.
+    # So, for example, wherever you see `Driver.api['users'].get_user('me')`,
+    # you can just do `Driver.users.get_user('me')`.
     # The names of the endpoints and requests are almost identical to
     # the names on the api.mattermost.com/v4 page.
     # API calls always return the json the server send as a response.
