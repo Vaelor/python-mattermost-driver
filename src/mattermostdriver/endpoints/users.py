@@ -141,6 +141,11 @@ class Users(Base):
 			options
 		)
 
+	def revoke_all_user_sessions(self, user_id):
+		return self.client.post(
+			self.endpoint + '/' + user_id + '/sessions/revoke/all',
+		)
+
 	def attach_mobile_device(self, options=None):
 		return self.client.put(
 			self.endpoint + '/sessions/device',
