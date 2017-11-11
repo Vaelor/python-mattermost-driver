@@ -174,3 +174,15 @@ class Users(Base):
 			self.endpoint + '/login/switch',
 			options
 		)
+
+	def disable_personal_access_token(self, options=None):
+		return self.client.post(
+			self.endpoint + '/tokens/disable',
+			options
+		)
+
+	def enable_personal_access_token(self, options=None):
+		return self.client.post(
+			self.endpoint + '/tokens/enable',
+			options
+		)
