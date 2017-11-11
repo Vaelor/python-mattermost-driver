@@ -94,6 +94,9 @@ class Driver:
 			'elasticsearch': Elasticsearch(self.client),
 			'data_retention': DataRetention(self.client),
 		}
+		for k, v in self.api.items():
+			assert not hasattr(self, k)
+			setattr(self, k, v)
 		self.websocket = None
 
 	def init_websocket(self, event_handler, websocket_cls=Websocket):
