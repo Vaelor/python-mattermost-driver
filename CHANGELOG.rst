@@ -1,3 +1,24 @@
+4.0.0
+'''''
+This has some changes related to Mattermost 4.4
+
+BREAKING CHANGES:
+ - Endpoints moved from `team` to `channels` https://github.com/mattermost/mattermost-api-reference/pull/298/files
+   - `get_public_channels`
+   - `get_deleted_channels`
+   - `search_channels`
+
+Added endpoints:
+ - `revoke_all_user_sessions` in `/users`
+ - `disable_personal_access_token` in `/users`
+ - `enable_personal_access_token` in `/users`
+
+Also, you can now access the api endpoints directly,
+without using `Driver.api['endpoint']`, instead you can
+`Driver.users.get_user('me')`.
+Both ways are working, so no breaking change there.
+Related Issue for this: https://github.com/Vaelor/python-mattermost-driver/issues/5
+
 3.0.1
 '''''
 Thanks to SmartHoneyBee!
