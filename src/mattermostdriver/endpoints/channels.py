@@ -6,6 +6,7 @@ from .users import Users
 log = logging.getLogger('mattermostdriver.api.channels')
 log.setLevel(logging.INFO)
 
+
 class Channels(Base):
 	endpoint = '/channels'
 
@@ -147,4 +148,22 @@ class Channels(Base):
 	def get_unread_messages(self, user_id, channel_id):
 		return self.client.get(
 			Users.endpoint + '/' + user_id + '/channels/' + channel_id + '/unread'
+		)
+
+	def get_public_channels(self, team_id, params=None):
+		return self.client.get(
+			'/teams/' + team_id + '/channels',
+			params=params
+		)
+
+	def get_deleted_channels(self, team_id, params=None):
+		return self.client.get(
+			'/teams/' + team_id + '/channels/deleted',
+			params=params
+		)
+
+	def search_channels(self, team_id, options=None):
+		return self.client.post(
+			'/teams/' + team_id + '/channels/search',
+			options=options
 		)
