@@ -1,5 +1,9 @@
+import logging
 from .base import Base
 from .users import Users
+
+log = logging.getLogger('mattermostdriver.teams')
+log.setLevel(logging.INFO)
 
 
 class Teams(Base):
@@ -146,18 +150,27 @@ class Teams(Base):
 		)
 
 	def get_public_channels(self, team_id, params=None):
+		log.warning(
+			'Using deprecated endpoint Teams.get_public_channels(). Use Channels.get_public_channels() instead.'
+		)
 		return self.client.get(
 			self.endpoint + '/' + team_id + '/channels',
 			params=params
 		)
 
 	def get_deleted_channels(self, team_id, params=None):
+		log.warning(
+			'Using deprecated endpoint Teams.get_deleted_channels(). Use Channels.get_deleted_channels() instead.'
+		)
 		return self.client.get(
 			self.endpoint + '/' + team_id + '/channels/deleted',
 			params=params
 		)
 
 	def search_channels(self, team_id, options=None):
+		log.warning(
+			'Using deprecated endpoint Teams.search_channels(). Use Channels.search_channels() instead.'
+		)
 		return self.client.post(
 			self.endpoint + '/' + team_id + '/channels/search',
 			options=options
