@@ -148,21 +148,3 @@ class Channels(Base):
 		return self.client.get(
 			Users.endpoint + '/' + user_id + '/channels/' + channel_id + '/unread'
 		)
-
-	def get_public_channels(self, team_id, params=None):
-		return self.client.get(
-			self.endpoint + '/' + team_id + '/channels',
-			params=params
-		)
-
-	def get_deleted_channels(self, team_id, params=None):
-		return self.client.get(
-			self.endpoint + '/' + team_id + '/channels/deleted',
-			params=params
-		)
-
-	def search_channels(self, team_id, options=None):
-		return self.client.post(
-			self.endpoint + '/' + team_id + '/channels/search',
-			options=options
-		)
