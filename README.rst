@@ -78,7 +78,7 @@ Usage
     # If the api request needs additional parameters
     # you can pass them to the function in the following way:
     # - Path parameters are always simple parameters you pass to the function
-    foo.api['user'].get_user(user_id='me')
+    foo.api['users'].get_user(user_id='me')
 
     # - Query parameters are always passed by passing a `params` dict to the function
     foo.api['teams'].get_teams(params={...})
