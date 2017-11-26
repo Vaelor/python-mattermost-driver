@@ -7,6 +7,7 @@ import websockets
 log = logging.getLogger('mattermostdriver.websocket')
 log.setLevel(logging.INFO)
 
+
 class Websocket:
 	def __init__(self, options, token):
 		self.options = options
