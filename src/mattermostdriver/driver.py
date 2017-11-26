@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import warnings
 
 from .client import Client
 from .websocket import Websocket
@@ -24,6 +25,7 @@ from .endpoints.data_retention import DataRetention
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
+
 
 class Driver:
 	"""
@@ -74,7 +76,7 @@ class Driver:
 		self.options.update(options)
 		self.driver = self.options
 		self.client = client_cls(self.options)
-		self.api = {
+		self._api = {
 			'users': Users(self.client),
 			'teams': Teams(self.client),
 			'channels': Channels(self.client),
@@ -94,9 +96,6 @@ class Driver:
 			'elasticsearch': Elasticsearch(self.client),
 			'data_retention': DataRetention(self.client),
 		}
-		for k, v in self.api.items():
-			assert not hasattr(self, k)
-			setattr(self, k, v)
 		self.websocket = None
 
 	def init_websocket(self, event_handler, websocket_cls=Websocket):
@@ -132,9 +131,9 @@ class Driver:
 		"""
 		if self.options['token']:
 			self.client.token = self.options['token']
-			result = self.api['users'].get_user('me')
+			result = self.users.get_user('me')
 		else:
-			result = self.api['users'].login_user({
+			result = self.users.login_user({
 				'login_id': self.options['login_id'],
 				'password': self.options['password'],
 				'token': self.options['mfa_token']
@@ -162,4 +161,77 @@ class Driver:
 		self.client.userid = ''
 		self.client.username = ''
 		self.client.cookies = None
-		return self.api['users'].logout_user()
+		return self.users.logout_user()
+
+	@property
+	def api(self):
+		warnings.warn('Deprecated for 5.0.0. Use the endpoints directly instead.', DeprecationWarning)
+		return self._api
+
+	@property
+	def users(self):
+		return Users(self.client)
+
+	@property
+	def teams(self):
+		return Teams(self.client)
+
+	@property
+	def channels(self):
+		return Channels(self.client)
+
+	@property
+	def posts(self):
+		return Posts(self.client)
+
+	@property
+	def files(self):
+		return Files(self.client)
+
+	@property
+	def preferences(self):
+		return Preferences(self.client)
+
+	@property
+	def emoji(self):
+		return Emoji(self.client)
+
+	@property
+	def system(self):
+		return System(self.client)
+
+	@property
+	def webhooks(self):
+		return Webhooks(self.client)
+
+	@property
+	def compliance(self):
+		return Compliance(self.client)
+
+	@property
+	def cluster(self):
+		return Cluster(self.client)
+
+	@property
+	def brand(self):
+		return Brand(self.client)
+
+	@property
+	def oauth(self):
+		return OAuth(self.client)
+
+	@property
+	def saml(self):
+		return SAML(self.client)
+
+	@property
+	def ldap(self):
+		return LDAP(self.client)
+
+	@property
+	def elasticsearch(self):
+		return Elasticsearch(self.client)
+
+	@property
+	def data_retention(self):
+		return DataRetention(self.client)

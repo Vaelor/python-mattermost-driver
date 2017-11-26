@@ -1,3 +1,24 @@
+4.0.2
+'''''
+This release makes some internal changes on how the endpoints are accessed.
+
+Since this works much better then using `api['endpoint']` has been deprecated for the next Major release.
+
+Fixes https://github.com/Vaelor/python-mattermost-driver/issues/5
+
+
+4.0.1
+'''''
+The release 4.0.0 was not quite correct, since the following changes did not really happen, only the api documentation for mattermost 4.4.0 changed.
+
+.. code:: none
+
+    Endpoints moved from team to channels https://github.com/mattermost/mattermost-api-reference/pull/298/files
+     - get_public_channels
+     - get_deleted_channels
+     - search_channels
+
+
 4.0.0
 '''''
 This has some changes related to Mattermost 4.4
