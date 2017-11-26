@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Mattermostdriver documentation &#8212; mattermostdriver 4.0.0 documentation</title>
+    <title>Mattermostdriver documentation &#8212; mattermostdriver 4.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.0.0',
+        VERSION:     '4.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -88,28 +88,28 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="c1"># and sets everything up in the client.</span>
 <span class="n">foo</span><span class="o">.</span><span class="n">login</span><span class="p">()</span>
 
-<span class="c1"># You can make api calls by using api[&#39;yourendpointofchoice&#39;].</span>
-<span class="c1"># Since v4.0.0 you can now also call the endpoint directly.</span>
-<span class="c1"># So, for example, wherever you see `Driver.api[&#39;users&#39;].get_user(&#39;me&#39;)`,</span>
-<span class="c1"># you can just do `Driver.users.get_user(&#39;me&#39;)`.</span>
+<span class="c1"># You can make api calls by using calling `Driver.endpointofchoice`.</span>
+<span class="c1"># Using api[&#39;&#39;] is deprecated for 5.0.0!</span>
+<span class="c1"># So, for example, if you used `Driver.api[&#39;users&#39;].get_user(&#39;me&#39;)` before,</span>
+<span class="c1"># you now just do `Driver.users.get_user(&#39;me&#39;)`.</span>
 <span class="c1"># The names of the endpoints and requests are almost identical to</span>
 <span class="c1"># the names on the api.mattermost.com/v4 page.</span>
 <span class="c1"># API calls always return the json the server send as a response.</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;users&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_user_by_username</span><span class="p">(</span><span class="s1">&#39;another.name&#39;</span><span class="p">)</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_user_by_username</span><span class="p">(</span><span class="s1">&#39;another.name&#39;</span><span class="p">)</span>
 
 <span class="c1"># If the api request needs additional parameters</span>
 <span class="c1"># you can pass them to the function in the following way:</span>
 <span class="c1"># - Path parameters are always simple parameters you pass to the function</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;user&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;me&#39;</span><span class="p">)</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;me&#39;</span><span class="p">)</span>
 
 <span class="c1"># - Query parameters are always passed by passing a `params` dict to the function</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;teams&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_teams</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">teams</span><span class="o">.</span><span class="n">get_teams</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 
 <span class="c1"># - Request Bodies are always passed by passing an `options` dict or array to the function</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_channel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">create_channel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="o">...</span><span class="p">})</span>
 
 <span class="c1"># See the mattermost api documentation to see which parameters you need to pass.</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_channel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">create_channel</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
     <span class="s1">&#39;team_id&#39;</span><span class="p">:</span> <span class="s1">&#39;some_team_id&#39;</span><span class="p">,</span>
     <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;awesome-channel&#39;</span><span class="p">,</span>
     <span class="s1">&#39;display_name&#39;</span><span class="p">:</span> <span class="s1">&#39;awesome channel&#39;</span><span class="p">,</span>
@@ -123,13 +123,13 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="n">foo</span><span class="o">.</span><span class="n">init_websocket</span><span class="p">(</span><span class="n">event_handler</span><span class="p">)</span>
 
 <span class="c1"># To upload a file you will need to pass a `files` dictionary</span>
-<span class="n">channel_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;channels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">get_channel_by_name_and_team_name</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">)[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="n">file_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;files&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
+<span class="n">channel_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">get_channel_by_name_and_team_name</span><span class="p">(</span><span class="s1">&#39;team&#39;</span><span class="p">,</span> <span class="s1">&#39;channel&#39;</span><span class="p">)[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">file_id</span> <span class="o">=</span> <span class="n">foo</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span>
             <span class="n">channel_id</span><span class="o">=</span><span class="n">channel_id</span>
             <span class="n">files</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">))})[</span><span class="s1">&#39;file_infos&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
 <span class="c1"># track the file id and pass it in `create_post` options, to attach the file</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;posts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">posts</span><span class="o">.</span><span class="n">create_post</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">{</span>
     <span class="s1">&#39;channel_id&#39;</span><span class="p">:</span> <span class="n">channel_id</span><span class="p">,</span>
     <span class="s1">&#39;message&#39;</span><span class="p">:</span> <span class="s1">&#39;This is the important file&#39;</span><span class="p">,</span>
     <span class="s1">&#39;file_ids&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">file_id</span><span class="p">]})</span>
@@ -137,7 +137,7 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="n">foo</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">make_request</span><span class="p">(</span><span class="s1">&#39;post&#39;</span><span class="p">,</span> <span class="s1">&#39;/endpoint&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basepath</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="c1"># If you want to call a webhook/execute it use the `call_webhook` method.</span>
 <span class="c1"># This method does not exist on the mattermost api AFAIK, I added it for ease of use.</span>
-<span class="n">foo</span><span class="o">.</span><span class="n">api</span><span class="p">[</span><span class="s1">&#39;hooks&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">call_webhook</span><span class="p">(</span><span class="s1">&#39;myHookId&#39;</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="c1"># Options are optional</span>
+<span class="n">foo</span><span class="o">.</span><span class="n">hooks</span><span class="o">.</span><span class="n">call_webhook</span><span class="p">(</span><span class="s1">&#39;myHookId&#39;</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="c1"># Options are optional</span>
 </pre></div>
 </div>
 </div>
@@ -145,12 +145,42 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘password’: None</em>, <em>’timeout’: 30</em>, <em>’verify’: True</em>, <em>’port’: 8065</em>, <em>’scheme’: ‘https’</em>, <em>’mfa_token’: None</em>, <em>’login_id’: None</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’url’: ‘localhost’</em>, <em>’token’: None}</em>, <em>client_cls=&lt;class ‘mattermostdriver.client.Client’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘scheme’: ‘https’</em>, <em>’mfa_token’: None</em>, <em>’verify’: True</em>, <em>’password’: None</em>, <em>’login_id’: None</em>, <em>’timeout’: 30</em>, <em>’token’: None</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’port’: 8065</em>, <em>’url’: ‘localhost’}</em>, <em>client_cls=&lt;class ‘mattermostdriver.client.Client’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
+<dt id="mattermostdriver.Driver.api">
+<code class="descname">api</code><a class="headerlink" href="#mattermostdriver.Driver.api" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.brand">
+<code class="descname">brand</code><a class="headerlink" href="#mattermostdriver.Driver.brand" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.channels">
+<code class="descname">channels</code><a class="headerlink" href="#mattermostdriver.Driver.channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.cluster">
+<code class="descname">cluster</code><a class="headerlink" href="#mattermostdriver.Driver.cluster" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.compliance">
+<code class="descname">compliance</code><a class="headerlink" href="#mattermostdriver.Driver.compliance" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.data_retention">
+<code class="descname">data_retention</code><a class="headerlink" href="#mattermostdriver.Driver.data_retention" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {‘password’: None, ‘timeout’: 30, ‘verify’: True, ‘port’: 8065, ‘scheme’: ‘https’, ‘mfa_token’: None, ‘login_id’: None, ‘basepath’: ‘/api/v4’, ‘url’: ‘localhost’, ‘token’: None}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {‘scheme’: ‘https’, ‘mfa_token’: None, ‘verify’: True, ‘password’: None, ‘login_id’: None, ‘timeout’: 30, ‘token’: None, ‘basepath’: ‘/api/v4’, ‘port’: 8065, ‘url’: ‘localhost’}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required:</dt>
 <dd>Either
@@ -176,6 +206,21 @@ Or
 </dl>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.elasticsearch">
+<code class="descname">elasticsearch</code><a class="headerlink" href="#mattermostdriver.Driver.elasticsearch" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.emoji">
+<code class="descname">emoji</code><a class="headerlink" href="#mattermostdriver.Driver.emoji" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.files">
+<code class="descname">files</code><a class="headerlink" href="#mattermostdriver.Driver.files" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="method">
 <dt id="mattermostdriver.Driver.init_websocket">
 <code class="descname">init_websocket</code><span class="sig-paren">(</span><em>event_handler</em>, <em>websocket_cls=&lt;class ‘mattermostdriver.websocket.Websocket’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.init_websocket"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver.init_websocket" title="Permalink to this definition">¶</a></dt>
@@ -195,6 +240,11 @@ websocket events mattermost sends.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.ldap">
+<code class="descname">ldap</code><a class="headerlink" href="#mattermostdriver.Driver.ldap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="mattermostdriver.Driver.login">
@@ -229,6 +279,46 @@ websocket events mattermost sends.</p>
 </tbody>
 </table>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.oauth">
+<code class="descname">oauth</code><a class="headerlink" href="#mattermostdriver.Driver.oauth" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.posts">
+<code class="descname">posts</code><a class="headerlink" href="#mattermostdriver.Driver.posts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.preferences">
+<code class="descname">preferences</code><a class="headerlink" href="#mattermostdriver.Driver.preferences" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.saml">
+<code class="descname">saml</code><a class="headerlink" href="#mattermostdriver.Driver.saml" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.system">
+<code class="descname">system</code><a class="headerlink" href="#mattermostdriver.Driver.system" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.teams">
+<code class="descname">teams</code><a class="headerlink" href="#mattermostdriver.Driver.teams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.users">
+<code class="descname">users</code><a class="headerlink" href="#mattermostdriver.Driver.users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="mattermostdriver.Driver.webhooks">
+<code class="descname">webhooks</code><a class="headerlink" href="#mattermostdriver.Driver.webhooks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

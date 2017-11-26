@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>CHANGELOG &#8212; mattermostdriver 4.0.0 documentation</title>
+    <title>CHANGELOG &#8212; mattermostdriver 4.0.2 documentation</title>
     
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '4.0.0',
+        VERSION:     '4.0.2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -45,7 +45,17 @@
   <div class="section" id="changelog">
 <h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>4.0.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>4.0.2<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>This release makes some internal changes on how the endpoints are accessed.</p>
+<p>Since this works much better then using <cite>api[‘endpoint’]</cite> has been deprecated for the next Major release.</p>
+<p>Fixes <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver/issues/5">https://github.com/Vaelor/python-mattermost-driver/issues/5</a></p>
+</div>
+<div class="section" id="id2">
+<h2>4.0.1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>The release 4.0.0 was not quite correct, since the following changes did not really happen, only the api documentation for mattermost 4.4.0 changed.</p>
+</div>
+<div class="section" id="id3">
+<h2>4.0.0<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>This has some changes related to Mattermost 4.4</p>
 <dl class="docutils">
 <dt>BREAKING CHANGES:</dt>
@@ -70,8 +80,8 @@ without using <cite>Driver.api[‘endpoint’]</cite>, instead you can
 Both ways are working, so no breaking change there.
 Related Issue for this: <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver/issues/5">https://github.com/Vaelor/python-mattermost-driver/issues/5</a></p>
 </div>
-<div class="section" id="id2">
-<h2>3.0.1<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>3.0.1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>Thanks to SmartHoneyBee!</dt>
 <dd><ul class="first last simple">
@@ -80,8 +90,8 @@ Related Issue for this: <a class="reference external" href="https://github.com/V
 </dd>
 </dl>
 </div>
-<div class="section" id="id3">
-<h2>3.0.0<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>3.0.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li>Removed python 3.3 from supported versions</li>
@@ -89,17 +99,17 @@ Related Issue for this: <a class="reference external" href="https://github.com/V
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id4">
-<h2>2.3.0<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>2.3.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>Make a <cite>basepath</cite> available in <cite>Client.make_request()</cite>.
 This is mainly needed for calling <cite>/hooks</cite>.</p>
 </div>
-<div class="section" id="id5">
-<h2>2.2.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>2.2.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>Support for personal access tokens and MFA Token.</p>
 </div>
-<div class="section" id="id6">
-<h2>2.0.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>2.0.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>Breaking change for file uploads.
 Instead of a <cite>data</cite> dict containing all formdata,
 a <cite>files</cite> dict is in the following endpoints</p>
@@ -168,12 +178,14 @@ a <cite>files</cite> dict is in the following endpoints</p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">CHANGELOG</a><ul>
-<li><a class="reference internal" href="#id1">4.0.0</a></li>
-<li><a class="reference internal" href="#id2">3.0.1</a></li>
-<li><a class="reference internal" href="#id3">3.0.0</a></li>
-<li><a class="reference internal" href="#id4">2.3.0</a></li>
-<li><a class="reference internal" href="#id5">2.2.0</a></li>
-<li><a class="reference internal" href="#id6">2.0.0</a></li>
+<li><a class="reference internal" href="#id1">4.0.2</a></li>
+<li><a class="reference internal" href="#id2">4.0.1</a></li>
+<li><a class="reference internal" href="#id3">4.0.0</a></li>
+<li><a class="reference internal" href="#id4">3.0.1</a></li>
+<li><a class="reference internal" href="#id5">3.0.0</a></li>
+<li><a class="reference internal" href="#id6">2.3.0</a></li>
+<li><a class="reference internal" href="#id7">2.2.0</a></li>
+<li><a class="reference internal" href="#id8">2.0.0</a></li>
 </ul>
 </li>
 </ul>
