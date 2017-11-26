@@ -145,7 +145,7 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘scheme’: ‘https’</em>, <em>’mfa_token’: None</em>, <em>’verify’: True</em>, <em>’password’: None</em>, <em>’login_id’: None</em>, <em>’timeout’: 30</em>, <em>’token’: None</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’port’: 8065</em>, <em>’url’: ‘localhost’}</em>, <em>client_cls=&lt;class ‘mattermostdriver.client.Client’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={‘login_id’: None</em>, <em>’timeout’: 30</em>, <em>’password’: None</em>, <em>’token’: None</em>, <em>’basepath’: ‘/api/v4’</em>, <em>’mfa_token’: None</em>, <em>’verify’: True</em>, <em>’url’: ‘localhost’</em>, <em>’scheme’: ‘https’</em>, <em>’port’: 8065}</em>, <em>client_cls=&lt;class ‘mattermostdriver.client.Client’&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
@@ -180,7 +180,7 @@ login, logout and initializing a websocket connection.</p>
 
 <dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {‘scheme’: ‘https’, ‘mfa_token’: None, ‘verify’: True, ‘password’: None, ‘login_id’: None, ‘timeout’: 30, ‘token’: None, ‘basepath’: ‘/api/v4’, ‘port’: 8065, ‘url’: ‘localhost’}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {‘login_id’: None, ‘timeout’: 30, ‘password’: None, ‘token’: None, ‘basepath’: ‘/api/v4’, ‘mfa_token’: None, ‘verify’: True, ‘url’: ‘localhost’, ‘scheme’: ‘https’, ‘port’: 8065}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required:</dt>
 <dd>Either
