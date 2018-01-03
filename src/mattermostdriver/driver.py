@@ -64,7 +64,7 @@ class Driver:
 		- debug
 
 	Should not be changed:
-		- basepath - unlikeliy this would do any good
+		- basepath - unlikely this would do any good
 	"""
 
 	def __init__(self, options=default_options, client_cls=Client):
