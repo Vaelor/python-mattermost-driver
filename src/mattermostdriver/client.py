@@ -12,6 +12,7 @@ from .exceptions import (
 log = logging.getLogger('mattermostdriver.websocket')
 log.setLevel(logging.INFO)
 
+
 class Client:
 	def __init__(self, options):
 		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
@@ -24,6 +25,15 @@ class Client:
 		self._basepath = options['basepath']
 		self._port = options['port']
 		self._verify = options['verify']
+		if options['debug']:
+			log.setLevel(logging.DEBUG)
+			# http://docs.python-requests.org/en/master/api/#api-changes
+			from http.client import HTTPConnection
+			HTTPConnection.debuglevel = 1
+			requests_log = logging.getLogger("requests.packages.urllib3")
+			requests_log.setLevel(logging.DEBUG)
+			requests_log.propagate = True
+
 		self._options = options
 		self._token = ''
 		self._cookies = None
