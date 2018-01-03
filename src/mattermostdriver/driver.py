@@ -43,7 +43,8 @@ class Driver:
 		'login_id': None,
 		'password': None,
 		'token': None,
-		'mfa_token': None
+		'mfa_token': None,
+		'debug': False
 	}
 	"""
 	Required:
@@ -60,7 +61,8 @@ class Driver:
 		- verify
 		- timeout
 		- mfa_token
-	
+		- debug
+
 	Should not be changed:
 		- basepath - unlikeliy this would do any good
 	"""
@@ -75,6 +77,9 @@ class Driver:
 		self.options = self.default_options.copy()
 		self.options.update(options)
 		self.driver = self.options
+		if self.options['debug']:
+			log.setLevel(logging.DEBUG)
+			log.warning('Careful!!\nSetting debug to True, will reveal your password in the log output if you do driver.login()!\nThis is NOT for production!')
 		self.client = client_cls(self.options)
 		self._api = {
 			'users': Users(self.client),

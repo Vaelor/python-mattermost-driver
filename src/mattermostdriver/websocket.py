@@ -11,6 +11,8 @@ log.setLevel(logging.INFO)
 class Websocket:
 	def __init__(self, options, token):
 		self.options = options
+		if options['debug']:
+			log.setLevel(logging.DEBUG)
 		self._token = token
 
 	@asyncio.coroutine
