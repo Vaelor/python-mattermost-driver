@@ -1,3 +1,8 @@
+"""
+Client for the driver, which holds information about the logged in user
+and actually makes the requests to the mattermost server
+"""
+
 import logging
 import requests
 
@@ -26,13 +31,7 @@ class Client:
 		self._port = options['port']
 		self._verify = options['verify']
 		if options['debug']:
-			log.setLevel(logging.DEBUG)
-			# http://docs.python-requests.org/en/master/api/#api-changes
-			from http.client import HTTPConnection
-			HTTPConnection.debuglevel = 1
-			requests_log = logging.getLogger("requests.packages.urllib3")
-			requests_log.setLevel(logging.DEBUG)
-			requests_log.propagate = True
+			self.activate_verbose_logging()
 
 		self._options = options
 		self._token = ''
@@ -40,6 +39,15 @@ class Client:
 		self._userid = ''
 		self._username = ''
 
+	@staticmethod
+	def activate_verbose_logging(level=logging.DEBUG):
+		log.setLevel(level)
+		# http://docs.python-requests.org/en/master/api/#api-changes
+		from http.client import HTTPConnection
+		HTTPConnection.debuglevel = 1
+		requests_log = logging.getLogger("requests.packages.urllib3")
+		requests_log.setLevel(level)
+		requests_log.propagate = True
 
 	@property
 	def userid(self):
@@ -132,6 +140,7 @@ class Client:
 			response.raise_for_status()
 		except requests.HTTPError as e:
 			data = e.response.json()
+			log.error(data['message'])
 			if data['status_code'] == 400:
 				raise InvalidOrMissingParameters(data['message'])
 			elif data['status_code'] == 401:
@@ -153,6 +162,7 @@ class Client:
 		try:
 			return response.json()
 		except ValueError:
+			log.debug('Could not convert response to json, returning raw response.')
 			return response
 
 	def post(self, endpoint, options=None, params=None, data=None, files=None):

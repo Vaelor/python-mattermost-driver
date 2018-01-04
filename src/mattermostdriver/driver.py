@@ -47,24 +47,26 @@ class Driver:
 		'debug': False
 	}
 	"""
-	Required:
-		Either
+	Required options
+		- url
+
+	Either
 		- login_id
 		- password
-		Or
+
+	Or
 		- token (https://docs.mattermost.com/developer/personal-access-tokens.html)
 
-	Optional:
-		- scheme
-		- url (though it would be a good idea to change that)
-		- port
-		- verify
-		- timeout
-		- mfa_token
-		- debug
+	Optional
+		- scheme ('https')
+		- port (8065)
+		- verify (True)
+		- timeout (30)
+		- mfa_token (None)
+		- debug (False)
 
-	Should not be changed:
-		- basepath - unlikely this would do any good
+	Should not be changed
+		- basepath ('/api/v4') - unlikely this would do any good
 	"""
 
 	def __init__(self, options=default_options, client_cls=Client):
@@ -126,11 +128,10 @@ class Driver:
 		"""
 		Logs the user in.
 
-		The log in information is saved in the client:
-
-		- userid
-		- username
-		- cookies
+		The log in information is saved in the client
+			- userid
+			- username
+			- cookies
 
 		:return: The raw response from the request
 		"""
@@ -170,73 +171,166 @@ class Driver:
 
 	@property
 	def api(self):
+		"""
+		.. deprecated:: 4.0.2
+
+		Use the endpoints directly instead.
+
+		:return: dictionary containing the endpoints
+		:rtype: dict
+		"""
 		warnings.warn('Deprecated for 5.0.0. Use the endpoints directly instead.', DeprecationWarning)
 		return self._api
 
 	@property
 	def users(self):
+		"""
+		Api endpoint for users
+
+		:return: Instance of :class:`~endpoints.users.Users`
+		"""
 		return Users(self.client)
 
 	@property
 	def teams(self):
+		"""
+		Api endpoint for teams
+
+		:return: Instance of :class:`~endpoints.teams.Teams`
+		"""
 		return Teams(self.client)
 
 	@property
 	def channels(self):
+		"""
+		Api endpoint for channels
+
+		:return: Instance of :class:`~endpoints.channels.Channels`
+		"""
 		return Channels(self.client)
 
 	@property
 	def posts(self):
+		"""
+		Api endpoint for posts
+
+		:return: Instance of :class:`~endpoints.posts.Posts`
+		"""
 		return Posts(self.client)
 
 	@property
 	def files(self):
+		"""
+		Api endpoint for files
+
+		:return: Instance of :class:`~endpoints.files.Files`
+		"""
 		return Files(self.client)
 
 	@property
 	def preferences(self):
+		"""
+		Api endpoint for preferences
+
+		:return: Instance of :class:`~endpoints.preferences.Preferences`
+		"""
 		return Preferences(self.client)
 
 	@property
 	def emoji(self):
+		"""
+		Api endpoint for emoji
+
+		:return: Instance of :class:`~endpoints.emoji.Emoji`
+		"""
 		return Emoji(self.client)
 
 	@property
 	def system(self):
+		"""
+		Api endpoint for system
+
+		:return: Instance of :class:`~endpoints.system.System`
+		"""
 		return System(self.client)
 
 	@property
 	def webhooks(self):
+		"""
+		Api endpoint for webhooks
+
+		:return: Instance of :class:`~endpoints.webhooks.Webhooks`
+		"""
 		return Webhooks(self.client)
 
 	@property
 	def compliance(self):
+		"""
+		Api endpoint for compliance
+
+		:return: Instance of :class:`~endpoints.compliance.Compliance`
+		"""
 		return Compliance(self.client)
 
 	@property
 	def cluster(self):
+		"""
+		Api endpoint for cluster
+
+		:return: Instance of :class:`~endpoints.cluster.Cluster`
+		"""
 		return Cluster(self.client)
 
 	@property
 	def brand(self):
+		"""
+		Api endpoint for brand
+
+		:return: Instance of :class:`~endpoints.brand.Brand`
+		"""
 		return Brand(self.client)
 
 	@property
 	def oauth(self):
+		"""
+		Api endpoint for oauth
+
+		:return: Instance of :class:`~endpoints.oauth.OAuth`
+		"""
 		return OAuth(self.client)
 
 	@property
 	def saml(self):
+		"""
+		Api endpoint for saml
+
+		:return: Instance of :class:`~endpoints.saml.SAML`
+		"""
 		return SAML(self.client)
 
 	@property
 	def ldap(self):
+		"""
+		Api endpoint for ldap
+
+		:return: Instance of :class:`~endpoints.ldap.LDAP`
+		"""
 		return LDAP(self.client)
 
 	@property
 	def elasticsearch(self):
+		"""
+		Api endpoint for elasticsearch
+
+		:return: Instance of :class:`~endpoints.elasticsearch.Elasticsearch`
+		"""
 		return Elasticsearch(self.client)
 
 	@property
 	def data_retention(self):
+		"""
+		Api endpoint for data_retention
+
+		:return: Instance of :class:`~endpoints.data_retention.DataRetention`
+		"""
 		return DataRetention(self.client)

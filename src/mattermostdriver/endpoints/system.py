@@ -2,6 +2,10 @@ from .base import Base
 
 
 class System(Base):
+	"""
+	This endpoint has a mix of different
+	endpoints, not only /system
+	"""
 	def check_system_health(self):
 		return self.client.get(
 			'/system/ping'

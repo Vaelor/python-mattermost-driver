@@ -1,3 +1,14 @@
+4.1.0
+'''''
+This release mostly improves on the documentation.
+
+The sphinx theme has been changed to the readthedocs one.
+
+This also adds a `debug` option, which enables a very verbose log output.
+Be careful, as everything, even your mattermost password when you log in,
+is readable in the log output!
+This is definitely not for production usage!
+
 4.0.2
 '''''
 This release makes some internal changes on how the endpoints are accessed.
@@ -11,7 +22,7 @@ Fixes https://github.com/Vaelor/python-mattermost-driver/issues/5
 '''''
 The release 4.0.0 was not quite correct, since the following changes did not really happen, only the api documentation for mattermost 4.4.0 changed.
 
-.. code:: none
+.. code::
 
     Endpoints moved from team to channels https://github.com/mattermost/mattermost-api-reference/pull/298/files
      - get_public_channels
@@ -65,19 +76,25 @@ Support for personal access tokens and MFA Token.
 Breaking change for file uploads.
 Instead of a `data` dict containing all formdata,
 a `files` dict is in the following endpoints
+
  - emoji
-  - `create_custom_emoji()` takes `emoji_name` additionally to a `files` dict
+   - `create_custom_emoji()` takes `emoji_name` additionally to a `files` dict
+
  - files
-  - `upload_file()` takes `channel_id` additionally to a `files` dict
+   - `upload_file()` takes `channel_id` additionally to a `files` dict
+
  - brand
-  - `upload_brand_image()`
+   - `upload_brand_image()`
+
  - saml
-  - `upload_idp_certificate()`
-  - `upload_public_certificate()`
-  - `upload_private_key()`
+   - `upload_idp_certificate()`
+   - `upload_public_certificate()`
+   - `upload_private_key()`
+
  - system
-  - `upload_license_file()`
+   - `upload_license_file()`
+
  - users
-  - `set_user_profile_image()`
+   - `set_user_profile_image()`
 
 See the documentation for an example.

@@ -21,6 +21,7 @@ class Websocket:
 		Connect to the websocket and authenticate it.
 		When the authentication has finished, start the loop listening for messages,
 		sending a ping to the server to keep the connection alive.
+
 		:param event_handler: Every websocket event will be passed there
 		:type event_handler: Function
 		:return:
@@ -34,7 +35,12 @@ class Websocket:
 			scheme = 'ws://'
 			context = None
 
-		url = scheme + self.options['url'] + ':' + str(self.options['port']) + self.options['basepath'] + '/websocket'
+		url = '{scheme:s}{url:s}:{port:s}{basepath:s}/websocket'.format(
+			scheme=scheme,
+			url=self.options['url'],
+			port=str(self.options['port']),
+			basepath=self.options['basepath']
+		)
 
 		websocket = yield from websockets.connect(
 			url,
@@ -70,6 +76,7 @@ class Websocket:
 		This is not needed when we just send the cookie we got on login
 		when connecting to the websocket.
 		"""
+		log.debug('Authenticating websocket')
 		json_data = json.dumps({
 			"seq": 1,
 			"action": "authentication_challenge",
@@ -89,9 +96,13 @@ class Websocket:
 					('seq_reply' in status and status['seq_reply'] == 1):
 				log.info('Websocket authentification OK')
 				return True
+			else:
+				log.error('Websocket authentification failed')
+
 
 	@asyncio.coroutine
 	def _wait_for_message(self, websocket, event_handler):
+		log.debug('Waiting for messages on websocket')
 		while True:
 			message = yield from websocket.recv()
 			yield from event_handler(message)
