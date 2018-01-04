@@ -149,7 +149,8 @@ class Teams(Base):
 
 	def get_public_channels(self, team_id, params=None):
 		warnings.warn(
-			'Using deprecated endpoint Teams.get_public_channels(). Use Channels.get_public_channels() instead.',
+			'Using deprecated endpoint Teams.get_public_channels(). ' +
+			'Use Channels.get_public_channels() instead.',
 			DeprecationWarning
 		)
 		return self.client.get(
@@ -159,7 +160,8 @@ class Teams(Base):
 
 	def get_deleted_channels(self, team_id, params=None):
 		warnings.warn(
-			'Using deprecated endpoint Teams.get_deleted_channels(). Use Channels.get_deleted_channels() instead.',
+			'Using deprecated endpoint Teams.get_deleted_channels(). ' +
+			'Use Channels.get_deleted_channels() instead.',
 			DeprecationWarning
 		)
 		return self.client.get(
