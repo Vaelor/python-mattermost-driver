@@ -115,6 +115,15 @@ class Driver:
 		See https://api.mattermost.com/v4/#tag/WebSocket for which
 		websocket events mattermost sends.
 
+		Example of a really simple event_handler function
+
+		.. code:: python
+
+			@asyncio.coroutine
+			def my_event_handler(message):
+				print(message)
+
+
 		:param event_handler: The function to handle the websocket events. Takes one argument.
 		:type event_handler: Function(message)
 		:return: The event loop
