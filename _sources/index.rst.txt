@@ -10,7 +10,10 @@ Mattermostdriver documentation
    :maxdepth: 1
    :caption: Contents:
 
+   endpoints
    changelog
+   contributing
+
 
 See https://github.com/Vaelor/python-mattermost-driver for the github repository.
 
