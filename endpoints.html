@@ -1,0 +1,1409 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Endpoints &mdash; mattermostdriver 4.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="genindex.html"/>
+        <link rel="search" title="Search" href="search.html"/>
+    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="index.html"/>
+        <link rel="next" title="CHANGELOG" href="changelog.html"/>
+        <link rel="prev" title="Mattermostdriver documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> mattermostdriver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.brand">Brand</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.channels">Channels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.cluster">Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.commands">Commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.compliance">Compliance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.data_retention">Data_retention</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.elasticsearch">Elasticsearch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.emoji">Emoji</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.files">Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.ldap">LDAP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.oauth">OAuth</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.posts">Posts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.preferences">Preferences</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.saml">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.system">System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.teams">Teams</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.users">Users</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-mattermostdriver.endpoints.webhooks">Webhooks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">CONTRIBUTING</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">mattermostdriver</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Endpoints</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/endpoints.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="endpoints">
+<h1>Endpoints<a class="headerlink" href="#endpoints" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-mattermostdriver.endpoints.brand">
+<span id="brand"></span><h2>Brand<a class="headerlink" href="#module-mattermostdriver.endpoints.brand" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.brand.Brand">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.brand.</code><code class="descname">Brand</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/brand.html#Brand"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.brand.Brand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.brand.Brand.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/brand’</em><a class="headerlink" href="#mattermostdriver.endpoints.brand.Brand.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.brand.Brand.get_brand_image">
+<code class="descname">get_brand_image</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/brand.html#Brand.get_brand_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.brand.Brand.get_brand_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.brand.Brand.upload_brand_image">
+<code class="descname">upload_brand_image</code><span class="sig-paren">(</span><em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/brand.html#Brand.upload_brand_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.brand.Brand.upload_brand_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.channels">
+<span id="channels"></span><h2>Channels<a class="headerlink" href="#module-mattermostdriver.endpoints.channels" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.channels.Channels">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.channels.</code><code class="descname">Channels</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.channels.Channels.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/channels’</em><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.create_channel">
+<code class="descname">create_channel</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.create_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.create_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.create_direct_message_channel">
+<code class="descname">create_direct_message_channel</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.create_direct_message_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.create_direct_message_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.create_group_message_channel">
+<code class="descname">create_group_message_channel</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.create_group_message_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.create_group_message_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_list_of_channels_by_ids">
+<code class="descname">get_list_of_channels_by_ids</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_list_of_channels_by_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_list_of_channels_by_ids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel">
+<code class="descname">get_channel</code><span class="sig-paren">(</span><em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.update_channel">
+<code class="descname">update_channel</code><span class="sig-paren">(</span><em>channel_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.update_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.update_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.delete_channel">
+<code class="descname">delete_channel</code><span class="sig-paren">(</span><em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.delete_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.delete_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.patch_channel">
+<code class="descname">patch_channel</code><span class="sig-paren">(</span><em>channel_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.patch_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.patch_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.restore_channel">
+<code class="descname">restore_channel</code><span class="sig-paren">(</span><em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.restore_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.restore_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_statistics">
+<code class="descname">get_channel_statistics</code><span class="sig-paren">(</span><em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_statistics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_statistics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_pinned_posts">
+<code class="descname">get_channel_pinned_posts</code><span class="sig-paren">(</span><em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_pinned_posts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_pinned_posts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_by_name">
+<code class="descname">get_channel_by_name</code><span class="sig-paren">(</span><em>team_id</em>, <em>channel_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_by_name_and_team_name">
+<code class="descname">get_channel_by_name_and_team_name</code><span class="sig-paren">(</span><em>team_name</em>, <em>channel_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_by_name_and_team_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_by_name_and_team_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_members">
+<code class="descname">get_channel_members</code><span class="sig-paren">(</span><em>channel_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_members"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_members" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.add_user">
+<code class="descname">add_user</code><span class="sig-paren">(</span><em>channel_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.add_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.add_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_members_by_ids">
+<code class="descname">get_channel_members_by_ids</code><span class="sig-paren">(</span><em>channel_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_members_by_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_members_by_ids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_member">
+<code class="descname">get_channel_member</code><span class="sig-paren">(</span><em>channel_id</em>, <em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_member"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_member" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.remove_channel_member">
+<code class="descname">remove_channel_member</code><span class="sig-paren">(</span><em>channel_id</em>, <em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.remove_channel_member"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.remove_channel_member" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.update_channel_roles">
+<code class="descname">update_channel_roles</code><span class="sig-paren">(</span><em>channel_id</em>, <em>user_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.update_channel_roles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.update_channel_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.update_channel_notifications">
+<code class="descname">update_channel_notifications</code><span class="sig-paren">(</span><em>channel_id</em>, <em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.update_channel_notifications"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.update_channel_notifications" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.view_channel">
+<code class="descname">view_channel</code><span class="sig-paren">(</span><em>user_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.view_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.view_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_members_for_user">
+<code class="descname">get_channel_members_for_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_members_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_members_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channels_for_user">
+<code class="descname">get_channels_for_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channels_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channels_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_channel_for_user">
+<code class="descname">get_channel_for_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_channel_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_channel_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_unread_messages">
+<code class="descname">get_unread_messages</code><span class="sig-paren">(</span><em>user_id</em>, <em>channel_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_unread_messages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_unread_messages" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_public_channels">
+<code class="descname">get_public_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_public_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_public_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.get_deleted_channels">
+<code class="descname">get_deleted_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.get_deleted_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.get_deleted_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.channels.Channels.search_channels">
+<code class="descname">search_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/channels.html#Channels.search_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.channels.Channels.search_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.cluster">
+<span id="cluster"></span><h2>Cluster<a class="headerlink" href="#module-mattermostdriver.endpoints.cluster" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.cluster.Cluster">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.cluster.</code><code class="descname">Cluster</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/cluster.html#Cluster"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.cluster.Cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.cluster.Cluster.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/cluster’</em><a class="headerlink" href="#mattermostdriver.endpoints.cluster.Cluster.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.cluster.Cluster.get_cluster_status">
+<code class="descname">get_cluster_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/cluster.html#Cluster.get_cluster_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.cluster.Cluster.get_cluster_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.commands">
+<span id="commands"></span><h2>Commands<a class="headerlink" href="#module-mattermostdriver.endpoints.commands" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.commands.Commands">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.commands.</code><code class="descname">Commands</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.commands.Commands.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/commands’</em><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.create_command">
+<code class="descname">create_command</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.create_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.create_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.list_commands_for_team">
+<code class="descname">list_commands_for_team</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.list_commands_for_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.list_commands_for_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.list_autocomplete_commands">
+<code class="descname">list_autocomplete_commands</code><span class="sig-paren">(</span><em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.list_autocomplete_commands"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.list_autocomplete_commands" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.update_command">
+<code class="descname">update_command</code><span class="sig-paren">(</span><em>command_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.update_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.update_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.delete_command">
+<code class="descname">delete_command</code><span class="sig-paren">(</span><em>command_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.delete_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.delete_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.generate_new_token">
+<code class="descname">generate_new_token</code><span class="sig-paren">(</span><em>command_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.generate_new_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.generate_new_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.commands.Commands.execute_command">
+<code class="descname">execute_command</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/commands.html#Commands.execute_command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.commands.Commands.execute_command" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.compliance">
+<span id="compliance"></span><h2>Compliance<a class="headerlink" href="#module-mattermostdriver.endpoints.compliance" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.compliance.Compliance">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.compliance.</code><code class="descname">Compliance</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/compliance.html#Compliance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.compliance.Compliance.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/compliance’</em><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.compliance.Compliance.create_report">
+<code class="descname">create_report</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/compliance.html#Compliance.create_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance.create_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.compliance.Compliance.get_reports">
+<code class="descname">get_reports</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/compliance.html#Compliance.get_reports"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance.get_reports" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.compliance.Compliance.get_report">
+<code class="descname">get_report</code><span class="sig-paren">(</span><em>report_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/compliance.html#Compliance.get_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance.get_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.compliance.Compliance.download_report">
+<code class="descname">download_report</code><span class="sig-paren">(</span><em>report_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/compliance.html#Compliance.download_report"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.compliance.Compliance.download_report" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.data_retention">
+<span id="data-retention"></span><h2>Data_retention<a class="headerlink" href="#module-mattermostdriver.endpoints.data_retention" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.data_retention.DataRetention">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.data_retention.</code><code class="descname">DataRetention</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/data_retention.html#DataRetention"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.data_retention.DataRetention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.data_retention.DataRetention.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/data_retention’</em><a class="headerlink" href="#mattermostdriver.endpoints.data_retention.DataRetention.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.data_retention.DataRetention.get_data_retention_policy">
+<code class="descname">get_data_retention_policy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/data_retention.html#DataRetention.get_data_retention_policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.data_retention.DataRetention.get_data_retention_policy" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.elasticsearch">
+<span id="elasticsearch"></span><h2>Elasticsearch<a class="headerlink" href="#module-mattermostdriver.endpoints.elasticsearch" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.elasticsearch.Elasticsearch">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.elasticsearch.</code><code class="descname">Elasticsearch</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/elasticsearch.html#Elasticsearch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.elasticsearch.Elasticsearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.elasticsearch.Elasticsearch.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/elasticsearch’</em><a class="headerlink" href="#mattermostdriver.endpoints.elasticsearch.Elasticsearch.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.elasticsearch.Elasticsearch.test_elasticsearch_configuration">
+<code class="descname">test_elasticsearch_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/elasticsearch.html#Elasticsearch.test_elasticsearch_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.elasticsearch.Elasticsearch.test_elasticsearch_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.elasticsearch.Elasticsearch.purge_all_elasticsearch_indexes">
+<code class="descname">purge_all_elasticsearch_indexes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/elasticsearch.html#Elasticsearch.purge_all_elasticsearch_indexes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.elasticsearch.Elasticsearch.purge_all_elasticsearch_indexes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.emoji">
+<span id="emoji"></span><h2>Emoji<a class="headerlink" href="#module-mattermostdriver.endpoints.emoji" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.emoji.Emoji">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.emoji.</code><code class="descname">Emoji</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/emoji’</em><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.create_custom_emoji">
+<code class="descname">create_custom_emoji</code><span class="sig-paren">(</span><em>emoji_name</em>, <em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji.create_custom_emoji"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.create_custom_emoji" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.get_emoji_list">
+<code class="descname">get_emoji_list</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji.get_emoji_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.get_emoji_list" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji">
+<code class="descname">get_custom_emoji</code><span class="sig-paren">(</span><em>emoji_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji.get_custom_emoji"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.delete_custom_emoji">
+<code class="descname">delete_custom_emoji</code><span class="sig-paren">(</span><em>emoji_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji.delete_custom_emoji"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.delete_custom_emoji" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji_image">
+<code class="descname">get_custom_emoji_image</code><span class="sig-paren">(</span><em>emoji_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/emoji.html#Emoji.get_custom_emoji_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.files">
+<span id="files"></span><h2>Files<a class="headerlink" href="#module-mattermostdriver.endpoints.files" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.files.Files">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.files.</code><code class="descname">Files</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.files.Files.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/files’</em><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.upload_file">
+<code class="descname">upload_file</code><span class="sig-paren">(</span><em>channel_id</em>, <em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.upload_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.upload_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.get_file">
+<code class="descname">get_file</code><span class="sig-paren">(</span><em>file_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.get_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.get_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.get_file_thumbnail">
+<code class="descname">get_file_thumbnail</code><span class="sig-paren">(</span><em>file_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.get_file_thumbnail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.get_file_thumbnail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.get_file_preview">
+<code class="descname">get_file_preview</code><span class="sig-paren">(</span><em>file_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.get_file_preview"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.get_file_preview" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.get_public_file_link">
+<code class="descname">get_public_file_link</code><span class="sig-paren">(</span><em>file_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.get_public_file_link"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.get_public_file_link" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.files.Files.get_file_metadata">
+<code class="descname">get_file_metadata</code><span class="sig-paren">(</span><em>file_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/files.html#Files.get_file_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.files.Files.get_file_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.ldap">
+<span id="ldap"></span><h2>LDAP<a class="headerlink" href="#module-mattermostdriver.endpoints.ldap" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.ldap.LDAP">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.ldap.</code><code class="descname">LDAP</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/ldap.html#LDAP"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.ldap.LDAP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.ldap.LDAP.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/ldap’</em><a class="headerlink" href="#mattermostdriver.endpoints.ldap.LDAP.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.ldap.LDAP.sync_ldap">
+<code class="descname">sync_ldap</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/ldap.html#LDAP.sync_ldap"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.ldap.LDAP.sync_ldap" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.ldap.LDAP.test_ldap_config">
+<code class="descname">test_ldap_config</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/ldap.html#LDAP.test_ldap_config"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.ldap.LDAP.test_ldap_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.oauth">
+<span id="oauth"></span><h2>OAuth<a class="headerlink" href="#module-mattermostdriver.endpoints.oauth" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.oauth.OAuth">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.oauth.</code><code class="descname">OAuth</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/oauth’</em><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.register_oauth_app">
+<code class="descname">register_oauth_app</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.register_oauth_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.register_oauth_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.get_oauth_apps">
+<code class="descname">get_oauth_apps</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.get_oauth_apps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.get_oauth_apps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.get_oauth_app">
+<code class="descname">get_oauth_app</code><span class="sig-paren">(</span><em>app_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.get_oauth_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.get_oauth_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.delete_oauth_app">
+<code class="descname">delete_oauth_app</code><span class="sig-paren">(</span><em>app_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.delete_oauth_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.delete_oauth_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.regenerate_oauth_app_secret">
+<code class="descname">regenerate_oauth_app_secret</code><span class="sig-paren">(</span><em>app_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.regenerate_oauth_app_secret"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.regenerate_oauth_app_secret" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.get_info_on_oauth_app">
+<code class="descname">get_info_on_oauth_app</code><span class="sig-paren">(</span><em>app_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.get_info_on_oauth_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.get_info_on_oauth_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.oauth.OAuth.get_authorized_oauth_apps">
+<code class="descname">get_authorized_oauth_apps</code><span class="sig-paren">(</span><em>user_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/oauth.html#OAuth.get_authorized_oauth_apps"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.oauth.OAuth.get_authorized_oauth_apps" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.posts">
+<span id="posts"></span><h2>Posts<a class="headerlink" href="#module-mattermostdriver.endpoints.posts" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.posts.Posts">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.posts.</code><code class="descname">Posts</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.posts.Posts.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/posts’</em><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.create_post">
+<code class="descname">create_post</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.create_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.create_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.get_post">
+<code class="descname">get_post</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.get_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.get_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.delete_post">
+<code class="descname">delete_post</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.delete_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.delete_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.update_post">
+<code class="descname">update_post</code><span class="sig-paren">(</span><em>post_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.update_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.update_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.patch_post">
+<code class="descname">patch_post</code><span class="sig-paren">(</span><em>post_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.patch_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.patch_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.get_thread">
+<code class="descname">get_thread</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.get_thread"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.get_thread" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.get_list_of_flagged_posts">
+<code class="descname">get_list_of_flagged_posts</code><span class="sig-paren">(</span><em>user_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.get_list_of_flagged_posts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.get_list_of_flagged_posts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.get_file_info_for_post">
+<code class="descname">get_file_info_for_post</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.get_file_info_for_post"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.get_file_info_for_post" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.get_posts_for_channel">
+<code class="descname">get_posts_for_channel</code><span class="sig-paren">(</span><em>channel_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.get_posts_for_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.get_posts_for_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.search_for_team_posts">
+<code class="descname">search_for_team_posts</code><span class="sig-paren">(</span><em>team_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.search_for_team_posts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.search_for_team_posts" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.pin_post_to_channel">
+<code class="descname">pin_post_to_channel</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.pin_post_to_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.pin_post_to_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.unpin_post_to_channel">
+<code class="descname">unpin_post_to_channel</code><span class="sig-paren">(</span><em>post_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.unpin_post_to_channel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.unpin_post_to_channel" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.posts.Posts.perform_post_action">
+<code class="descname">perform_post_action</code><span class="sig-paren">(</span><em>post_id</em>, <em>action_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/posts.html#Posts.perform_post_action"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.posts.Posts.perform_post_action" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.preferences">
+<span id="preferences"></span><h2>Preferences<a class="headerlink" href="#module-mattermostdriver.endpoints.preferences" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.preferences.Preferences">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.preferences.</code><code class="descname">Preferences</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<p>This is the endpoint for Preferences.
+It is special in a way, that the endpoint is /user and not /preferences,
+like one might expect at first!</p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/users’</em><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.get_user_preferences">
+<code class="descname">get_user_preferences</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences.get_user_preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.get_user_preferences" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.save_user_preferences">
+<code class="descname">save_user_preferences</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences.save_user_preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.save_user_preferences" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.delete_user_preferences">
+<code class="descname">delete_user_preferences</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences.delete_user_preferences"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.delete_user_preferences" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.list_user_preferences_by_category">
+<code class="descname">list_user_preferences_by_category</code><span class="sig-paren">(</span><em>user_id</em>, <em>category</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences.list_user_preferences_by_category"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.list_user_preferences_by_category" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.preferences.Preferences.get_specific_user_preference">
+<code class="descname">get_specific_user_preference</code><span class="sig-paren">(</span><em>user_id</em>, <em>category</em>, <em>preference_name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/preferences.html#Preferences.get_specific_user_preference"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.preferences.Preferences.get_specific_user_preference" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.saml">
+<span id="saml"></span><h2>SAML<a class="headerlink" href="#module-mattermostdriver.endpoints.saml" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.saml.SAML">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.saml.</code><code class="descname">SAML</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.saml.SAML.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/saml’</em><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.get_metadata">
+<code class="descname">get_metadata</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.get_metadata"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.get_metadata" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.upload_idp_certificate">
+<code class="descname">upload_idp_certificate</code><span class="sig-paren">(</span><em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.upload_idp_certificate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.upload_idp_certificate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.remove_idp_certificate">
+<code class="descname">remove_idp_certificate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.remove_idp_certificate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.remove_idp_certificate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.upload_public_certificate">
+<code class="descname">upload_public_certificate</code><span class="sig-paren">(</span><em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.upload_public_certificate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.upload_public_certificate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.remove_public_certificate">
+<code class="descname">remove_public_certificate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.remove_public_certificate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.remove_public_certificate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.upload_private_key">
+<code class="descname">upload_private_key</code><span class="sig-paren">(</span><em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.upload_private_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.upload_private_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.remove_private_key">
+<code class="descname">remove_private_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.remove_private_key"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.remove_private_key" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.saml.SAML.get_certificate_status">
+<code class="descname">get_certificate_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/saml.html#SAML.get_certificate_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.saml.SAML.get_certificate_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.system">
+<span id="system"></span><h2>System<a class="headerlink" href="#module-mattermostdriver.endpoints.system" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.system.System">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.system.</code><code class="descname">System</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<p>This endpoint has a mix of different
+endpoints, not only /system</p>
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.check_system_health">
+<code class="descname">check_system_health</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.check_system_health"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.check_system_health" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.recycle_database_connection">
+<code class="descname">recycle_database_connection</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.recycle_database_connection"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.recycle_database_connection" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.send_test_email">
+<code class="descname">send_test_email</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.send_test_email"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.send_test_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_configuration">
+<code class="descname">get_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.update_configuration">
+<code class="descname">update_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.update_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.update_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.reload_configuration">
+<code class="descname">reload_configuration</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.reload_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.reload_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_client_configuration">
+<code class="descname">get_client_configuration</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_client_configuration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_client_configuration" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.upload_license_file">
+<code class="descname">upload_license_file</code><span class="sig-paren">(</span><em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.upload_license_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.upload_license_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.remove_license_file">
+<code class="descname">remove_license_file</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.remove_license_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.remove_license_file" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_client_license">
+<code class="descname">get_client_license</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_client_license"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_client_license" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_audits">
+<code class="descname">get_audits</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_audits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_audits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.invalidate_all_caches">
+<code class="descname">invalidate_all_caches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.invalidate_all_caches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.invalidate_all_caches" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_logs">
+<code class="descname">get_logs</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_logs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_logs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.add_log_message">
+<code class="descname">add_log_message</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.add_log_message"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.add_log_message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_webrtc_token">
+<code class="descname">get_webrtc_token</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_webrtc_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_webrtc_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.system.System.get_analytics">
+<code class="descname">get_analytics</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/system.html#System.get_analytics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.system.System.get_analytics" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.teams">
+<span id="teams"></span><h2>Teams<a class="headerlink" href="#module-mattermostdriver.endpoints.teams" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.teams.Teams">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.teams.</code><code class="descname">Teams</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.teams.Teams.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/teams’</em><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.create_team">
+<code class="descname">create_team</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.create_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.create_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_teams">
+<code class="descname">get_teams</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_teams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_teams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team">
+<code class="descname">get_team</code><span class="sig-paren">(</span><em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.update_team">
+<code class="descname">update_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.update_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.update_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.delete_team">
+<code class="descname">delete_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.delete_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.delete_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.patch_team">
+<code class="descname">patch_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.patch_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.patch_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_by_name">
+<code class="descname">get_team_by_name</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_by_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_by_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.search_teams">
+<code class="descname">search_teams</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.search_teams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.search_teams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.check_team_exists">
+<code class="descname">check_team_exists</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.check_team_exists"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.check_team_exists" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_user_teams">
+<code class="descname">get_user_teams</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_user_teams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_user_teams" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_members">
+<code class="descname">get_team_members</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_members"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_members" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.add_user_to_team">
+<code class="descname">add_user_to_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.add_user_to_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.add_user_to_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.add_user_to_team_from_invite">
+<code class="descname">add_user_to_team_from_invite</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.add_user_to_team_from_invite"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.add_user_to_team_from_invite" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.add_multiple_users_to_team">
+<code class="descname">add_multiple_users_to_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.add_multiple_users_to_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.add_multiple_users_to_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_members_for_user">
+<code class="descname">get_team_members_for_user</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_members_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_members_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_member">
+<code class="descname">get_team_member</code><span class="sig-paren">(</span><em>team_id</em>, <em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_member"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_member" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.remove_user_from_team">
+<code class="descname">remove_user_from_team</code><span class="sig-paren">(</span><em>team_id</em>, <em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.remove_user_from_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.remove_user_from_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_members_by_id">
+<code class="descname">get_team_members_by_id</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_members_by_id"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_members_by_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_stats">
+<code class="descname">get_team_stats</code><span class="sig-paren">(</span><em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_stats"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_stats" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.update_team_member_roles">
+<code class="descname">update_team_member_roles</code><span class="sig-paren">(</span><em>team_id</em>, <em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.update_team_member_roles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.update_team_member_roles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_team_unreads_for_user">
+<code class="descname">get_team_unreads_for_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_team_unreads_for_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_team_unreads_for_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_unreads_for_team">
+<code class="descname">get_unreads_for_team</code><span class="sig-paren">(</span><em>user_id</em>, <em>team_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_unreads_for_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_unreads_for_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.invite_users_to_team_by_mail">
+<code class="descname">invite_users_to_team_by_mail</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.invite_users_to_team_by_mail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.invite_users_to_team_by_mail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.import_team_from_other_app">
+<code class="descname">import_team_from_other_app</code><span class="sig-paren">(</span><em>team_id</em>, <em>data=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.import_team_from_other_app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.import_team_from_other_app" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_invite_info_for_team">
+<code class="descname">get_invite_info_for_team</code><span class="sig-paren">(</span><em>invite_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_invite_info_for_team"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_invite_info_for_team" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_public_channels">
+<code class="descname">get_public_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_public_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_public_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.get_deleted_channels">
+<code class="descname">get_deleted_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.get_deleted_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.get_deleted_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.teams.Teams.search_channels">
+<code class="descname">search_channels</code><span class="sig-paren">(</span><em>team_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/teams.html#Teams.search_channels"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.teams.Teams.search_channels" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.users">
+<span id="users"></span><h2>Users<a class="headerlink" href="#module-mattermostdriver.endpoints.users" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.users.Users">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.users.</code><code class="descname">Users</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.users.Users.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/users’</em><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.login_user">
+<code class="descname">login_user</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.login_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.login_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.logout_user">
+<code class="descname">logout_user</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.logout_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.logout_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.create_user">
+<code class="descname">create_user</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.create_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.create_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_users">
+<code class="descname">get_users</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_users_by_ids">
+<code class="descname">get_users_by_ids</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_users_by_ids"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_users_by_ids" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_users_by_usernames">
+<code class="descname">get_users_by_usernames</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_users_by_usernames"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_users_by_usernames" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.search_users">
+<code class="descname">search_users</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.search_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.search_users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.autocomplete_users">
+<code class="descname">autocomplete_users</code><span class="sig-paren">(</span><em>params=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.autocomplete_users"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.autocomplete_users" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user">
+<code class="descname">get_user</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.update_user">
+<code class="descname">update_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.update_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.update_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.deactivate_user">
+<code class="descname">deactivate_user</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.deactivate_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.deactivate_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.patch_user">
+<code class="descname">patch_user</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.patch_user"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.patch_user" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.update_user_role">
+<code class="descname">update_user_role</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.update_user_role"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.update_user_role" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.update_user_active_status">
+<code class="descname">update_user_active_status</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.update_user_active_status"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.update_user_active_status" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user_profile_image">
+<code class="descname">get_user_profile_image</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user_profile_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user_profile_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.set_user_profile_image">
+<code class="descname">set_user_profile_image</code><span class="sig-paren">(</span><em>user_id</em>, <em>files</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.set_user_profile_image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.set_user_profile_image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user_by_username">
+<code class="descname">get_user_by_username</code><span class="sig-paren">(</span><em>username</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user_by_username"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user_by_username" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.reset_password">
+<code class="descname">reset_password</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.reset_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.reset_password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.update_user_mfa">
+<code class="descname">update_user_mfa</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.update_user_mfa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.update_user_mfa" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.generate_mfa">
+<code class="descname">generate_mfa</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.generate_mfa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.generate_mfa" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.check_mfa">
+<code class="descname">check_mfa</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.check_mfa"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.check_mfa" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.update_user_password">
+<code class="descname">update_user_password</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.update_user_password"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.update_user_password" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.send_password_reset_mail">
+<code class="descname">send_password_reset_mail</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.send_password_reset_mail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.send_password_reset_mail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user_by_email">
+<code class="descname">get_user_by_email</code><span class="sig-paren">(</span><em>email</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user_by_email"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user_by_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user_sessions">
+<code class="descname">get_user_sessions</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user_sessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user_sessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.revoke_user_session">
+<code class="descname">revoke_user_session</code><span class="sig-paren">(</span><em>user_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.revoke_user_session"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.revoke_user_session" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.revoke_all_user_sessions">
+<code class="descname">revoke_all_user_sessions</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.revoke_all_user_sessions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.revoke_all_user_sessions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.attach_mobile_device">
+<code class="descname">attach_mobile_device</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.attach_mobile_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.attach_mobile_device" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.get_user_audits">
+<code class="descname">get_user_audits</code><span class="sig-paren">(</span><em>user_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.get_user_audits"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.get_user_audits" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.verify_user_email">
+<code class="descname">verify_user_email</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.verify_user_email"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.verify_user_email" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.send_verification_mail">
+<code class="descname">send_verification_mail</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.send_verification_mail"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.send_verification_mail" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.switch_login_method">
+<code class="descname">switch_login_method</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.switch_login_method"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.switch_login_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.disable_personal_access_token">
+<code class="descname">disable_personal_access_token</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.disable_personal_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.disable_personal_access_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.users.Users.enable_personal_access_token">
+<code class="descname">enable_personal_access_token</code><span class="sig-paren">(</span><em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/users.html#Users.enable_personal_access_token"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.users.Users.enable_personal_access_token" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-mattermostdriver.endpoints.webhooks">
+<span id="webhooks"></span><h2>Webhooks<a class="headerlink" href="#module-mattermostdriver.endpoints.webhooks" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks">
+<em class="property">class </em><code class="descclassname">mattermostdriver.endpoints.webhooks.</code><code class="descname">Webhooks</code><span class="sig-paren">(</span><em>client</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">mattermostdriver.endpoints.base.Base</span></code></p>
+<dl class="attribute">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.endpoint">
+<code class="descname">endpoint</code><em class="property"> = ‘/hooks’</em><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.create_incoming_hook">
+<code class="descname">create_incoming_hook</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.create_incoming_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.create_incoming_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.list_incoming_hooks">
+<code class="descname">list_incoming_hooks</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.list_incoming_hooks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.list_incoming_hooks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.get_incoming_hook">
+<code class="descname">get_incoming_hook</code><span class="sig-paren">(</span><em>hook_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.get_incoming_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.get_incoming_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.update_incoming_hook">
+<code class="descname">update_incoming_hook</code><span class="sig-paren">(</span><em>hook_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.update_incoming_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.update_incoming_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.create_outgoing_hook">
+<code class="descname">create_outgoing_hook</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.create_outgoing_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.create_outgoing_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.list_outgoing_hooks">
+<code class="descname">list_outgoing_hooks</code><span class="sig-paren">(</span><em>params</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.list_outgoing_hooks"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.list_outgoing_hooks" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.get_outgoing_hook">
+<code class="descname">get_outgoing_hook</code><span class="sig-paren">(</span><em>hook_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.get_outgoing_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.get_outgoing_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.delete_outgoing_hook">
+<code class="descname">delete_outgoing_hook</code><span class="sig-paren">(</span><em>hook_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.delete_outgoing_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.delete_outgoing_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.update_outgoing_hook">
+<code class="descname">update_outgoing_hook</code><span class="sig-paren">(</span><em>hook_id</em>, <em>options</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.update_outgoing_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.update_outgoing_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.regenerate_token_outgoing_hook">
+<code class="descname">regenerate_token_outgoing_hook</code><span class="sig-paren">(</span><em>hook_id</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.regenerate_token_outgoing_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.regenerate_token_outgoing_hook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="mattermostdriver.endpoints.webhooks.Webhooks.call_webhook">
+<code class="descname">call_webhook</code><span class="sig-paren">(</span><em>hook_id</em>, <em>options=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/endpoints/webhooks.html#Webhooks.call_webhook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.endpoints.webhooks.Webhooks.call_webhook" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="changelog.html" class="btn btn-neutral float-right" title="CHANGELOG" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Mattermostdriver documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Christian Plümer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'4.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

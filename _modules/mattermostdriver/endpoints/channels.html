@@ -1,0 +1,394 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mattermostdriver.endpoints.channels &mdash; mattermostdriver 4.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mattermostdriver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../endpoints.html">Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">CONTRIBUTING</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mattermostdriver</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mattermostdriver.endpoints.channels</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mattermostdriver.endpoints.channels</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">.teams</span> <span class="k">import</span> <span class="n">Teams</span>
+<span class="kn">from</span> <span class="nn">.users</span> <span class="k">import</span> <span class="n">Users</span>
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;mattermostdriver.api.channels&#39;</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels">[docs]</a><span class="k">class</span> <span class="nc">Channels</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+	<span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;/channels&#39;</span>
+
+<div class="viewcode-block" id="Channels.create_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.create_channel">[docs]</a>	<span class="k">def</span> <span class="nf">create_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.create_direct_message_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.create_direct_message_channel">[docs]</a>	<span class="k">def</span> <span class="nf">create_direct_message_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/direct&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.create_group_message_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.create_group_message_channel">[docs]</a>	<span class="k">def</span> <span class="nf">create_group_message_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/group&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_list_of_channels_by_ids"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_list_of_channels_by_ids">[docs]</a>	<span class="k">def</span> <span class="nf">get_list_of_channels_by_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="n">Teams</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/ids&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.update_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.update_channel">[docs]</a>	<span class="k">def</span> <span class="nf">update_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.delete_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.delete_channel">[docs]</a>	<span class="k">def</span> <span class="nf">delete_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.patch_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.patch_channel">[docs]</a>	<span class="k">def</span> <span class="nf">patch_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/patch&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.restore_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.restore_channel">[docs]</a>	<span class="k">def</span> <span class="nf">restore_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/restore&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_statistics"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_statistics">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_statistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/stats&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_pinned_posts"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_pinned_posts">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_pinned_posts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/pinned&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_by_name"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_by_name">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Teams</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/name/&#39;</span> <span class="o">+</span> <span class="n">channel_name</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_by_name_and_team_name"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_by_name_and_team_name">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_by_name_and_team_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_name</span><span class="p">,</span> <span class="n">channel_name</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Teams</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/name/&#39;</span> <span class="o">+</span> <span class="n">team_name</span> <span class="o">+</span> <span class="s1">&#39;/channels/name/&#39;</span> <span class="o">+</span> <span class="n">channel_name</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_members"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_members">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_members</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.add_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.add_user">[docs]</a>	<span class="k">def</span> <span class="nf">add_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_members_by_ids"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_members_by_ids">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_members_by_ids</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members/ids&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_member"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_member">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.remove_channel_member"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.remove_channel_member">[docs]</a>	<span class="k">def</span> <span class="nf">remove_channel_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.update_channel_roles"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.update_channel_roles">[docs]</a>	<span class="k">def</span> <span class="nf">update_channel_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/roles&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.update_channel_notifications"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.update_channel_notifications">[docs]</a>	<span class="k">def</span> <span class="nf">update_channel_notifications</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/notify_props&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.view_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.view_channel">[docs]</a>	<span class="k">def</span> <span class="nf">view_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/view&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_members_for_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_members_for_user">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_members_for_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/members&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channels_for_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channels_for_user">[docs]</a>	<span class="k">def</span> <span class="nf">get_channels_for_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_channel_for_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_channel_for_user">[docs]</a>	<span class="k">def</span> <span class="nf">get_channel_for_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+			<span class="s1">&#39;Call to deprecated function get_channel_for_user, &#39;</span>
+			<span class="s1">&#39;which will be removed in the next major version.&#39;</span>
+			<span class="s1">&#39;Use get_channels_for_user instead.&#39;</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_channels_for_user</span><span class="p">(</span><span class="n">user_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_unread_messages"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_unread_messages">[docs]</a>	<span class="k">def</span> <span class="nf">get_unread_messages</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/unread&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_public_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_public_channels">[docs]</a>	<span class="k">def</span> <span class="nf">get_public_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.get_deleted_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.get_deleted_channels">[docs]</a>	<span class="k">def</span> <span class="nf">get_deleted_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/deleted&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Channels.search_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.channels.Channels.search_channels">[docs]</a>	<span class="k">def</span> <span class="nf">search_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/search&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Christian Plümer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'4.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

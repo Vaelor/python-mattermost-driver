@@ -1,0 +1,319 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mattermostdriver.endpoints.system &mdash; mattermostdriver 4.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mattermostdriver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../endpoints.html">Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">CONTRIBUTING</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mattermostdriver</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mattermostdriver.endpoints.system</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mattermostdriver.endpoints.system</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Base</span>
+
+
+<div class="viewcode-block" id="System"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System">[docs]</a><span class="k">class</span> <span class="nc">System</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+	<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">	This endpoint has a mix of different</span>
+<span class="sd">	endpoints, not only /system</span>
+<span class="sd">	&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="System.check_system_health"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.check_system_health">[docs]</a>	<span class="k">def</span> <span class="nf">check_system_health</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/system/ping&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.recycle_database_connection"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.recycle_database_connection">[docs]</a>	<span class="k">def</span> <span class="nf">recycle_database_connection</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/database/recycle&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.send_test_email"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.send_test_email">[docs]</a>	<span class="k">def</span> <span class="nf">send_test_email</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/email/test&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_configuration"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_configuration">[docs]</a>	<span class="k">def</span> <span class="nf">get_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/config&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.update_configuration"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.update_configuration">[docs]</a>	<span class="k">def</span> <span class="nf">update_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="s1">&#39;/config&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.reload_configuration"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.reload_configuration">[docs]</a>	<span class="k">def</span> <span class="nf">reload_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/config/reload&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_client_configuration"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_client_configuration">[docs]</a>	<span class="k">def</span> <span class="nf">get_client_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/config/client&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.upload_license_file"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.upload_license_file">[docs]</a>	<span class="k">def</span> <span class="nf">upload_license_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">files</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/license&#39;</span><span class="p">,</span>
+			<span class="n">files</span><span class="o">=</span><span class="n">files</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.remove_license_file"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.remove_license_file">[docs]</a>	<span class="k">def</span> <span class="nf">remove_license_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="s1">&#39;/license&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_client_license"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_client_license">[docs]</a>	<span class="k">def</span> <span class="nf">get_client_license</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/license/client&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_audits"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_audits">[docs]</a>	<span class="k">def</span> <span class="nf">get_audits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/audits&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.invalidate_all_caches"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.invalidate_all_caches">[docs]</a>	<span class="k">def</span> <span class="nf">invalidate_all_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/caches/invalidate&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_logs"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_logs">[docs]</a>	<span class="k">def</span> <span class="nf">get_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/logs&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.add_log_message"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.add_log_message">[docs]</a>	<span class="k">def</span> <span class="nf">add_log_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="s1">&#39;/logs&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_webrtc_token"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_webrtc_token">[docs]</a>	<span class="k">def</span> <span class="nf">get_webrtc_token</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/webrtc/token&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="System.get_analytics"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.system.System.get_analytics">[docs]</a>	<span class="k">def</span> <span class="nf">get_analytics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="s1">&#39;/analytics/old&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Christian Plümer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'4.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

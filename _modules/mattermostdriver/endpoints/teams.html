@@ -1,0 +1,405 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mattermostdriver.endpoints.teams &mdash; mattermostdriver 4.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mattermostdriver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../endpoints.html">Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">CONTRIBUTING</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mattermostdriver</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mattermostdriver.endpoints.teams</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mattermostdriver.endpoints.teams</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">.users</span> <span class="k">import</span> <span class="n">Users</span>
+
+
+<div class="viewcode-block" id="Teams"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams">[docs]</a><span class="k">class</span> <span class="nc">Teams</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+	<span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;/teams&#39;</span>
+
+<div class="viewcode-block" id="Teams.create_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.create_team">[docs]</a>	<span class="k">def</span> <span class="nf">create_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_teams"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_teams">[docs]</a>	<span class="k">def</span> <span class="nf">get_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team">[docs]</a>	<span class="k">def</span> <span class="nf">get_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.update_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.update_team">[docs]</a>	<span class="k">def</span> <span class="nf">update_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.delete_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.delete_team">[docs]</a>	<span class="k">def</span> <span class="nf">delete_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.patch_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.patch_team">[docs]</a>	<span class="k">def</span> <span class="nf">patch_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/patch&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_by_name"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_by_name">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_by_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/name/&#39;</span> <span class="o">+</span> <span class="n">name</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.search_teams"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.search_teams">[docs]</a>	<span class="k">def</span> <span class="nf">search_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/search&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.check_team_exists"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.check_team_exists">[docs]</a>	<span class="k">def</span> <span class="nf">check_team_exists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/name/&#39;</span> <span class="o">+</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;/exists&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_user_teams"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_user_teams">[docs]</a>	<span class="k">def</span> <span class="nf">get_user_teams</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_members"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_members">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_members</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.add_user_to_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.add_user_to_team">[docs]</a>	<span class="k">def</span> <span class="nf">add_user_to_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.add_user_to_team_from_invite"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.add_user_to_team_from_invite">[docs]</a>	<span class="k">def</span> <span class="nf">add_user_to_team_from_invite</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/members/invite&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.add_multiple_users_to_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.add_multiple_users_to_team">[docs]</a>	<span class="k">def</span> <span class="nf">add_multiple_users_to_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members/batch&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_members_for_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_members_for_user">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_members_for_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams/members&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_member"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_member">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_member</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.remove_user_from_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.remove_user_from_team">[docs]</a>	<span class="k">def</span> <span class="nf">remove_user_from_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_members_by_id"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_members_by_id">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_members_by_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members/ids&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_stats"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_stats">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/stats&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.update_team_member_roles"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.update_team_member_roles">[docs]</a>	<span class="k">def</span> <span class="nf">update_team_member_roles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/members/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/roles&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_team_unreads_for_user"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_team_unreads_for_user">[docs]</a>	<span class="k">def</span> <span class="nf">get_team_unreads_for_user</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams/unread&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_unreads_for_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_unreads_for_team">[docs]</a>	<span class="k">def</span> <span class="nf">get_unreads_for_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">team_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/teams/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/unread&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.invite_users_to_team_by_mail"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.invite_users_to_team_by_mail">[docs]</a>	<span class="k">def</span> <span class="nf">invite_users_to_team_by_mail</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/invite/email&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.import_team_from_other_app"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.import_team_from_other_app">[docs]</a>	<span class="k">def</span> <span class="nf">import_team_from_other_app</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/import&#39;</span><span class="p">,</span>
+			<span class="n">data</span><span class="o">=</span><span class="n">data</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_invite_info_for_team"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_invite_info_for_team">[docs]</a>	<span class="k">def</span> <span class="nf">get_invite_info_for_team</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invite_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/invite/&#39;</span> <span class="o">+</span> <span class="n">invite_id</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_public_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_public_channels">[docs]</a>	<span class="k">def</span> <span class="nf">get_public_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+			<span class="s1">&#39;Using deprecated endpoint Teams.get_public_channels(). &#39;</span> <span class="o">+</span>
+			<span class="s1">&#39;Use Channels.get_public_channels() instead.&#39;</span><span class="p">,</span>
+			<span class="ne">DeprecationWarning</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.get_deleted_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.get_deleted_channels">[docs]</a>	<span class="k">def</span> <span class="nf">get_deleted_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+			<span class="s1">&#39;Using deprecated endpoint Teams.get_deleted_channels(). &#39;</span> <span class="o">+</span>
+			<span class="s1">&#39;Use Channels.get_deleted_channels() instead.&#39;</span><span class="p">,</span>
+			<span class="ne">DeprecationWarning</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/deleted&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Teams.search_channels"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.teams.Teams.search_channels">[docs]</a>	<span class="k">def</span> <span class="nf">search_channels</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+			<span class="s1">&#39;Using deprecated endpoint Teams.search_channels(). Use Channels.search_channels() instead.&#39;</span><span class="p">,</span>
+			<span class="ne">DeprecationWarning</span>
+		<span class="p">)</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/channels/search&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Christian Plümer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'4.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

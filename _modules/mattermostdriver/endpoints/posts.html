@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mattermostdriver.endpoints.posts &mdash; mattermostdriver 4.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="../../../index.html"/>
+        <link rel="up" title="Module code" href="../../index.html"/> 
+
+  
+  <script src="../../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> mattermostdriver
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../endpoints.html">Endpoints</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">CHANGELOG</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">CONTRIBUTING</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">mattermostdriver</a>
+        
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>mattermostdriver.endpoints.posts</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for mattermostdriver.endpoints.posts</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Base</span>
+<span class="kn">from</span> <span class="nn">.teams</span> <span class="k">import</span> <span class="n">Teams</span>
+<span class="kn">from</span> <span class="nn">.users</span> <span class="k">import</span> <span class="n">Users</span>
+<span class="kn">from</span> <span class="nn">.channels</span> <span class="k">import</span> <span class="n">Channels</span>
+
+
+<div class="viewcode-block" id="Posts"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts">[docs]</a><span class="k">class</span> <span class="nc">Posts</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+	<span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;/posts&#39;</span>
+
+<div class="viewcode-block" id="Posts.create_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.create_post">[docs]</a>	<span class="k">def</span> <span class="nf">create_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.get_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.get_post">[docs]</a>	<span class="k">def</span> <span class="nf">get_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.delete_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.delete_post">[docs]</a>	<span class="k">def</span> <span class="nf">delete_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.update_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.update_post">[docs]</a>	<span class="k">def</span> <span class="nf">update_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.patch_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.patch_post">[docs]</a>	<span class="k">def</span> <span class="nf">patch_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/patch&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.get_thread"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.get_thread">[docs]</a>	<span class="k">def</span> <span class="nf">get_thread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/thread&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.get_list_of_flagged_posts"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.get_list_of_flagged_posts">[docs]</a>	<span class="k">def</span> <span class="nf">get_list_of_flagged_posts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Users</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/posts/flagged&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.get_file_info_for_post"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.get_file_info_for_post">[docs]</a>	<span class="k">def</span> <span class="nf">get_file_info_for_post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/files/info&#39;</span><span class="p">,</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.get_posts_for_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.get_posts_for_channel">[docs]</a>	<span class="k">def</span> <span class="nf">get_posts_for_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel_id</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="n">Channels</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">channel_id</span> <span class="o">+</span> <span class="s1">&#39;/posts&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.search_for_team_posts"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.search_for_team_posts">[docs]</a>	<span class="k">def</span> <span class="nf">search_for_team_posts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_id</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="n">Teams</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">team_id</span> <span class="o">+</span> <span class="s1">&#39;/posts/search&#39;</span><span class="p">,</span>
+			<span class="n">options</span><span class="o">=</span><span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.pin_post_to_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.pin_post_to_channel">[docs]</a>	<span class="k">def</span> <span class="nf">pin_post_to_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/pin&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.unpin_post_to_channel"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.unpin_post_to_channel">[docs]</a>	<span class="k">def</span> <span class="nf">unpin_post_to_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/unpin&#39;</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Posts.perform_post_action"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.posts.Posts.perform_post_action">[docs]</a>	<span class="k">def</span> <span class="nf">perform_post_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">post_id</span><span class="p">,</span> <span class="n">action_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">post_id</span> <span class="o">+</span> <span class="s1">&#39;/actions/&#39;</span> <span class="o">+</span> <span class="n">action_id</span>
+		<span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+           <div class="articleComments">
+            
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2017, Christian Plümer.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../',
+            VERSION:'4.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
