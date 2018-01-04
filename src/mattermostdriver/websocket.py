@@ -22,8 +22,8 @@ class Websocket:
 		When the authentication has finished, start the loop listening for messages,
 		sending a ping to the server to keep the connection alive.
 
-		:param event_handler: Every websocket event will be passed there
-		:type event_handler: Function
+		:param event_handler: Every websocket event will be passed there. Takes one argument.
+		:type event_handler: Function(message)
 		:return:
 		"""
 		context = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)

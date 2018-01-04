@@ -115,8 +115,8 @@ class Driver:
 		See https://api.mattermost.com/v4/#tag/WebSocket for which
 		websocket events mattermost sends.
 
-		:param event_handler: The function to handle the websocket events.
-		:type event_handler: Function
+		:param event_handler: The function to handle the websocket events. Takes one argument.
+		:type event_handler: Function(message)
 		:return: The event loop
 		"""
 		self.websocket = websocket_cls(self.options, self.client.token)
