@@ -14,7 +14,7 @@ class Users(Base):
 		return self.client.post(self.endpoint, options)
 
 	def get_users(self, params=None):
-		return self.client.get(	self.endpoint, params=params)
+		return self.client.get(self.endpoint, params=params)
 
 	def get_users_by_ids(self, options=None):
 		return self.client.post(
