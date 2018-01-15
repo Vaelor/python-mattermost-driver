@@ -1,3 +1,12 @@
+4.2.0
+'''''
+Release for Mattermost 4.6 api changes.
+
+Added endpoints:
+ - `get_user_access_token` in `/users`
+ - `search_tokens` in `/users`
+ - `update_user_authentication_method` in `/users`
+
 4.1.0
 '''''
 This release mostly improves on the documentation.
