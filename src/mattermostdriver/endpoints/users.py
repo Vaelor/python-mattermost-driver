@@ -186,3 +186,19 @@ class Users(Base):
 			self.endpoint + '/tokens/enable',
 			options
 		)
+
+	def get_user_access_token(self, token_id):
+		return self.client.get(
+			self.endpoint + '/tokens/' + token_id
+		)
+
+	def search_tokens(self, options=None):
+		return self.client.post(
+			self.endpoint + '/tokens/search',
+			options
+		)
+
+	def update_user_authentication_method(self, user_id, options=None):
+		return self.client.put(
+			self.endpoint + user_id + '/auth'
+		)
