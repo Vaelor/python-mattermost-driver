@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mattermostdriver.endpoints.users &mdash; mattermostdriver 4.1.0 documentation</title>
+  <title>mattermostdriver.endpoints.users &mdash; mattermostdriver 4.2.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="../../../genindex.html"/>
         <link rel="search" title="Search" href="../../../search.html"/>
-    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="../../../index.html"/>
+    <link rel="top" title="mattermostdriver 4.2.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                4.1
+                4.2
               </div>
             
           
@@ -345,6 +345,22 @@
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/tokens/enable&#39;</span><span class="p">,</span>
 			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Users.get_user_access_token"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.users.Users.get_user_access_token">[docs]</a>	<span class="k">def</span> <span class="nf">get_user_access_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_id</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/tokens/&#39;</span> <span class="o">+</span> <span class="n">token_id</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Users.search_tokens"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.users.Users.search_tokens">[docs]</a>	<span class="k">def</span> <span class="nf">search_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/tokens/search&#39;</span><span class="p">,</span>
+			<span class="n">options</span>
+		<span class="p">)</span></div>
+
+<div class="viewcode-block" id="Users.update_user_authentication_method"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.users.Users.update_user_authentication_method">[docs]</a>	<span class="k">def</span> <span class="nf">update_user_authentication_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="n">user_id</span> <span class="o">+</span> <span class="s1">&#39;/auth&#39;</span>
 		<span class="p">)</span></div></div>
 </pre></div>
 
@@ -382,7 +398,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'4.1.0',
+            VERSION:'4.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,

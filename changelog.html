@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>CHANGELOG &mdash; mattermostdriver 4.1.0 documentation</title>
+  <title>CHANGELOG &mdash; mattermostdriver 4.2.0 documentation</title>
   
 
   
@@ -35,7 +35,7 @@
         <link rel="index" title="Index"
               href="genindex.html"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mattermostdriver 4.1.0 documentation" href="index.html"/>
+    <link rel="top" title="mattermostdriver 4.2.0 documentation" href="index.html"/>
         <link rel="next" title="CONTRIBUTING" href="contributing.html"/>
         <link rel="prev" title="Endpoints" href="endpoints.html"/> 
 
@@ -66,7 +66,7 @@
             
             
               <div class="version">
-                4.1
+                4.2
               </div>
             
           
@@ -94,15 +94,16 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="endpoints.html">Endpoints</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">CHANGELOG</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id1">4.1.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id2">4.0.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">4.0.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">4.0.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id5">3.0.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id6">3.0.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id7">2.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id8">2.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id9">2.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">4.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id2">4.1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id3">4.0.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id4">4.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id5">4.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id6">3.0.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id7">3.0.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id8">2.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id9">2.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id10">2.0.0</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">CONTRIBUTING</a></li>
@@ -172,7 +173,20 @@
   <div class="section" id="changelog">
 <h1>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>4.1.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2>4.2.0<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Release for Mattermost 4.6 api changes.</p>
+<dl class="docutils">
+<dt>Added endpoints:</dt>
+<dd><ul class="first last simple">
+<li><cite>get_user_access_token</cite> in <cite>/users</cite></li>
+<li><cite>search_tokens</cite> in <cite>/users</cite></li>
+<li><cite>update_user_authentication_method</cite> in <cite>/users</cite></li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h2>4.1.0<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>This release mostly improves on the documentation.</p>
 <p>The sphinx theme has been changed to the readthedocs one.</p>
 <p>This also adds a <cite>debug</cite> option, which enables a very verbose log output.
@@ -180,14 +194,14 @@ Be careful, as everything, even your mattermost password when you log in,
 is readable in the log output!
 This is definitely not for production usage!</p>
 </div>
-<div class="section" id="id2">
-<h2>4.0.2<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h2>4.0.2<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>This release makes some internal changes on how the endpoints are accessed.</p>
 <p>Since this works much better then using <cite>api[‘endpoint’]</cite> has been deprecated for the next Major release.</p>
 <p>Fixes <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver/issues/5">https://github.com/Vaelor/python-mattermost-driver/issues/5</a></p>
 </div>
-<div class="section" id="id3">
-<h2>4.0.1<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id4">
+<h2>4.0.1<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>The release 4.0.0 was not quite correct, since the following changes did not really happen, only the api documentation for mattermost 4.4.0 changed.</p>
 <div class="code highlight-default"><div class="highlight"><pre><span></span><span class="n">Endpoints</span> <span class="n">moved</span> <span class="kn">from</span> <span class="nn">team</span> <span class="n">to</span> <span class="n">channels</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">mattermost</span><span class="o">/</span><span class="n">mattermost</span><span class="o">-</span><span class="n">api</span><span class="o">-</span><span class="n">reference</span><span class="o">/</span><span class="n">pull</span><span class="o">/</span><span class="mi">298</span><span class="o">/</span><span class="n">files</span>
  <span class="o">-</span> <span class="n">get_public_channels</span>
@@ -196,8 +210,8 @@ This is definitely not for production usage!</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="id4">
-<h2>4.0.0<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id5">
+<h2>4.0.0<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>This has some changes related to Mattermost 4.4</p>
 <dl class="docutils">
 <dt>BREAKING CHANGES:</dt>
@@ -222,8 +236,8 @@ without using <cite>Driver.api[‘endpoint’]</cite>, instead you can
 Both ways are working, so no breaking change there.
 Related Issue for this: <a class="reference external" href="https://github.com/Vaelor/python-mattermost-driver/issues/5">https://github.com/Vaelor/python-mattermost-driver/issues/5</a></p>
 </div>
-<div class="section" id="id5">
-<h2>3.0.1<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id6">
+<h2>3.0.1<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
 <dt>Thanks to SmartHoneyBee!</dt>
 <dd><ul class="first last simple">
@@ -232,8 +246,8 @@ Related Issue for this: <a class="reference external" href="https://github.com/V
 </dd>
 </dl>
 </div>
-<div class="section" id="id6">
-<h2>3.0.0<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h2>3.0.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li>Removed python 3.3 from supported versions</li>
@@ -241,17 +255,17 @@ Related Issue for this: <a class="reference external" href="https://github.com/V
 </ul>
 </div></blockquote>
 </div>
-<div class="section" id="id7">
-<h2>2.3.0<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id8">
+<h2>2.3.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
 <p>Make a <cite>basepath</cite> available in <cite>Client.make_request()</cite>.
 This is mainly needed for calling <cite>/hooks</cite>.</p>
 </div>
-<div class="section" id="id8">
-<h2>2.2.0<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id9">
+<h2>2.2.0<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
 <p>Support for personal access tokens and MFA Token.</p>
 </div>
-<div class="section" id="id9">
-<h2>2.0.0<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h2>2.0.0<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
 <p>Breaking change for file uploads.
 Instead of a <cite>data</cite> dict containing all formdata,
 a <cite>files</cite> dict is in the following endpoints</p>
@@ -321,7 +335,7 @@ a <cite>files</cite> dict is in the following endpoints</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'4.1.0',
+            VERSION:'4.2.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
