@@ -18,6 +18,8 @@ The repository will try to keep up with the master of https://github.com/matterm
 
 If something changes, it is most likely to change because the official mattermost api changed.
 
+Python 3.4 or later is required.
+
 Installation
 ------------
 
