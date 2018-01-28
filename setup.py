@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 import os.path
 import sys
 
@@ -7,6 +10,11 @@ full_version = ''
 
 root_dir = os.path.abspath(os.path.dirname(__file__))
 
+py_version = sys.version_info[:2]
+
+if py_version < (3, 4):
+	raise Exception("python-mattermost-driver requires Python >= 3.4.")
+
 readme_file = os.path.join(root_dir, 'README.rst')
 with open(readme_file, encoding='utf-8') as f:
 	long_description = f.read()
@@ -15,10 +23,6 @@ version_module = os.path.join(root_dir, 'src', 'mattermostdriver', 'version.py')
 with open(version_module, encoding='utf-8') as f:
 	exec(f.read())
 
-py_version = sys.version_info[:2]
-
-if py_version < (3, 4):
-	raise Exception("python-mattermost-driver requires Python >= 3.4.")
 
 setup(
 	name='mattermostdriver',
