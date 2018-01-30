@@ -1,3 +1,11 @@
+4.2.1
+'''''
+Fixes
+ - https://github.com/Vaelor/python-mattermost-driver/pull/21
+ - https://github.com/Vaelor/python-mattermost-driver/pull/22
+
+Thanks to @dan-klasson for these!!
+
 4.2.0
 '''''
 Release for Mattermost 4.6 api changes.
