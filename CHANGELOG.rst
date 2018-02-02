@@ -1,3 +1,8 @@
+4.3.1
+'''''
+Added endpoints
+ - `create_user_access_token` in `/users`
+
 4.2.1
 '''''
 Fixes

@@ -202,3 +202,9 @@ class Users(Base):
 		return self.client.put(
 			self.endpoint + user_id + '/auth'
 		)
+
+	def create_user_access_token(self, user_id, options=None):
+		return self.client.post(
+			self.endpoint + '/' + user_id + '/tokens',
+			options
+		)
