@@ -26,9 +26,10 @@ class System(Base):
 			'/config'
 		)
 
-	def update_configuration(self):
+	def update_configuration(self, options):
 		return self.client.put(
-			'/config'
+			'/config',
+			options=options
 		)
 
 	def reload_configuration(self):

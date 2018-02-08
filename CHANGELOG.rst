@@ -1,3 +1,8 @@
+4.3.2
+'''''
+Fixes
+ - https://github.com/Vaelor/python-mattermost-driver/issues/24
+
 4.3.1
 '''''
 Added endpoints
