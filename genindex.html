@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; mattermostdriver 4.2.0 documentation</title>
+  <title>Index &mdash; mattermostdriver 4.4.0 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
         <link rel="index" title="Index"
               href="#"/>
         <link rel="search" title="Search" href="search.html"/>
-    <link rel="top" title="mattermostdriver 4.2.0 documentation" href="index.html"/> 
+    <link rel="top" title="mattermostdriver 4.4.0 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                4.2
+                4.4
               </div>
             
           
@@ -191,13 +191,17 @@
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.teams.Teams.add_user_to_team">add_user_to_team() (mattermostdriver.endpoints.teams.Teams method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="endpoints.html#mattermostdriver.endpoints.teams.Teams.add_user_to_team_from_invite">add_user_to_team_from_invite() (mattermostdriver.endpoints.teams.Teams method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#mattermostdriver.Driver.api">api (mattermostdriver.Driver attribute)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.users.Users.attach_mobile_device">attach_mobile_device() (mattermostdriver.endpoints.users.Users method)</a>
+</li>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.channels.Channels.autocomplete_channels">autocomplete_channels() (mattermostdriver.endpoints.channels.Channels method)</a>
+</li>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji.autocomplete_custom_emoji">autocomplete_custom_emoji() (mattermostdriver.endpoints.emoji.Emoji method)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.users.Users.autocomplete_users">autocomplete_users() (mattermostdriver.endpoints.users.Users method)</a>
 </li>
@@ -243,10 +247,10 @@
 </li>
       <li><a href="index.html#mattermostdriver.Driver.compliance">compliance (mattermostdriver.Driver attribute)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#mattermostdriver.exceptions.ContentTooLarge">ContentTooLarge (class in mattermostdriver.exceptions)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="index.html#mattermostdriver.Client.cookies">cookies (mattermostdriver.Client attribute)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.channels.Channels.create_channel">create_channel() (mattermostdriver.endpoints.channels.Channels method)</a>
@@ -270,6 +274,8 @@
       <li><a href="endpoints.html#mattermostdriver.endpoints.teams.Teams.create_team">create_team() (mattermostdriver.endpoints.teams.Teams method)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.users.Users.create_user">create_user() (mattermostdriver.endpoints.users.Users method)</a>
+</li>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.users.Users.create_user_access_token">create_user_access_token() (mattermostdriver.endpoints.users.Users method)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -431,6 +437,8 @@
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji">get_custom_emoji() (mattermostdriver.endpoints.emoji.Emoji method)</a>
 </li>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji_by_name">get_custom_emoji_by_name() (mattermostdriver.endpoints.emoji.Emoji method)</a>
+</li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji.get_custom_emoji_image">get_custom_emoji_image() (mattermostdriver.endpoints.emoji.Emoji method)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.data_retention.DataRetention.get_data_retention_policy">get_data_retention_policy() (mattermostdriver.endpoints.data_retention.DataRetention method)</a>
@@ -461,10 +469,10 @@
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.channels.Channels.get_list_of_channels_by_ids">get_list_of_channels_by_ids() (mattermostdriver.endpoints.channels.Channels method)</a>
 </li>
-      <li><a href="endpoints.html#mattermostdriver.endpoints.posts.Posts.get_list_of_flagged_posts">get_list_of_flagged_posts() (mattermostdriver.endpoints.posts.Posts method)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.posts.Posts.get_list_of_flagged_posts">get_list_of_flagged_posts() (mattermostdriver.endpoints.posts.Posts method)</a>
+</li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.system.System.get_logs">get_logs() (mattermostdriver.endpoints.system.System method)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.saml.SAML.get_metadata">get_metadata() (mattermostdriver.endpoints.saml.SAML method)</a>
@@ -751,6 +759,8 @@
         <li><a href="endpoints.html#mattermostdriver.endpoints.teams.Teams.search_channels">(mattermostdriver.endpoints.teams.Teams method)</a>
 </li>
       </ul></li>
+      <li><a href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji.search_custom_emoji">search_custom_emoji() (mattermostdriver.endpoints.emoji.Emoji method)</a>
+</li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.posts.Posts.search_for_team_posts">search_for_team_posts() (mattermostdriver.endpoints.posts.Posts method)</a>
 </li>
       <li><a href="endpoints.html#mattermostdriver.endpoints.teams.Teams.search_teams">search_teams() (mattermostdriver.endpoints.teams.Teams method)</a>
@@ -920,7 +930,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'4.2.0',
+            VERSION:'4.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true,
