@@ -1,3 +1,16 @@
+4.4.0
+'''''
+Release for Mattermost 4.7 api changes.
+
+Added endpoints:
+ - `get_custom_emoji_by_name` in `emoji`
+ - `search_custom_emoji` in `emoji`
+ - `autocomplete_custom_emoji` in `emoji`
+ - `autocomplete_channels` in `channels`
+
+Fixes:
+ - `update_user_authentication_method` was missing the request body
+
 4.3.2
 '''''
 Fixes
