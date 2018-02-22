@@ -27,7 +27,24 @@ class Emoji(Base):
 			self.endpoint + '/' + emoji_id
 		)
 
+	def get_custom_emoji_by_name(self, name):
+		return self.client.get(
+			self.endpoint + '/name/' + name
+		)
+
 	def get_custom_emoji_image(self, emoji_id):
 		return self.client.get(
 			self.endpoint + '/' + emoji_id + '/image'
+		)
+
+	def search_custom_emoji(self, options=None):
+		return self.client.post(
+			self.endpoint + '/search',
+			options=options
+		)
+
+	def autocomplete_custom_emoji(self, params=None):
+		return self.client.get(
+			self.endpoint + '/autocomplete',
+			params=params
 		)

@@ -167,3 +167,9 @@ class Channels(Base):
 			'/teams/' + team_id + '/channels/search',
 			options=options
 		)
+
+	def autocomplete_channels(self, team_id, params=None):
+		return self.client.get(
+			'/teams/' + team_id + '/channels/autocomplete',
+			params=params
+		)
