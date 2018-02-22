@@ -195,16 +195,17 @@ class Users(Base):
 	def search_tokens(self, options=None):
 		return self.client.post(
 			self.endpoint + '/tokens/search',
-			options
+			options=options
 		)
 
 	def update_user_authentication_method(self, user_id, options=None):
 		return self.client.put(
-			self.endpoint + user_id + '/auth'
+			self.endpoint + user_id + '/auth',
+			options=options
 		)
 
 	def create_user_access_token(self, user_id, options=None):
 		return self.client.post(
 			self.endpoint + '/' + user_id + '/tokens',
-			options
+			options=options
 		)
