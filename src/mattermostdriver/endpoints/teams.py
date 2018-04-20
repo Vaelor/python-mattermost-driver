@@ -178,3 +178,14 @@ class Teams(Base):
 			self.endpoint + '/' + team_id + '/channels/search',
 			options=options
 		)
+
+	def get_team_icon(self, team_id):
+		return self.client.get(
+			self.endpoint + '/' + team_id + '/image'
+		)
+
+	def set_team_icon(self, team_id, file):
+		return self.client.post(
+			self.endpoint + '/' + team_id + '/image',
+			files=file
+		)
