@@ -94,3 +94,8 @@ class System(Base):
 			'/analytics/old',
 			params=params
 		)
+
+	def get_configuration_environment(self):
+		return self.client.get(
+			'/config/environment'
+		)
