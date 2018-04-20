@@ -13,6 +13,12 @@ class Posts(Base):
 			options=options
 		)
 
+	def create_ephemeral_post(self, options):
+		return self.client.post(
+			self.endpoint + '/ephemeral',
+			options=options
+		)
+
 	def get_post(self, post_id):
 		return self.client.get(
 			self.endpoint + '/' + post_id,
