@@ -99,3 +99,9 @@ class System(Base):
 		return self.client.get(
 			'/config/environment'
 		)
+
+	def test_aws_s3_connection(self, options=None):
+		return self.client.post(
+			'/file/s3_test',
+			options=options
+		)
