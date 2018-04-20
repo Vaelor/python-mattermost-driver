@@ -16,9 +16,10 @@ class System(Base):
 			'/database/recycle'
 		)
 
-	def send_test_email(self):
+	def send_test_email(self, options=None):
 		return self.client.post(
-			'/email/test'
+			'/email/test',
+			options=options
 		)
 
 	def get_configuration(self):
