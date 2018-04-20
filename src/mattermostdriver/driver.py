@@ -23,6 +23,7 @@ from .endpoints.elasticsearch import Elasticsearch
 from .endpoints.emoji import Emoji
 from .endpoints.data_retention import DataRetention
 from .endpoints.roles import Roles
+from .endpoints.status import Status
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
@@ -91,6 +92,7 @@ class Driver:
 			'posts': Posts(self.client),
 			'files': Files(self.client),
 			'preferences': Preferences(self.client),
+			'status': Status(self.client),
 			'emoji': Emoji(self.client),
 			'system': System(self.client),
 			'webhooks': Webhooks(self.client),
