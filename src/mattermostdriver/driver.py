@@ -22,6 +22,7 @@ from .endpoints.webhooks import Webhooks
 from .endpoints.elasticsearch import Elasticsearch
 from .endpoints.emoji import Emoji
 from .endpoints.data_retention import DataRetention
+from .endpoints.roles import Roles
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
@@ -98,6 +99,7 @@ class Driver:
 			'cluster': Cluster(self.client),
 			'brand': Brand(self.client),
 			'oauth': OAuth(self.client),
+			'roles': Roles(self.client),
 			'saml': SAML(self.client),
 			'ldap': LDAP(self.client),
 			'elasticsearch': Elasticsearch(self.client),
