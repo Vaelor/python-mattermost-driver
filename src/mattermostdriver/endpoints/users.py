@@ -200,7 +200,7 @@ class Users(Base):
 
 	def update_user_authentication_method(self, user_id, options=None):
 		return self.client.put(
-			self.endpoint + user_id + '/auth',
+			self.endpoint + '/' + user_id + '/auth',
 			options=options
 		)
 
