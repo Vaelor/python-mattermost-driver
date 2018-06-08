@@ -1,3 +1,23 @@
+4.5.0
+'''''
+Release for Mattermost 4.8 api changes.
+
+Yes this release is quite a bit behind schedule, sorry for that!
+
+Added endpoints:
+ - `status` as a whole new endpoint
+ - `roles` as a whole new endpoint
+ - `test_aws_s3_connection` in `system`
+ - `get_configuration_environment` in `system`
+ - `send_test_email` in `system`
+ - `create_ephemeral_post` in `posts`
+ - `get_team_icon` in `teams`
+ - `set_team_icon` in `teams`
+
+Fixes:
+ - Example for `call_webhook` was incorrect #26
+ - A slash was missing in `update_user_authentication_method` #27
+
 4.4.0
 '''''
 Release for Mattermost 4.7 api changes.
