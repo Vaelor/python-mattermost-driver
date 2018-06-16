@@ -173,3 +173,19 @@ class Channels(Base):
 			'/teams/' + team_id + '/channels/autocomplete',
 			params=params
 		)
+
+	def update_scheme_derived_roles_of_channel_member(self, channel_id, user_id, options=None):
+		return self.client.put(
+			self.endpoint + '/' + channel_id + '/members/' + user_id + '/schemeRoles',
+			options=options
+		)
+
+	def set_channel_scheme(self, channel_id):
+		return self.client.put(
+			self.endpoint + '/' + channel_id + '/scheme'
+		)
+
+	def convert_channel(self, channel_id):
+		return self.client.post(
+			self.endpoint + '/' + channel_id + '/convert'
+		)

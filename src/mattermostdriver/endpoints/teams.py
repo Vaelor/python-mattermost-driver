@@ -189,3 +189,19 @@ class Teams(Base):
 			self.endpoint + '/' + team_id + '/image',
 			files=file
 		)
+
+	def update_scheme_derived_roles_of_team_member(self, team_id, user_id, options=None):
+		return self.client.put(
+			self.endpoint + '/' + team_id + '/members/' + user_id + '/schemeRoles',
+			options=options
+		)
+
+	def delete_team_icon(self, team_id):
+		self.client.delete(
+			self.endpoint + '/' + team_id + '/image'
+		)
+
+	def set_team_scheme(self, team_id):
+		return self.client.put(
+			self.endpoint + '/' + team_id + '/scheme'
+		)

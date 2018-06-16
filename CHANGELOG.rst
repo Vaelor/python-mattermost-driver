@@ -1,3 +1,22 @@
+4.6.0
+'''''
+Release for Mattermost 5.0 api changes.
+
+Yes, I skipped the 4.9 release because of holiday time ;-)
+
+Added endpoints:
+ - `scheme` as a whole new endpoint
+ - `update_scheme_derived_roles_of_channel_member` in `channels`
+ - `set_channel_scheme` in `channels`
+ - `convert_channel` in `channels`
+ - `update_scheme_derived_roles_of_team_member` in `teams`
+ - `delete_team_icon` in `teams`
+ - `set_team_scheme` in `teams`
+ - `get_stats` in `users`
+
+Fixes:
+ - `create_user` in `users` was missing the query parameters
+
 4.5.0
 '''''
 Release for Mattermost 4.8 api changes.

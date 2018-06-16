@@ -10,8 +10,8 @@ class Users(Base):
 	def logout_user(self):
 		return self.client.post(self.endpoint + '/logout')
 
-	def create_user(self, options=None):
-		return self.client.post(self.endpoint, options)
+	def create_user(self, options=None, params=None):
+		return self.client.post(self.endpoint, options=options, params=params)
 
 	def get_users(self, params=None):
 		return self.client.get(self.endpoint, params=params)
@@ -208,4 +208,9 @@ class Users(Base):
 		return self.client.post(
 			self.endpoint + '/' + user_id + '/tokens',
 			options=options
+		)
+
+	def get_stats(self):
+		return self.client.get(
+			self.endpoint + '/stats'
 		)
