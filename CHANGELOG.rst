@@ -1,3 +1,13 @@
+5.0.0
+'''''
+POSSIBLE BREAKING CHANGES:
+ Requirements have been updated:
+ - requests==2.19.1
+ - websockets==5.0
+
+Fixes:
+ - The error message 'Websocket authentication failed' was not always correct
+
 4.6.0
 '''''
 Release for Mattermost 5.0 api changes.
