@@ -96,9 +96,8 @@ class Websocket:
 					('seq_reply' in status and status['seq_reply'] == 1):
 				log.info('Websocket authentification OK')
 				return True
-			else:
+			elif 'seq_reply' in status and status['seq_reply'] == 1:
 				log.error('Websocket authentification failed')
-
 
 	@asyncio.coroutine
 	def _wait_for_message(self, websocket, event_handler):
