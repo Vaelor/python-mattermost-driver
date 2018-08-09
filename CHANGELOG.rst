@@ -1,3 +1,8 @@
+5.0.1
+'''''
+Fixes:
+ - Do not try to parse responses as json when it's clear they are not. Thanks Kenan!
+
 5.0.0
 '''''
 POSSIBLE BREAKING CHANGES:
