@@ -159,10 +159,15 @@ class Client:
 
 	def get(self, endpoint, options=None, params=None):
 		response = self.make_request('get', endpoint, options=options, params=params)
+
+		if response.headers['Content-Type'] != 'application/json':
+			log.debug('Response is not application/json, returning raw response')
+			return response
+
 		try:
 			return response.json()
 		except ValueError:
-			log.debug('Could not convert response to json, returning raw response.')
+			log.debug('Could not convert response to json, returning raw response')
 			return response
 
 	def post(self, endpoint, options=None, params=None, data=None, files=None):
