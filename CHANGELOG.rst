@@ -1,3 +1,14 @@
+6.0.0
+'''''
+POSSIBLE BREAKING CHANGES:
+ Requirements have been updated:
+ - websockets==6.0
+
+This requirement (and requests from 5.0.0) are now included in the setup.py file.
+If you didn't need to update before it is possible you do now,
+which could cause a breaking change this time.
+Not exactly sure about this, but better safe then sorry!
+
 5.0.1
 '''''
 Fixes:
