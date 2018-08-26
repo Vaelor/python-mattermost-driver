@@ -1,3 +1,5 @@
+import json
+
 from .base import Base
 
 
@@ -5,9 +7,10 @@ class Emoji(Base):
 	endpoint = '/emoji'
 
 	def create_custom_emoji(self, emoji_name, files):
+		emoji = {'name': emoji_name, 'creator_id': self.client.userid}
 		return self.client.post(
 			self.endpoint,
-			data={'emoji': {'name': emoji_name}},
+			data={'emoji': json.dumps(emoji)},
 			files=files
 		)
 
