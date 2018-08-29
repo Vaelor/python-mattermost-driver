@@ -152,14 +152,19 @@ class Driver:
 			self.client.token = self.options['token']
 			result = self.users.get_user('me')
 		else:
-			result = self.users.login_user({
+			response = self.users.login_user({
 				'login_id': self.options['login_id'],
 				'password': self.options['password'],
 				'token': self.options['mfa_token']
 			})
-			if result.status_code == 200:
-				self.client.token = result.headers['Token']
-				self.client.cookies = result.cookies
+			if response.status_code == 200:
+				self.client.token = response.headers['Token']
+				self.client.cookies = response.cookies
+			try:
+				result = response.json()
+			except ValueError:
+				log.debug('Could not convert response to json, returning raw response')
+				result = response
 
 		log.debug(result)
 
