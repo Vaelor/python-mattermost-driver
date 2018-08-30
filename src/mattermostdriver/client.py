@@ -10,6 +10,7 @@ from .exceptions import (
 	InvalidOrMissingParameters,
 	NoAccessTokenProvided,
 	NotEnoughPermissions,
+	ResourceNotFound,
 	ContentTooLarge,
 	FeatureDisabled
 )
@@ -147,6 +148,8 @@ class Client:
 				raise NoAccessTokenProvided(data['message'])
 			elif data['status_code'] == 403:
 				raise NotEnoughPermissions(data['message'])
+			elif data['status_code'] == 404:
+				raise ResourceNotFound(data['message'])
 			elif data['status_code'] == 413:
 				raise ContentTooLarge(data['message'])
 			elif data['status_code'] == 501:
