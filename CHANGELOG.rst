@@ -1,3 +1,11 @@
+6.0.1
+'''''
+Fixes:
+ - Unable to create custom emojies #33
+ - Use ResourceNotFound for 404 #34
+
+Thanks a lot to @Sakarah and @maxbrunet for these fixes!
+
 6.0.0
 '''''
 POSSIBLE BREAKING CHANGES:
