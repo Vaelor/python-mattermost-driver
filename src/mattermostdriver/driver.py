@@ -14,6 +14,7 @@ from .endpoints.ldap import LDAP
 from .endpoints.oauth import OAuth
 from .endpoints.posts import Posts
 from .endpoints.preferences import Preferences
+from .endpoints.reactions import Reactions
 from .endpoints.saml import SAML
 from .endpoints.system import System
 from .endpoints.teams import Teams
@@ -94,6 +95,7 @@ class Driver:
 			'preferences': Preferences(self.client),
 			'status': Status(self.client),
 			'emoji': Emoji(self.client),
+			'reactions': Reactions(self.client),
 			'system': System(self.client),
 			'webhooks': Webhooks(self.client),
 			'commands': Commands(self.client),
@@ -262,6 +264,15 @@ class Driver:
 		:return: Instance of :class:`~endpoints.emoji.Emoji`
 		"""
 		return Emoji(self.client)
+
+	@property
+	def reactions(self):
+		"""
+		Api endpoint for posts' reactions
+
+		:return: Instance of :class:`~endpoints.reactions.Reactions`
+		"""
+		return Reactions(self.client)
 
 	@property
 	def system(self):
