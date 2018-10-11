@@ -1,3 +1,10 @@
+6.1.0
+'''''
+Added Endpoints:
+- Reactions
+
+Thanks a lot to @aedho3yn for this!
+
 6.0.1
 '''''
 Fixes:
