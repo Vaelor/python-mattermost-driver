@@ -1,3 +1,8 @@
+6.1.1
+'''''
+Update requirements:
+- requests@2.20.0
+
 6.1.0
 '''''
 Added Endpoints:
