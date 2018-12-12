@@ -11,6 +11,7 @@ from .exceptions import (
 	NoAccessTokenProvided,
 	NotEnoughPermissions,
 	ResourceNotFound,
+	MethodNotAllowed,
 	ContentTooLarge,
 	FeatureDisabled
 )
@@ -155,6 +156,8 @@ class Client:
 				raise NotEnoughPermissions(message)
 			elif e.response.status_code == 404:
 				raise ResourceNotFound(message)
+			elif e.response.status_code == 405:
+				raise MethodNotAllowed(message)
 			elif e.response.status_code == 413:
 				raise ContentTooLarge(message)
 			elif e.response.status_code == 501:
