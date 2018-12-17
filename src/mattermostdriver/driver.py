@@ -183,11 +183,12 @@ class Driver:
 
 		:return: The JSON response from the server
 		"""
+		result = self.users.logout_user()
 		self.client.token = ''
 		self.client.userid = ''
 		self.client.username = ''
 		self.client.cookies = None
-		return self.users.logout_user()
+		return result
 
 	@property
 	def api(self):
