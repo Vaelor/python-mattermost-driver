@@ -29,6 +29,13 @@ class ResourceNotFound(HTTPError):
 	"""
 
 
+class MethodNotAllowed(HTTPError):
+	"""
+	Raised when mattermost returns a
+	405 Method Not Allowed
+	"""
+
+
 class ContentTooLarge(HTTPError):
 	"""
 	Raised when mattermost returns a

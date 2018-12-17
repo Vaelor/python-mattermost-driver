@@ -11,6 +11,7 @@ from .exceptions import (
 	NoAccessTokenProvided,
 	NotEnoughPermissions,
 	ResourceNotFound,
+	MethodNotAllowed,
 	ContentTooLarge,
 	FeatureDisabled
 )
@@ -140,20 +141,27 @@ class Client:
 		try:
 			response.raise_for_status()
 		except requests.HTTPError as e:
-			data = e.response.json()
-			log.error(data['message'])
-			if data['status_code'] == 400:
-				raise InvalidOrMissingParameters(data['message'])
-			elif data['status_code'] == 401:
-				raise NoAccessTokenProvided(data['message'])
-			elif data['status_code'] == 403:
-				raise NotEnoughPermissions(data['message'])
-			elif data['status_code'] == 404:
-				raise ResourceNotFound(data['message'])
-			elif data['status_code'] == 413:
-				raise ContentTooLarge(data['message'])
-			elif data['status_code'] == 501:
-				raise FeatureDisabled(data['message'])
+			try:
+				data = e.response.json()
+				message = data.get('message', data)
+			except ValueError:
+				log.debug('Could not convert response to json')
+				message = response.text
+			log.error(message)
+			if e.response.status_code == 400:
+				raise InvalidOrMissingParameters(message)
+			elif e.response.status_code == 401:
+				raise NoAccessTokenProvided(message)
+			elif e.response.status_code == 403:
+				raise NotEnoughPermissions(message)
+			elif e.response.status_code == 404:
+				raise ResourceNotFound(message)
+			elif e.response.status_code == 405:
+				raise MethodNotAllowed(message)
+			elif e.response.status_code == 413:
+				raise ContentTooLarge(message)
+			elif e.response.status_code == 501:
+				raise FeatureDisabled(message)
 			else:
 				raise
 
