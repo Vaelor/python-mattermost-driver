@@ -364,3 +364,30 @@ class Driver:
 		:return: Instance of :class:`~endpoints.data_retention.DataRetention`
 		"""
 		return DataRetention(self.client)
+
+	@property
+	def status(self):
+		"""
+		Api endpoint for status
+
+		:return: Instance of :class:`~endpoints.status.Status`
+		"""
+		return Status(self.client)
+
+	@property
+	def commands(self):
+		"""
+		Api endpoint for commands
+
+		:return: Instance of :class:`~endpoints.commands.Commands`
+		"""
+		return Commands(self.client)
+	
+	@property
+	def roles(self):
+		"""
+		Api endpoint for roles
+
+		:return: Instance of :class:`~endpoints.roles.Roles`
+		"""
+		return Roles(self.client)
