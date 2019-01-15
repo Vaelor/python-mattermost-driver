@@ -1,3 +1,18 @@
+6.1.3
+'''''
+Fixes:
+ - Add missing endpoints to the driver
+
+Thanks a lot to @opalmer for this fix!
+
+6.1.2
+'''''
+Fixes:
+ - Don't parse non JSON errors #31
+ - Logout before cleaning up #37
+
+Thanks a lot to @maxbrunet for these two fixes!
+
 6.1.1
 '''''
 Update requirements:
