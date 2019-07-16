@@ -67,7 +67,7 @@ Usage
         'port': 8065,
         'basepath': '/api/v4',
         'verify': True,
-        'mfa_token': 'YourMFAToken'
+        'mfa_token': 'YourMFAToken',
 
         """
         If for some reasons you get regular timeouts after a while, try to decrease
