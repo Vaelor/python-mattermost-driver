@@ -4,9 +4,10 @@ from .base import Base
 class Compliance(Base):
 	endpoint = '/compliance'
 
-	def create_report(self):
+	def create_report(self, params):
 		return self.client.post(
-			self.endpoint + '/reports'
+			self.endpoint + '/reports',
+			params=params
 		)
 
 	def get_reports(self, params=None):
