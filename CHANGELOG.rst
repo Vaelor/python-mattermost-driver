@@ -1,3 +1,13 @@
+6.2.0
+'''''
+Fixes:
+ - Fix documentation to make Json valid
+
+Features:
+ - Added a configurable timeout #40
+
+Thanks a lot to @sahasrara62 for his contribution!
+
 6.1.3
 '''''
 Fixes:
