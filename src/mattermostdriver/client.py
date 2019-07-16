@@ -69,6 +69,13 @@ class Client:
 		"""
 		return self._username
 
+	@property
+	def request_timeout(self):
+		"""
+		:return: The configured timeout for the requests
+		"""
+		return self._options['request_timeout']
+
 	@username.setter
 	def username(self, username):
 		self._username = username
@@ -136,7 +143,8 @@ class Client:
 				json=options,
 				params=params,
 				data=data,
-				files=files
+				files=files,
+				timeout=self.request_timeout
 			)
 		try:
 			response.raise_for_status()

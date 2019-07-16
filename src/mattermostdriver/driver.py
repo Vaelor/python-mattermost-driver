@@ -43,6 +43,7 @@ class Driver:
 		'basepath': '/api/v4',
 		'verify': True,
 		'timeout': 30,
+		'request_timeout': None,
 		'login_id': None,
 		'password': None,
 		'token': None,
@@ -65,6 +66,7 @@ class Driver:
 		- port (8065)
 		- verify (True)
 		- timeout (30)
+		- request_timeout (None)
 		- mfa_token (None)
 		- debug (False)
 

@@ -79,6 +79,15 @@ Usage
         'timeout': 30,
 
         """
+        This value controls the request timeout.
+        See https://python-requests.org/en/master/user/advanced/#timeouts
+        for more information.
+        The default value is None here, because it is the default in the
+        request library, too.
+        """
+        'request_timeout': None,
+
+        """
         Setting debug to True, will activate a very verbose logging.
         This also activates the logging for the requests package,
         so you can see every request you send.
