@@ -32,6 +32,7 @@ class Client:
 		self._basepath = options['basepath']
 		self._port = options['port']
 		self._verify = options['verify']
+		self._auth = options['auth']
 		if options['debug']:
 			self.activate_verbose_logging()
 
@@ -107,6 +108,7 @@ class Client:
 		self._token = t
 
 	def auth_header(self):
+		if self._auth: return None
 		if self._token == '':
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
@@ -139,6 +141,7 @@ class Client:
 		response = request(
 				url + endpoint,
 				headers=self.auth_header(),
+				auth = self._auth(),
 				verify=self._verify,
 				json=options,
 				params=params,
