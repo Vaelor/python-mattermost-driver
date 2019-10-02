@@ -33,6 +33,8 @@ Usage
     :start-after: inclusion-marker-start-usage
     :end-before: inclusion-marker-end-usage
 
+.. include:: auth.rst
+
 Classes
 '''''''
 
