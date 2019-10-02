@@ -48,6 +48,7 @@ class Driver:
 		'password': None,
 		'token': None,
 		'mfa_token': None,
+		'auth': None,
 		'debug': False
 	}
 	"""
@@ -68,6 +69,7 @@ class Driver:
 		- timeout (30)
 		- request_timeout (None)
 		- mfa_token (None)
+		- auth (None)
 		- debug (False)
 
 	Should not be changed
