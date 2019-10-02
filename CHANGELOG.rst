@@ -1,3 +1,10 @@
+6.3.0
+'''''
+Features:
+ - Added authentication with .netrc
+
+Thanks a lot to @apfeiffer1 for his contribution!
+
 6.2.0
 '''''
 Fixes:
