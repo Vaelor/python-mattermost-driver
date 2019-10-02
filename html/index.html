@@ -302,16 +302,120 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 </pre></div>
 </div>
 </div>
+<div class="section" id="authentication">
+<h2>Authentication<a class="headerlink" href="#authentication" title="Permalink to this headline">¶</a></h2>
+<p>Yuu can either use the normal ways for login, by token and or username,
+or authenticate using the .netrc file. This passes the credentials to the
+requests library, where you can also read more about that.</p>
+<p>A nice example for authentication with .netrc by <a class="reference external" href="https://github.com/apfeiffer1">&#64;apfeiffer</a>.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="c1"># A simple example to retrieve all users for a team while using a _token_ </span>
+<span class="c1"># from the .netrc file instead of a password (as requests assumes by default)</span>
+
+<span class="kn">import</span> <span class="nn">logging</span> 
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">netrc</span>
+
+<span class="kn">from</span> <span class="nn">mattermostdriver</span> <span class="k">import</span> <span class="n">Driver</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span> <span class="s1">&#39;MattermostManager&#39;</span> <span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span> <span class="p">)</span>
+
+<span class="c1"># requests overrides the simple authentication token header if it finds the entry in </span>
+<span class="c1"># the ~/.netrc file. Since we want to use ~/.netrc to retrieve the _token_, we need</span>
+<span class="c1"># to provide our own Authenticator class:</span>
+
+<span class="k">class</span> <span class="nc">TokenAuth</span><span class="p">(</span> <span class="n">requests</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">AuthBase</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">r</span> <span class="p">)</span> <span class="p">:</span>
+        <span class="c1"># Implement my authentication</span>
+        <span class="n">mmHost</span> <span class="o">=</span> <span class="s1">&#39;mattermost.host.in.netrc&#39;</span>
+        <span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span> <span class="o">=</span> <span class="n">netrc</span><span class="o">.</span><span class="n">netrc</span><span class="p">()</span><span class="o">.</span><span class="n">authenticators</span><span class="p">(</span> <span class="n">mmHost</span> <span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">headers</span><span class="p">[</span> <span class="s1">&#39;Authorization&#39;</span> <span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Bearer </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">password</span>
+        <span class="k">return</span> <span class="n">r</span>
+
+
+<span class="k">class</span> <span class="nc">MattermostManager</span><span class="p">(</span> <span class="nb">object</span> <span class="p">)</span> <span class="p">:</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span> <span class="p">:</span>
+
+        <span class="c1"># Get the _token_ (as &quot;password&quot;) from the ~/.netrc file.</span>
+        <span class="c1"># the corresponding line in the file should look like:</span>
+        <span class="c1"># &lt;mattermost.host.in.netrc&gt; foo foo &lt;long-string-of-token&gt;</span>
+        <span class="c1"># The &quot;login&quot; and &quot;account&quot; (both set to &quot;foo&quot; in the example are ignored)</span>
+        
+        <span class="n">mmHost</span> <span class="o">=</span> <span class="s1">&#39;mattermost.host.in.netrc&#39;</span>
+        <span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span> <span class="o">=</span> <span class="n">netrc</span><span class="o">.</span><span class="n">netrc</span><span class="p">()</span><span class="o">.</span><span class="n">authenticators</span><span class="p">(</span> <span class="n">mmHost</span> <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span> <span class="s2">&quot;Going to set up driver for connection to </span><span class="si">%s</span><span class="s2"> &quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mmHost</span><span class="p">,)</span> <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span> <span class="o">=</span> <span class="n">Driver</span><span class="p">(</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">&#39;url&#39;</span>    <span class="p">:</span> <span class="n">mmHost</span><span class="p">,</span>
+            <span class="s1">&#39;scheme&#39;</span> <span class="p">:</span> <span class="s1">&#39;https&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;port&#39;</span>   <span class="p">:</span> <span class="mi">443</span><span class="p">,</span>
+            <span class="s1">&#39;auth&#39;</span>   <span class="p">:</span> <span class="n">TokenAuth</span><span class="p">,</span> <span class="c1"># use the new Authenticator class defined above</span>
+        <span class="p">}</span> <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span> <span class="n">user_id</span><span class="o">=</span><span class="s1">&#39;me&#39;</span> <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">getTeamMembers</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">teamName</span> <span class="p">)</span> <span class="p">:</span>
+
+        <span class="c1"># for restricted teams, we need to get the ID first, and</span>
+        <span class="c1"># for this, we need to have the &quot;name&quot; (as in the URL), not</span>
+        <span class="c1"># the &quot;display name&quot;, as shown in the GUIs:</span>
+
+        <span class="n">team0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">teams</span><span class="o">.</span><span class="n">get_team_by_name</span><span class="p">(</span> <span class="n">teamName</span> <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span> <span class="s1">&#39;team by name </span><span class="si">%s</span><span class="s1"> : </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">teamName</span><span class="p">,</span> <span class="n">team0</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">teamId</span> <span class="o">=</span> <span class="n">team0</span><span class="p">[</span> <span class="s1">&#39;id&#39;</span> <span class="p">]</span>
+
+        <span class="n">team</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">teams</span><span class="o">.</span><span class="n">check_team_exists</span><span class="p">(</span> <span class="n">teamName</span> <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span> <span class="s1">&#39;team </span><span class="si">%s</span><span class="s1"> - exists: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">teamName</span><span class="p">,</span> <span class="n">team</span><span class="p">[</span> <span class="s1">&#39;exists&#39;</span> <span class="p">])</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">team</span><span class="p">[</span> <span class="s1">&#39;exists&#39;</span> <span class="p">]</span> <span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span> <span class="s1">&#39;no team with name </span><span class="si">%s</span><span class="s1"> found&#39;</span> <span class="o">%</span> <span class="n">teamName</span> <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span> <span class="s1">&#39;found team </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">teamName</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">teams</span><span class="o">.</span><span class="n">get_team</span><span class="p">(</span> <span class="n">teamId</span> <span class="p">))</span> <span class="p">)</span>
+
+        <span class="n">users</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getAllUsersForTeam</span><span class="p">(</span> <span class="n">teamId</span> <span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span> <span class="s1">&#39;found </span><span class="si">%s</span><span class="s1"> users for team &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span> <span class="n">users</span> <span class="p">),</span> <span class="n">teamName</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">users</span>
+
+    <span class="k">def</span> <span class="nf">_getAllUsersForTeam</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">teamId</span> <span class="p">)</span> <span class="p">:</span>
+
+        <span class="c1"># get all users for a team</span>
+        <span class="c1"># with the max of 200 per page, we need to iterate a bit over the pages</span>
+
+        <span class="n">users</span> <span class="o">=</span> <span class="p">[</span> <span class="p">]</span>
+        <span class="n">pgNo</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">teamUsers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_users</span><span class="p">(</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;in_team&#39;</span>  <span class="p">:</span> <span class="n">teamId</span><span class="p">,</span>
+                                                            <span class="s1">&#39;page&#39;</span>     <span class="p">:</span> <span class="nb">str</span><span class="p">(</span> <span class="n">pgNo</span> <span class="p">),</span>
+                                                            <span class="s1">&#39;per_page&#39;</span> <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                                            <span class="p">}</span> <span class="p">)</span>
+        <span class="k">while</span> <span class="n">teamUsers</span> <span class="p">:</span>
+            <span class="n">users</span> <span class="o">+=</span> <span class="n">teamUsers</span>
+            <span class="n">pgNo</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">teamUsers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mmDriver</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">get_users</span><span class="p">(</span> <span class="n">params</span><span class="o">=</span><span class="p">{</span> <span class="s1">&#39;in_team&#39;</span>  <span class="p">:</span> <span class="n">teamId</span><span class="p">,</span>
+                                                                <span class="s1">&#39;per_page&#39;</span> <span class="p">:</span> <span class="mi">200</span><span class="p">,</span>
+                                                                <span class="s1">&#39;page&#39;</span>     <span class="p">:</span> <span class="nb">str</span><span class="p">(</span> <span class="n">pgNo</span> <span class="p">),</span>
+                                                                <span class="p">}</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">users</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span> <span class="p">:</span>
+    <span class="n">mmM</span> <span class="o">=</span> <span class="n">MattermostManager</span><span class="p">()</span>
+    <span class="n">mmM</span><span class="o">.</span><span class="n">getTeamMembers</span><span class="p">(</span> <span class="s1">&#39;myTeam&#39;</span> <span class="p">)</span>
+</pre></div>
+</div>
+</div>
 <div class="section" id="module-mattermostdriver">
 <span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="mattermostdriver.Driver">
-<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={'basepath': '/api/v4'</em>, <em>'debug': False</em>, <em>'login_id': None</em>, <em>'mfa_token': None</em>, <em>'password': None</em>, <em>'port': 8065</em>, <em>'request_timeout': None</em>, <em>'scheme': 'https'</em>, <em>'timeout': 30</em>, <em>'token': None</em>, <em>'url': 'localhost'</em>, <em>'verify': True}</em>, <em>client_cls=&lt;class 'mattermostdriver.client.Client'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">mattermostdriver.</code><code class="descname">Driver</code><span class="sig-paren">(</span><em>options={'auth': None</em>, <em>'basepath': '/api/v4'</em>, <em>'debug': False</em>, <em>'login_id': None</em>, <em>'mfa_token': None</em>, <em>'password': None</em>, <em>'port': 8065</em>, <em>'request_timeout': None</em>, <em>'scheme': 'https'</em>, <em>'timeout': 30</em>, <em>'token': None</em>, <em>'url': 'localhost'</em>, <em>'verify': True}</em>, <em>client_cls=&lt;class 'mattermostdriver.client.Client'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
 <dd><p>Contains the client, api and provides you with functions for
 login, logout and initializing a websocket connection.</p>
 <dl class="attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="descname">default_options</code><em class="property"> = {'basepath': '/api/v4', 'debug': False, 'login_id': None, 'mfa_token': None, 'password': None, 'port': 8065, 'request_timeout': None, 'scheme': 'https', 'timeout': 30, 'token': None, 'url': 'localhost', 'verify': True}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="descname">default_options</code><em class="property"> = {'auth': None, 'basepath': '/api/v4', 'debug': False, 'login_id': None, 'mfa_token': None, 'password': None, 'port': 8065, 'request_timeout': None, 'scheme': 'https', 'timeout': 30, 'token': None, 'url': 'localhost', 'verify': True}</em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="docutils">
 <dt>Required options</dt>
 <dd><ul class="first last simple">
@@ -337,6 +441,7 @@ login, logout and initializing a websocket connection.</p>
 <li>timeout (30)</li>
 <li>request_timeout (None)</li>
 <li>mfa_token (None)</li>
+<li>auth (None)</li>
 <li>debug (False)</li>
 </ul>
 </dd>
