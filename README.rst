@@ -48,6 +48,9 @@ Usage
 
         Instead of the login/password, you can also use a personal access token.
         If you have a token, you don't need to pass login/pass.
+        It is also possible to use 'auth' to pass a auth header in directly,
+        for an example, see:
+        https://vaelor.github.io/python-mattermost-driver/#authentication
         """
         'url': 'mattermost.server.com',
         'login_id': 'user.name',
@@ -68,7 +71,13 @@ Usage
         'basepath': '/api/v4',
         'verify': True,
         'mfa_token': 'YourMFAToken',
-
+        """
+        Setting this will pass the your auth header directly to
+        the request libraries 'auth' parameter.
+        You probably only want that, if token or login/password is not set or
+        you want to set a custom auth header.
+        """
+        'auth': None
         """
         If for some reasons you get regular timeouts after a while, try to decrease
         this value. The websocket will ping the server in this interval to keep the connection
