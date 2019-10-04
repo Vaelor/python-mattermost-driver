@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermostdriver documentation &mdash; mattermostdriver 6.3.0 documentation</title>
+  <title>Mattermostdriver documentation &mdash; mattermostdriver 6.3.1 documentation</title>
   
 
   
@@ -178,6 +178,9 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 
 <span class="sd">    Instead of the login/password, you can also use a personal access token.</span>
 <span class="sd">    If you have a token, you don&#39;t need to pass login/pass.</span>
+<span class="sd">    It is also possible to use &#39;auth&#39; to pass a auth header in directly,</span>
+<span class="sd">    for an example, see:</span>
+<span class="sd">    https://vaelor.github.io/python-mattermost-driver/#authentication</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;mattermost.server.com&#39;</span><span class="p">,</span>
     <span class="s1">&#39;login_id&#39;</span><span class="p">:</span> <span class="s1">&#39;user.name&#39;</span><span class="p">,</span>
@@ -198,7 +201,13 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
     <span class="s1">&#39;basepath&#39;</span><span class="p">:</span> <span class="s1">&#39;/api/v4&#39;</span><span class="p">,</span>
     <span class="s1">&#39;verify&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
     <span class="s1">&#39;mfa_token&#39;</span><span class="p">:</span> <span class="s1">&#39;YourMFAToken&#39;</span><span class="p">,</span>
-
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Setting this will pass the your auth header directly to</span>
+<span class="sd">    the request libraries &#39;auth&#39; parameter.</span>
+<span class="sd">    You probably only want that, if token or login/password is not set or</span>
+<span class="sd">    you want to set a custom auth header.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s1">&#39;auth&#39;</span><span class="p">:</span> <span class="kc">None</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    If for some reasons you get regular timeouts after a while, try to decrease</span>
 <span class="sd">    this value. The websocket will ping the server in this interval to keep the connection</span>
@@ -997,7 +1006,7 @@ websocket events mattermost sends.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'6.3.0',
+            VERSION:'6.3.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

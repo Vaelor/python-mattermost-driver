@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mattermostdriver.client &mdash; mattermostdriver 6.3.0 documentation</title>
+  <title>mattermostdriver.client &mdash; mattermostdriver 6.3.1 documentation</title>
   
 
   
@@ -258,7 +258,8 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">=</span> <span class="n">t</span>
 
 	<span class="k">def</span> <span class="nf">auth_header</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">:</span> <span class="k">return</span> <span class="kc">None</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">:</span>
+			<span class="k">return</span> <span class="kc">None</span>
 		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_token</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
 			<span class="k">return</span> <span class="p">{}</span>
 		<span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer </span><span class="si">{token:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">)}</span>
@@ -288,16 +289,22 @@
 		<span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;delete&#39;</span><span class="p">:</span>
 			<span class="n">request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span>
 
+		<span class="n">request_params</span> <span class="o">=</span> <span class="p">{</span>
+			<span class="s1">&#39;headers&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">auth_header</span><span class="p">(),</span>
+			<span class="s1">&#39;verify&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verify</span><span class="p">,</span>
+			<span class="s1">&#39;json&#39;</span><span class="p">:</span> <span class="n">options</span><span class="p">,</span>
+			<span class="s1">&#39;params&#39;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+			<span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+			<span class="s1">&#39;files&#39;</span><span class="p">:</span> <span class="n">files</span><span class="p">,</span>
+			<span class="s1">&#39;timeout&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+			<span class="n">request_params</span><span class="p">[</span><span class="s1">&#39;auth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">()</span>
+
 		<span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span>
 				<span class="n">url</span> <span class="o">+</span> <span class="n">endpoint</span><span class="p">,</span>
-				<span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">auth_header</span><span class="p">(),</span>
-				<span class="n">auth</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auth</span><span class="p">(),</span>
-				<span class="n">verify</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_verify</span><span class="p">,</span>
-				<span class="n">json</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
-				<span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
-				<span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
-				<span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">,</span>
-				<span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">request_timeout</span>
+				<span class="o">**</span><span class="n">request_params</span>
 			<span class="p">)</span>
 		<span class="k">try</span><span class="p">:</span>
 			<span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
@@ -384,7 +391,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'6.3.0',
+            VERSION:'6.3.1',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
