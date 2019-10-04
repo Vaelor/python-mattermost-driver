@@ -108,7 +108,8 @@ class Client:
 		self._token = t
 
 	def auth_header(self):
-		if self._auth: return None
+		if self._auth:
+			return None
 		if self._token == '':
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
@@ -138,16 +139,22 @@ class Client:
 		elif method == 'delete':
 			request = requests.delete
 
+		request_params = {
+			'headers': self.auth_header(),
+			'verify': self._verify,
+			'json': options,
+			'params': params,
+			'data': data,
+			'files': files,
+			'timeout': self.request_timeout
+		}
+
+		if self._auth is not None:
+			request_params['auth'] = self._auth()
+
 		response = request(
 				url + endpoint,
-				headers=self.auth_header(),
-				auth = self._auth(),
-				verify=self._verify,
-				json=options,
-				params=params,
-				data=data,
-				files=files,
-				timeout=self.request_timeout
+				**request_params
 			)
 		try:
 			response.raise_for_status()

@@ -1,3 +1,8 @@
+6.3.1
+'''''
+Fixes
+ - Authentication without `auth` option works again
+
 6.3.0
 '''''
 Features:
