@@ -129,8 +129,7 @@ class Driver:
 
 		.. code:: python
 
-			@asyncio.coroutine
-			def my_event_handler(message):
+			async def my_event_handler(message):
 				print(message)
 
 
@@ -386,7 +385,7 @@ class Driver:
 		:return: Instance of :class:`~endpoints.commands.Commands`
 		"""
 		return Commands(self.client)
-	
+
 	@property
 	def roles(self):
 		"""

@@ -15,8 +15,7 @@ class Websocket:
 			log.setLevel(logging.DEBUG)
 		self._token = token
 
-	@asyncio.coroutine
-	def connect(self, event_handler):
+	async def connect(self, event_handler):
 		"""
 		Connect to the websocket and authenticate it.
 		When the authentication has finished, start the loop listening for messages,
@@ -42,16 +41,15 @@ class Websocket:
 			basepath=self.options['basepath']
 		)
 
-		websocket = yield from websockets.connect(
+		websocket = await websockets.connect(
 			url,
 			ssl=context,
 		)
 
-		yield from self._authenticate_websocket(websocket, event_handler)
-		yield from self._start_loop(websocket, event_handler)
+		await self._authenticate_websocket(websocket, event_handler)
+		await self._start_loop(websocket, event_handler)
 
-	@asyncio.coroutine
-	def _start_loop(self, websocket, event_handler):
+	async def _start_loop(self, websocket, event_handler):
 		"""
 		We will listen for websockets events, sending a heartbeat/pong everytime
 		we react a TimeoutError. If we don't the webserver would close the idle connection,
@@ -60,17 +58,16 @@ class Websocket:
 		log.debug('Starting websocket loop')
 		while True:
 			try:
-				yield from asyncio.wait_for(
+				await asyncio.wait_for(
 					self._wait_for_message(websocket, event_handler),
 					timeout=self.options['timeout']
 				)
 			except asyncio.TimeoutError:
-				yield from websocket.pong()
+				await websocket.pong()
 				log.debug("Sending heartbeat...")
 				continue
 
-	@asyncio.coroutine
-	def _authenticate_websocket(self, websocket, event_handler):
+	async def _authenticate_websocket(self, websocket, event_handler):
 		"""
 		Sends a authentication challenge over a websocket.
 		This is not needed when we just send the cookie we got on login
@@ -84,14 +81,14 @@ class Websocket:
 				"token": self._token
 			}
 		}).encode('utf8')
-		yield from websocket.send(json_data)
+		await websocket.send(json_data)
 		while True:
-			message = yield from websocket.recv()
+			message = await websocket.recv()
 			status = json.loads(message)
 			log.debug(status)
 			# We want to pass the events to the event_handler already
 			# because the hello event could arrive before the authentication ok response
-			yield from event_handler(message)
+			await event_handler(message)
 			if ('status' in status and status['status'] == 'OK') and \
 					('seq_reply' in status and status['seq_reply'] == 1):
 				log.info('Websocket authentification OK')
@@ -99,9 +96,8 @@ class Websocket:
 			elif 'seq_reply' in status and status['seq_reply'] == 1:
 				log.error('Websocket authentification failed')
 
-	@asyncio.coroutine
-	def _wait_for_message(self, websocket, event_handler):
+	async def _wait_for_message(self, websocket, event_handler):
 		log.debug('Waiting for messages on websocket')
 		while True:
-			message = yield from websocket.recv()
-			yield from event_handler(message)
+			message = await websocket.recv()
+			await event_handler(message)
