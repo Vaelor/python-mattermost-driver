@@ -93,8 +93,7 @@ class Websocket:
 					('seq_reply' in status and status['seq_reply'] == 1):
 				log.info('Websocket authentification OK')
 				return True
-			elif 'seq_reply' in status and status['seq_reply'] == 1:
-				log.error('Websocket authentification failed')
+			log.error('Websocket authentification failed')
 
 	async def _wait_for_message(self, websocket, event_handler):
 		log.debug('Waiting for messages on websocket')

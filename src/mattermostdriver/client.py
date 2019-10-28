@@ -20,6 +20,7 @@ log = logging.getLogger('mattermostdriver.websocket')
 log.setLevel(logging.INFO)
 
 
+# pylint: disable=too-many-instance-attributes
 class Client:
 	def __init__(self, options):
 		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
@@ -114,6 +115,7 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
+	# pylint: disable=too-many-branches
 	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
 		if options is None:
 			options = {}
