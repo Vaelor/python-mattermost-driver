@@ -47,7 +47,7 @@ class Client:
 	def activate_verbose_logging(level=logging.DEBUG):
 		log.setLevel(level)
 		# http://docs.python-requests.org/en/master/api/#api-changes
-		from http.client import HTTPConnection
+		from http.client import HTTPConnection  # pylint: disable=import-outside-toplevel
 		HTTPConnection.debuglevel = 1
 		requests_log = logging.getLogger("requests.packages.urllib3")
 		requests_log.setLevel(level)
@@ -168,6 +168,7 @@ class Client:
 				log.debug('Could not convert response to json')
 				message = response.text
 			log.error(message)
+			# pylint: disable=no-else-raise
 			if e.response.status_code == 400:
 				raise InvalidOrMissingParameters(message)
 			elif e.response.status_code == 401:
