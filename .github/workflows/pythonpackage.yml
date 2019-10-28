@@ -24,7 +24,7 @@ jobs:
     - name: Lint with pylint
       run: |
         pip install pylint
-        pylint src/**/*.py
+        pylint src/**/*.py --exit-zero
     - name: Test with pytest
       run: |
         pip install pytest
