@@ -78,7 +78,7 @@ class Driver:
 		- basepath ('/api/v4') - unlikely this would do any good
 	"""
 
-	def __init__(self, options=default_options, client_cls=Client):
+	def __init__(self, options=None, client_cls=Client):
 		"""
 		:param options: A dict with the values from `default_options`
 		:type options: dict
@@ -90,7 +90,7 @@ class Driver:
 		self.driver = self.options
 		if self.options['debug']:
 			log.setLevel(logging.DEBUG)
-			log.warning('Careful!!\nSetting debug to True, will reveal your password in the log output if you do driver.login()!\nThis is NOT for production!')
+			log.warning('Careful!!\nSetting debug to True, will reveal your password in the log output if you do driver.login()!\nThis is NOT for production!')  # pylint: disable=line-too-long
 		self.client = client_cls(self.options)
 		self._api = {
 			'users': Users(self.client),

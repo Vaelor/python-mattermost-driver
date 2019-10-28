@@ -20,6 +20,7 @@ log = logging.getLogger('mattermostdriver.websocket')
 log.setLevel(logging.INFO)
 
 
+# pylint: disable=too-many-instance-attributes
 class Client:
 	def __init__(self, options):
 		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
@@ -46,7 +47,7 @@ class Client:
 	def activate_verbose_logging(level=logging.DEBUG):
 		log.setLevel(level)
 		# http://docs.python-requests.org/en/master/api/#api-changes
-		from http.client import HTTPConnection
+		from http.client import HTTPConnection  # pylint: disable=import-outside-toplevel
 		HTTPConnection.debuglevel = 1
 		requests_log = logging.getLogger("requests.packages.urllib3")
 		requests_log.setLevel(level)
@@ -114,6 +115,7 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
+	# pylint: disable=too-many-branches
 	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
 		if options is None:
 			options = {}
@@ -166,6 +168,7 @@ class Client:
 				log.debug('Could not convert response to json')
 				message = response.text
 			log.error(message)
+			# pylint: disable=no-else-raise
 			if e.response.status_code == 400:
 				raise InvalidOrMissingParameters(message)
 			elif e.response.status_code == 401:
