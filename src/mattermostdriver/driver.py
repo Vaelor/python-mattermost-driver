@@ -26,6 +26,7 @@ from .endpoints.data_retention import DataRetention
 from .endpoints.roles import Roles
 from .endpoints.status import Status
 from .endpoints.bots import Bots
+from .endpoints.opengraph import Opengraph
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
@@ -113,7 +114,8 @@ class Driver:
 			'ldap': LDAP(self.client),
 			'elasticsearch': Elasticsearch(self.client),
 			'data_retention': DataRetention(self.client),
-			'bots': Bots(self.client)
+			'bots': Bots(self.client),
+			'opengraph': Opengraph(self.client)
 		}
 		self.websocket = None
 
@@ -396,3 +398,12 @@ class Driver:
 		:return: Instance of :class:`~endpoints.roles.Roles`
 		"""
 		return Roles(self.client)
+
+	@property
+	def opengraph(self):
+		"""
+		Api endpoint for opengraph
+
+		:return: Instance of :class:`~endpoints.opengraph.Opengraph`
+		"""
+		return Opengraph(self.client)
