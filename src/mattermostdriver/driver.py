@@ -25,6 +25,7 @@ from .endpoints.emoji import Emoji
 from .endpoints.data_retention import DataRetention
 from .endpoints.roles import Roles
 from .endpoints.status import Status
+from .endpoints.bots import Bots
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
@@ -112,6 +113,7 @@ class Driver:
 			'ldap': LDAP(self.client),
 			'elasticsearch': Elasticsearch(self.client),
 			'data_retention': DataRetention(self.client),
+			'bots': Bots(self.client)
 		}
 		self.websocket = None
 
