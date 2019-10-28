@@ -1,3 +1,21 @@
+7.0.0
+'''''
+Added Endpoints:
+ - `opengraph`
+ - `bots`
+
+Fixes:
+ - Some pylint rules that failed have been fixed or where suppressed
+
+Added:
+ - Support for Python 3.8
+ - Github actions with pylint is now active
+
+BREAKING CHANGES:
+ - Support for python 3.4 was dropped
+
+Thanks a lot to @maxbrunet for his contribution!
+
 6.3.1
 '''''
 Fixes
