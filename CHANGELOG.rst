@@ -1,3 +1,10 @@
+7.0.1
+'''''
+Fixes
+ - Log `WebSocket authentication failed` even if WebSocket authentication was successful
+
+Thanks a lot to @icedevml for his contribution!
+
 7.0.0
 '''''
 Added Endpoints:
