@@ -89,8 +89,8 @@ class Websocket:
 			# We want to pass the events to the event_handler already
 			# because the hello event could arrive before the authentication ok response
 			await event_handler(message)
-			if ('status' in status and status['status'] == 'OK') and \
-					('seq_reply' in status and status['seq_reply'] == 1):
+			if ('event' in status and status['event'] == 'hello') and \
+					('seq' in status and status['seq'] == 0):
 				log.info('Websocket authentification OK')
 				return True
 			log.error('Websocket authentification failed')
