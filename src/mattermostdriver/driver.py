@@ -27,6 +27,7 @@ from .endpoints.roles import Roles
 from .endpoints.status import Status
 from .endpoints.bots import Bots
 from .endpoints.opengraph import Opengraph
+from .endpoints.integration_actions import IntegrationActions
 
 log = logging.getLogger('mattermostdriver.api')
 log.setLevel(logging.INFO)
@@ -115,7 +116,8 @@ class Driver:
 			'elasticsearch': Elasticsearch(self.client),
 			'data_retention': DataRetention(self.client),
 			'bots': Bots(self.client),
-			'opengraph': Opengraph(self.client)
+			'opengraph': Opengraph(self.client),
+			'integration_actions': IntegrationActions(self.client),
 		}
 		self.websocket = None
 
@@ -407,3 +409,13 @@ class Driver:
 		:return: Instance of :class:`~endpoints.opengraph.Opengraph`
 		"""
 		return Opengraph(self.client)
+
+	@property
+	def integration_actions(self):
+		"""
+		Api endpoint for integration actions
+
+		:return: Instance of :class:`~endpoints.integration_actions.IntegrationActions`
+		"""
+		return IntegrationActions(self.client)
+
