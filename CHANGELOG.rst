@@ -1,3 +1,10 @@
+7.1.0
+'''''
+Added endpoints
+ - `IntegrationActions`
+
+Thanks a lot to @ritelle for his contribution!
+
 7.0.1
 '''''
 Fixes
