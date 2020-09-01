@@ -24,3 +24,13 @@ class Roles(Base):
 		return self.client.get(
 			self.endpoint + '/names',
 		)
+
+	def create_role(self, options=None):
+		return self.client.post(
+			self.endpoint, options=options
+		)
+
+	def delete_role(self, role_id):
+		return self.client.delete(
+			self.endpoint + '/' + role_id
+		)
