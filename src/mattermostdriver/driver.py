@@ -19,6 +19,7 @@ from .endpoints.saml import SAML
 from .endpoints.system import System
 from .endpoints.teams import Teams
 from .endpoints.users import Users
+from .endpoints.scheme import Scheme
 from .endpoints.webhooks import Webhooks
 from .endpoints.elasticsearch import Elasticsearch
 from .endpoints.emoji import Emoji
@@ -229,6 +230,15 @@ class Driver:
 		:return: Instance of :class:`~endpoints.teams.Teams`
 		"""
 		return Teams(self.client)
+
+        @property
+        def scheme(self):
+                """
+                Api endpoint for schemes
+
+                :return: Instance of :class:`~endpoints.scheme.Scheme`
+                """
+                return Scheme(self.client)
 
 	@property
 	def channels(self):
