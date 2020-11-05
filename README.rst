@@ -77,7 +77,7 @@ Usage
         You probably only want that, if token or login/password is not set or
         you want to set a custom auth header.
         """
-        'auth': None
+        'auth': None,
         """
         If for some reasons you get regular timeouts after a while, try to decrease
         this value. The websocket will ping the server in this interval to keep the connection
@@ -104,7 +104,7 @@ Usage
         Be careful. This SHOULD NOT be active in production, because this logs a lot!
         Even the password for your account when doing driver.login()!
         """
-        'debug': False
+        'debug': False,
     })
 
     """
