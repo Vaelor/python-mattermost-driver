@@ -14,7 +14,8 @@ class Status(Base):
 			options=options
 		)
 
-	def get_user_statuses_by_id(self):
+	def get_user_statuses_by_id(self, options=None):
 		return self.client.post(
-			'/users/status/ids'
+			'/users/status/ids',
+			options
 		)
