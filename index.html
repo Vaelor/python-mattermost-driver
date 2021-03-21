@@ -419,8 +419,434 @@ requests library, where you can also read more about that.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="classes">
-<h2>Classes<a class="headerlink" href="#classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-mattermostdriver">
+<span id="classes"></span><h2>Classes<a class="headerlink" href="#module-mattermostdriver" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="mattermostdriver.Driver">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">mattermostdriver.</span></code><code class="sig-name descname"><span class="pre">Driver</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">options=None</span></em>, <em class="sig-param"><span class="pre">client_cls=&lt;class</span> <span class="pre">'mattermostdriver.client.Client'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Driver" title="Permalink to this definition">¶</a></dt>
+<dd><p>Contains the client, api and provides you with functions for
+login, logout and initializing a websocket connection.</p>
+<dl class="py attribute">
+<dt id="mattermostdriver.Driver.default_options">
+<code class="sig-name descname"><span class="pre">default_options</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'auth':</span> <span class="pre">None,</span> <span class="pre">'basepath':</span> <span class="pre">'/api/v4',</span> <span class="pre">'debug':</span> <span class="pre">False,</span> <span class="pre">'login_id':</span> <span class="pre">None,</span> <span class="pre">'mfa_token':</span> <span class="pre">None,</span> <span class="pre">'password':</span> <span class="pre">None,</span> <span class="pre">'port':</span> <span class="pre">8065,</span> <span class="pre">'request_timeout':</span> <span class="pre">None,</span> <span class="pre">'scheme':</span> <span class="pre">'https',</span> <span class="pre">'timeout':</span> <span class="pre">30,</span> <span class="pre">'token':</span> <span class="pre">None,</span> <span class="pre">'url':</span> <span class="pre">'localhost',</span> <span class="pre">'verify':</span> <span class="pre">True}</span></em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Required options</dt><dd><ul class="simple">
+<li><p>url</p></li>
+</ul>
+</dd>
+<dt>Either</dt><dd><ul class="simple">
+<li><p>login_id</p></li>
+<li><p>password</p></li>
+</ul>
+</dd>
+<dt>Or</dt><dd><ul class="simple">
+<li><p>token (<a class="reference external" href="https://docs.mattermost.com/developer/personal-access-tokens.html">https://docs.mattermost.com/developer/personal-access-tokens.html</a>)</p></li>
+</ul>
+</dd>
+<dt>Optional</dt><dd><ul class="simple">
+<li><p>scheme (‘https’)</p></li>
+<li><p>port (8065)</p></li>
+<li><p>verify (True)</p></li>
+<li><p>timeout (30)</p></li>
+<li><p>request_timeout (None)</p></li>
+<li><p>mfa_token (None)</p></li>
+<li><p>auth (None)</p></li>
+<li><p>debug (False)</p></li>
+</ul>
+</dd>
+<dt>Should not be changed</dt><dd><ul class="simple">
+<li><p>basepath (‘/api/v4’) - unlikely this would do any good</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.init_websocket">
+<code class="sig-name descname"><span class="pre">init_websocket</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="pre">event_handler</span></em>, <em class="sig-param"><span class="pre">websocket_cls=&lt;class</span> <span class="pre">'mattermostdriver.websocket.Websocket'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.init_websocket"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Driver.init_websocket" title="Permalink to this definition">¶</a></dt>
+<dd><p>Will initialize the websocket connection to the mattermost server.</p>
+<p>This should be run after login(), because the websocket needs to make
+an authentification.</p>
+<p>See <a class="reference external" href="https://api.mattermost.com/v4/#tag/WebSocket">https://api.mattermost.com/v4/#tag/WebSocket</a> for which
+websocket events mattermost sends.</p>
+<p>Example of a really simple event_handler function</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">async</span> <span class="k">def</span> <span class="nf">my_event_handler</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>event_handler</strong> (<em>Function</em><em>(</em><em>message</em><em>)</em>) – The function to handle the websocket events. Takes one argument.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The event loop</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.disconnect">
+<code class="sig-name descname"><span class="pre">disconnect</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.disconnect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Driver.disconnect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Disconnects the driver from the server, stopping the websocket event loop.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.login">
+<code class="sig-name descname"><span class="pre">login</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.login"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Driver.login" title="Permalink to this definition">¶</a></dt>
+<dd><p>Logs the user in.</p>
+<dl class="simple">
+<dt>The log in information is saved in the client</dt><dd><ul class="simple">
+<li><p>userid</p></li>
+<li><p>username</p></li>
+<li><p>cookies</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The raw response from the request</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.logout">
+<code class="sig-name descname"><span class="pre">logout</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/driver.html#Driver.logout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Driver.logout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Log the user out.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The JSON response from the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.api">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">api</span></code><a class="headerlink" href="#mattermostdriver.Driver.api" title="Permalink to this definition">¶</a></dt>
+<dd><div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 4.0.2.</span></p>
+</div>
+<p>Use the endpoints directly instead.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictionary containing the endpoints</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.users">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">users</span></code><a class="headerlink" href="#mattermostdriver.Driver.users" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for users</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.users.Users" title="mattermostdriver.endpoints.users.Users"><code class="xref py py-class docutils literal notranslate"><span class="pre">Users</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.teams">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">teams</span></code><a class="headerlink" href="#mattermostdriver.Driver.teams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for teams</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.teams.Teams" title="mattermostdriver.endpoints.teams.Teams"><code class="xref py py-class docutils literal notranslate"><span class="pre">Teams</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.channels">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">channels</span></code><a class="headerlink" href="#mattermostdriver.Driver.channels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for channels</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.channels.Channels" title="mattermostdriver.endpoints.channels.Channels"><code class="xref py py-class docutils literal notranslate"><span class="pre">Channels</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.posts">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">posts</span></code><a class="headerlink" href="#mattermostdriver.Driver.posts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for posts</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.posts.Posts" title="mattermostdriver.endpoints.posts.Posts"><code class="xref py py-class docutils literal notranslate"><span class="pre">Posts</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.files">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">files</span></code><a class="headerlink" href="#mattermostdriver.Driver.files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.files.Files" title="mattermostdriver.endpoints.files.Files"><code class="xref py py-class docutils literal notranslate"><span class="pre">Files</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.preferences">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">preferences</span></code><a class="headerlink" href="#mattermostdriver.Driver.preferences" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for preferences</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.preferences.Preferences" title="mattermostdriver.endpoints.preferences.Preferences"><code class="xref py py-class docutils literal notranslate"><span class="pre">Preferences</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.emoji">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">emoji</span></code><a class="headerlink" href="#mattermostdriver.Driver.emoji" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for emoji</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.emoji.Emoji" title="mattermostdriver.endpoints.emoji.Emoji"><code class="xref py py-class docutils literal notranslate"><span class="pre">Emoji</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.reactions">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">reactions</span></code><a class="headerlink" href="#mattermostdriver.Driver.reactions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for posts’ reactions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Reactions</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.system">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">system</span></code><a class="headerlink" href="#mattermostdriver.Driver.system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.system.System" title="mattermostdriver.endpoints.system.System"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.webhooks">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">webhooks</span></code><a class="headerlink" href="#mattermostdriver.Driver.webhooks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for webhooks</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.webhooks.Webhooks" title="mattermostdriver.endpoints.webhooks.Webhooks"><code class="xref py py-class docutils literal notranslate"><span class="pre">Webhooks</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.compliance">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">compliance</span></code><a class="headerlink" href="#mattermostdriver.Driver.compliance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for compliance</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.compliance.Compliance" title="mattermostdriver.endpoints.compliance.Compliance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Compliance</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.cluster">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cluster</span></code><a class="headerlink" href="#mattermostdriver.Driver.cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for cluster</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.cluster.Cluster" title="mattermostdriver.endpoints.cluster.Cluster"><code class="xref py py-class docutils literal notranslate"><span class="pre">Cluster</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.brand">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">brand</span></code><a class="headerlink" href="#mattermostdriver.Driver.brand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for brand</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.brand.Brand" title="mattermostdriver.endpoints.brand.Brand"><code class="xref py py-class docutils literal notranslate"><span class="pre">Brand</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.oauth">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">oauth</span></code><a class="headerlink" href="#mattermostdriver.Driver.oauth" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for oauth</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.oauth.OAuth" title="mattermostdriver.endpoints.oauth.OAuth"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuth</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.saml">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">saml</span></code><a class="headerlink" href="#mattermostdriver.Driver.saml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for saml</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.saml.SAML" title="mattermostdriver.endpoints.saml.SAML"><code class="xref py py-class docutils literal notranslate"><span class="pre">SAML</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.ldap">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">ldap</span></code><a class="headerlink" href="#mattermostdriver.Driver.ldap" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for ldap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.ldap.LDAP" title="mattermostdriver.endpoints.ldap.LDAP"><code class="xref py py-class docutils literal notranslate"><span class="pre">LDAP</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.elasticsearch">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">elasticsearch</span></code><a class="headerlink" href="#mattermostdriver.Driver.elasticsearch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for elasticsearch</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.elasticsearch.Elasticsearch" title="mattermostdriver.endpoints.elasticsearch.Elasticsearch"><code class="xref py py-class docutils literal notranslate"><span class="pre">Elasticsearch</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.data_retention">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">data_retention</span></code><a class="headerlink" href="#mattermostdriver.Driver.data_retention" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for data_retention</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.data_retention.DataRetention" title="mattermostdriver.endpoints.data_retention.DataRetention"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataRetention</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.status">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">status</span></code><a class="headerlink" href="#mattermostdriver.Driver.status" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for status</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Status</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.commands">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">commands</span></code><a class="headerlink" href="#mattermostdriver.Driver.commands" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for commands</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <a class="reference internal" href="endpoints.html#mattermostdriver.endpoints.commands.Commands" title="mattermostdriver.endpoints.commands.Commands"><code class="xref py py-class docutils literal notranslate"><span class="pre">Commands</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.roles">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">roles</span></code><a class="headerlink" href="#mattermostdriver.Driver.roles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for roles</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Roles</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.opengraph">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">opengraph</span></code><a class="headerlink" href="#mattermostdriver.Driver.opengraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for opengraph</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">Opengraph</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Driver.integration_actions">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">integration_actions</span></code><a class="headerlink" href="#mattermostdriver.Driver.integration_actions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Api endpoint for integration actions</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Instance of <code class="xref py py-class docutils literal notranslate"><span class="pre">IntegrationActions</span></code></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="mattermostdriver.Client">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">mattermostdriver.</span></code><code class="sig-name descname"><span class="pre">Client</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">options</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mattermostdriver/client.html#Client"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mattermostdriver.Client" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="mattermostdriver.Client.userid">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">userid</span></code><a class="headerlink" href="#mattermostdriver.Client.userid" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The user id of the logged in user</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Client.request_timeout">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">request_timeout</span></code><a class="headerlink" href="#mattermostdriver.Client.request_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The configured timeout for the requests</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Client.username">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">username</span></code><a class="headerlink" href="#mattermostdriver.Client.username" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The username of the logged in user. If none, returns an emtpy string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Client.cookies">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">cookies</span></code><a class="headerlink" href="#mattermostdriver.Client.cookies" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The cookie given on login</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="mattermostdriver.Client.token">
+<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">token</span></code><a class="headerlink" href="#mattermostdriver.Client.token" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The token for the login</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-mattermostdriver.exceptions">
 <span id="exceptions-that-api-requests-can-throw"></span><h2>Exceptions that api requests can throw<a class="headerlink" href="#module-mattermostdriver.exceptions" title="Permalink to this headline">¶</a></h2>

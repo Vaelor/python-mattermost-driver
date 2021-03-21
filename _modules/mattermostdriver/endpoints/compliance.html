@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mattermostdriver.endpoints.compliance &mdash; mattermostdriver 6.3.1 documentation</title>
+  <title>mattermostdriver.endpoints.compliance &mdash; mattermostdriver 7.2.0 documentation</title>
   
 
   
@@ -26,6 +26,7 @@
 
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
 
@@ -56,7 +57,7 @@
             
             
               <div class="version">
-                6.3
+                7.2
               </div>
             
           
@@ -148,15 +149,16 @@
            <div itemprop="articleBody">
             
   <h1>Source code for mattermostdriver.endpoints.compliance</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="k">import</span> <span class="n">Base</span>
+<span></span><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Base</span>
 
 
 <div class="viewcode-block" id="Compliance"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.compliance.Compliance">[docs]</a><span class="k">class</span> <span class="nc">Compliance</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
 	<span class="n">endpoint</span> <span class="o">=</span> <span class="s1">&#39;/compliance&#39;</span>
 
-<div class="viewcode-block" id="Compliance.create_report"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.compliance.Compliance.create_report">[docs]</a>	<span class="k">def</span> <span class="nf">create_report</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Compliance.create_report"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.compliance.Compliance.create_report">[docs]</a>	<span class="k">def</span> <span class="nf">create_report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
 		<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/reports&#39;</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">endpoint</span> <span class="o">+</span> <span class="s1">&#39;/reports&#39;</span><span class="p">,</span>
+			<span class="n">params</span><span class="o">=</span><span class="n">params</span>
 		<span class="p">)</span></div>
 
 <div class="viewcode-block" id="Compliance.get_reports"><a class="viewcode-back" href="../../../endpoints.html#mattermostdriver.endpoints.compliance.Compliance.get_reports">[docs]</a>	<span class="k">def</span> <span class="nf">get_reports</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -208,7 +210,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'6.3.1',
+            VERSION:'7.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',

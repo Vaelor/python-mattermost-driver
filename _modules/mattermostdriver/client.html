@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>mattermostdriver.client &mdash; mattermostdriver 6.3.1 documentation</title>
+  <title>mattermostdriver.client &mdash; mattermostdriver 7.2.0 documentation</title>
   
 
   
@@ -26,6 +26,7 @@
 
   <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" /> 
 
@@ -56,7 +57,7 @@
             
             
               <div class="version">
-                6.3
+                7.2
               </div>
             
           
@@ -156,7 +157,7 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="p">(</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="p">(</span>
 	<span class="n">InvalidOrMissingParameters</span><span class="p">,</span>
 	<span class="n">NoAccessTokenProvided</span><span class="p">,</span>
 	<span class="n">NotEnoughPermissions</span><span class="p">,</span>
@@ -170,8 +171,9 @@
 <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
 
+<span class="c1"># pylint: disable=too-many-instance-attributes</span>
 <div class="viewcode-block" id="Client"><a class="viewcode-back" href="../../index.html#mattermostdriver.Client">[docs]</a><span class="k">class</span> <span class="nc">Client</span><span class="p">:</span>
-	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
+	<span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">options</span><span class="p">):</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">_url</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{scheme:s}</span><span class="s1">://</span><span class="si">{url:s}</span><span class="s1">:</span><span class="si">{port:d}{basepath:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
 			<span class="n">scheme</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;scheme&#39;</span><span class="p">],</span>
 			<span class="n">url</span><span class="o">=</span><span class="n">options</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">],</span>
@@ -196,7 +198,7 @@
 	<span class="k">def</span> <span class="nf">activate_verbose_logging</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">):</span>
 		<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
 		<span class="c1"># http://docs.python-requests.org/en/master/api/#api-changes</span>
-		<span class="kn">from</span> <span class="nn">http.client</span> <span class="k">import</span> <span class="n">HTTPConnection</span>
+		<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>  <span class="c1"># pylint: disable=import-outside-toplevel</span>
 		<span class="n">HTTPConnection</span><span class="o">.</span><span class="n">debuglevel</span> <span class="o">=</span> <span class="mi">1</span>
 		<span class="n">requests_log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s2">&quot;requests.packages.urllib3&quot;</span><span class="p">)</span>
 		<span class="n">requests_log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
@@ -264,6 +266,7 @@
 			<span class="k">return</span> <span class="p">{}</span>
 		<span class="k">return</span> <span class="p">{</span><span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer </span><span class="si">{token:s}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">token</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_token</span><span class="p">)}</span>
 
+	<span class="c1"># pylint: disable=too-many-branches</span>
 	<span class="k">def</span> <span class="nf">make_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">basepath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 		<span class="k">if</span> <span class="n">options</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 			<span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
@@ -316,20 +319,21 @@
 				<span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s1">&#39;Could not convert response to json&#39;</span><span class="p">)</span>
 				<span class="n">message</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">text</span>
 			<span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+			<span class="c1"># pylint: disable=no-else-raise</span>
 			<span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">400</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">InvalidOrMissingParameters</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">InvalidOrMissingParameters</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">401</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">NoAccessTokenProvided</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">NoAccessTokenProvided</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">403</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">NotEnoughPermissions</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">NotEnoughPermissions</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">ResourceNotFound</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">ResourceNotFound</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">405</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">MethodNotAllowed</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">MethodNotAllowed</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">413</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">ContentTooLarge</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">ContentTooLarge</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">elif</span> <span class="n">e</span><span class="o">.</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">501</span><span class="p">:</span>
-				<span class="k">raise</span> <span class="n">FeatureDisabled</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+				<span class="k">raise</span> <span class="n">FeatureDisabled</span><span class="p">(</span><span class="n">message</span><span class="p">)</span> <span class="kn">from</span> <span class="bp">None</span>
 			<span class="k">else</span><span class="p">:</span>
 				<span class="k">raise</span>
 
@@ -391,7 +395,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'6.3.1',
+            VERSION:'7.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
