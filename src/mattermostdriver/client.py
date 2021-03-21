@@ -170,19 +170,19 @@ class Client:
 			log.error(message)
 			# pylint: disable=no-else-raise
 			if e.response.status_code == 400:
-				raise InvalidOrMissingParameters(message)
+				raise InvalidOrMissingParameters(message) from None
 			elif e.response.status_code == 401:
-				raise NoAccessTokenProvided(message)
+				raise NoAccessTokenProvided(message) from None
 			elif e.response.status_code == 403:
-				raise NotEnoughPermissions(message)
+				raise NotEnoughPermissions(message) from None
 			elif e.response.status_code == 404:
-				raise ResourceNotFound(message)
+				raise ResourceNotFound(message) from None
 			elif e.response.status_code == 405:
-				raise MethodNotAllowed(message)
+				raise MethodNotAllowed(message) from None
 			elif e.response.status_code == 413:
-				raise ContentTooLarge(message)
+				raise ContentTooLarge(message) from None
 			elif e.response.status_code == 501:
-				raise FeatureDisabled(message)
+				raise FeatureDisabled(message) from None
 			else:
 				raise
 
