@@ -422,4 +422,3 @@ class Driver:
 		:return: Instance of :class:`~endpoints.integration_actions.IntegrationActions`
 		"""
 		return IntegrationActions(self.client)
-
