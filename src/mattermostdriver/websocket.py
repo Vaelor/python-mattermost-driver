@@ -104,6 +104,6 @@ class Websocket:
 
 	async def _wait_for_message(self, websocket, event_handler):
 		log.debug('Waiting for messages on websocket')
-		while True:
+		while self._alive:
 			message = await websocket.recv()
 			await event_handler(message)
