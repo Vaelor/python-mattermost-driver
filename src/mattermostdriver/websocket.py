@@ -68,7 +68,7 @@ class Websocket:
 				await websocket.pong()
 				log.debug("Sending heartbeat...")
 				continue
-				
+
 	def disconnect(self):
 		"""Sets `self._alive` to False so the loop in `self._start_loop` will finish."""
 		log.info("Disconnecting websocket")
