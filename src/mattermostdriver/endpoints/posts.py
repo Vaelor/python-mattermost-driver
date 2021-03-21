@@ -83,3 +83,9 @@ class Posts(Base):
 		return self.client.post(
 			self.endpoint + '/' + post_id + '/actions/' + action_id
 		)
+
+	def get_unread_posts_for_channel(self, user_id, channel_id, params=None):
+		return self.client.get(
+			Users.endpoint + '/' + user_id + '/channels/' + channel_id + '/posts/unread',
+			params=params
+		)
