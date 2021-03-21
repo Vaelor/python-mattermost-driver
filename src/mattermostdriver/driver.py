@@ -147,6 +147,10 @@ class Driver:
 		loop = asyncio.get_event_loop()
 		loop.run_until_complete(self.websocket.connect(event_handler))
 		return loop
+	
+	def disconnect(self):
+		"""Disconnects the driver from the server, stopping the websocket event loop."""
+		self.websocket.disconnect()
 
 	def login(self):
 		"""
