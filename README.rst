@@ -63,13 +63,13 @@ Usage
         These options already have useful defaults or are just not needed in every case.
         In most cases, you won't need to modify these, especially the basepath.
         If you can only use a self signed/insecure certificate, you should set
-        verify to False. Please double check this if you have any errors while
+        verify to your CA file or to False. Please double check this if you have any errors while
         using a self signed certificate!
         """
         'scheme': 'https',
         'port': 8065,
         'basepath': '/api/v4',
-        'verify': True,
+        'verify': True,  # Or /path/to/file.pem
         'mfa_token': 'YourMFAToken',
         """
         Setting this will pass the your auth header directly to
@@ -157,6 +157,9 @@ Usage
     See the API documentation for which events are available.
     """
     foo.init_websocket(event_handler)
+
+    # Use `disconnect()` to disconnect the websocket
+    foo.disconnect()
 
     # To upload a file you will need to pass a `files` dictionary
     channel_id = foo.channels.get_channel_by_name_and_team_name('team', 'channel')['id']
