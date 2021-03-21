@@ -148,6 +148,10 @@ class Driver:
 		loop.run_until_complete(self.websocket.connect(event_handler))
 		return loop
 
+	def disconnect(self):
+		"""Disconnects the driver from the server, stopping the websocket event loop."""
+		self.websocket.disconnect()
+
 	def login(self):
 		"""
 		Logs the user in.
@@ -418,4 +422,3 @@ class Driver:
 		:return: Instance of :class:`~endpoints.integration_actions.IntegrationActions`
 		"""
 		return IntegrationActions(self.client)
-

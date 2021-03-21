@@ -14,6 +14,7 @@ class Websocket:
 		if options['debug']:
 			log.setLevel(logging.DEBUG)
 		self._token = token
+		self._alive = False
 
 	async def connect(self, event_handler):
 		"""
@@ -56,7 +57,8 @@ class Websocket:
 		forcing us to reconnect.
 		"""
 		log.debug('Starting websocket loop')
-		while True:
+		self._alive = True
+		while self._alive:
 			try:
 				await asyncio.wait_for(
 					self._wait_for_message(websocket, event_handler),
@@ -66,6 +68,11 @@ class Websocket:
 				await websocket.pong()
 				log.debug("Sending heartbeat...")
 				continue
+
+	def disconnect(self):
+		"""Sets `self._alive` to False so the loop in `self._start_loop` will finish."""
+		log.info("Disconnecting websocket")
+		self._alive = False
 
 	async def _authenticate_websocket(self, websocket, event_handler):
 		"""
