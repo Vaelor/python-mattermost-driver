@@ -11,7 +11,7 @@ class Roles(Base):
 
 	def get_role_by_name(self, role_name):
 		return self.client.get(
-			self.endpoint + '/' + role_name
+			self.endpoint + '/name/' + role_name
 		)
 
 	def patch_role(self, role_id, options=None):
