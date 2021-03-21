@@ -71,7 +71,7 @@ class Websocket:
 				
 	def disconnect(self):
 		"""Sets `self._alive` to False so the loop in `self._start_loop` will finish."""
-		log.debug("Stopping websocket loop")
+		log.info("Disconnecting websocket")
 		self._alive = False
 
 	async def _authenticate_websocket(self, websocket, event_handler):
