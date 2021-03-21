@@ -37,12 +37,13 @@ setup(
 		'Programming Language :: Python :: 3.6',
 		'Programming Language :: Python :: 3.7',
 		'Programming Language :: Python :: 3.8',
+		'Programming Language :: Python :: 3.9',
 	],
 	package_dir={'': 'src'},
 	packages=find_packages('src'),
 	python_requires=">=3.5",
 	install_requires=[
-		'websockets>=6',
-		'requests>=2.19'
+		'websockets>=8',
+		'requests>=2.25'
 	],
 )

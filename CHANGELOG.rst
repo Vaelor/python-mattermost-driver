@@ -1,3 +1,22 @@
+7.2.0
+''''''
+Requirement changes
+ - websocket bumped from 6.0 to 8.1
+ - requests bumped from 2.20.0 to 2.25.1
+
+Added
+ - Add Driver.disconnect function #80
+ - Raise errors from None to reduce traceback noise #69
+
+Fixes
+ - Correct url for role by name #78
+ - Add oldest unread endpoint #76
+
+Documentation:
+ - Improve documentation about verify #64
+
+Thanks a lot to @jneeven for his contribution!
+
 7.1.0
 '''''
 Added endpoints
