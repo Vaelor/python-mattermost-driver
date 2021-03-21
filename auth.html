@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Authentication &mdash; mattermostdriver 6.3.1 documentation</title>
+  <title>Authentication &mdash; mattermostdriver 7.2.0 documentation</title>
   
 
   
@@ -26,6 +26,7 @@
 
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" /> 
 
@@ -56,7 +57,7 @@
             
             
               <div class="version">
-                6.3
+                7.2
               </div>
             
           
@@ -163,7 +164,7 @@ requests library, where you can also read more about that.</p>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">netrc</span>
 
-<span class="kn">from</span> <span class="nn">mattermostdriver</span> <span class="k">import</span> <span class="n">Driver</span>
+<span class="kn">from</span> <span class="nn">mattermostdriver</span> <span class="kn">import</span> <span class="n">Driver</span>
 
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(name)s</span><span class="s1"> - </span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span> <span class="s1">&#39;MattermostManager&#39;</span> <span class="p">)</span>
@@ -174,7 +175,7 @@ requests library, where you can also read more about that.</p>
 <span class="c1"># to provide our own Authenticator class:</span>
 
 <span class="k">class</span> <span class="nc">TokenAuth</span><span class="p">(</span> <span class="n">requests</span><span class="o">.</span><span class="n">auth</span><span class="o">.</span><span class="n">AuthBase</span> <span class="p">)</span> <span class="p">:</span>
-    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">r</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">r</span> <span class="p">)</span> <span class="p">:</span>
         <span class="c1"># Implement my authentication</span>
         <span class="n">mmHost</span> <span class="o">=</span> <span class="s1">&#39;mattermost.host.in.netrc&#39;</span>
         <span class="p">(</span><span class="n">login</span><span class="p">,</span> <span class="n">account</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span> <span class="o">=</span> <span class="n">netrc</span><span class="o">.</span><span class="n">netrc</span><span class="p">()</span><span class="o">.</span><span class="n">authenticators</span><span class="p">(</span> <span class="n">mmHost</span> <span class="p">)</span>
@@ -184,7 +185,7 @@ requests library, where you can also read more about that.</p>
 
 <span class="k">class</span> <span class="nc">MattermostManager</span><span class="p">(</span> <span class="nb">object</span> <span class="p">)</span> <span class="p">:</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span> <span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span> <span class="bp">self</span> <span class="p">)</span> <span class="p">:</span>
 
         <span class="c1"># Get the _token_ (as &quot;password&quot;) from the ~/.netrc file.</span>
         <span class="c1"># the corresponding line in the file should look like:</span>
@@ -287,7 +288,7 @@ requests library, where you can also read more about that.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'6.3.1',
+            VERSION:'7.2.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
