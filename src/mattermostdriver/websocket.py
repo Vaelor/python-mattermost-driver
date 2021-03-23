@@ -55,7 +55,7 @@ class Websocket:
 					except websockets.ConnectionClosedError:
 						self.disconnect()
 						break
-			except (websockets.ConnectionClosedError, ConnectionRefusedError) as e:
+			except Exception as e:
 				log.debug(f"Failed to establish websocket connection: {e}")
 				await asyncio.sleep(self.options['timeout'])
 
