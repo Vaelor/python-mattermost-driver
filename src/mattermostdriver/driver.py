@@ -52,6 +52,9 @@ class Driver:
 		'token': None,
 		'mfa_token': None,
 		'auth': None,
+		'keepalive': False,
+		'keepalive_delay': 5,
+		'connect_kw_args': None,
 		'debug': False
 	}
 	"""
