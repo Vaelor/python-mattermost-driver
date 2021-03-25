@@ -45,8 +45,8 @@ class Websocket:
 		while True:
 			try:
 				kw_args = {}
-				if self.options['connect_kw_args'] is not None:
-					kw_args = self.options['connect_kw_args']
+				if self.options['websocket_kw_args'] is not None:
+					kw_args = self.options['websocket_kw_args']
 				websocket = await websockets.connect(
 					url,
 					ssl=context,
@@ -57,11 +57,10 @@ class Websocket:
 					try:
 						await self._start_loop(websocket, event_handler)
 					except websockets.ConnectionClosedError:
-						self.disconnect()
 						break
-				if not self.options['keepalive']: break
-			except Exception as e:
-				log.debug(f"Failed to establish websocket connection: {e}")
+				if (not self.options['keepalive']) or (not self._alive) : break
+			except WebSocketException as e:
+				log.warning(f"Failed to establish websocket connection: {e}")
 				await asyncio.sleep(self.options['keepalive_delay'])
 
 	async def _start_loop(self, websocket, event_handler):

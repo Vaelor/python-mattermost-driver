@@ -54,7 +54,7 @@ class Driver:
 		'auth': None,
 		'keepalive': False,
 		'keepalive_delay': 5,
-		'connect_kw_args': None,
+		'websocket_kw_args': None,
 		'debug': False
 	}
 	"""
