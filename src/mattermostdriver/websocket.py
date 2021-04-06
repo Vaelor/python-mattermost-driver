@@ -58,8 +58,9 @@ class Websocket:
 						await self._start_loop(websocket, event_handler)
 					except websockets.ConnectionClosedError:
 						break
-				if (not self.options['keepalive']) or (not self._alive) : break
-			except WebSocketException as e:
+				if (not self.options['keepalive']) or (not self._alive):
+					break
+			except Exception as e:
 				log.warning(f"Failed to establish websocket connection: {e}")
 				await asyncio.sleep(self.options['keepalive_delay'])
 
