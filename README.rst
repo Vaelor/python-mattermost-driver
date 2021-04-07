@@ -97,6 +97,22 @@ Usage
         'request_timeout': None,
 
         """
+        To keep the websocket connection alive even if it gets disconnected for some reason you 
+        can set the  keepalive option to True. The keepalive_delay defines how long to wait in seconds
+        before attempting to reconnect the websocket. 
+        """
+        'keepalive': False,
+        'keepalive_delay': 5,
+
+        """
+        This option allows you to provide additional keyword arguments when calling websockets.connect()
+        By default it is None, meaning we will not add any additional arguments. An example of an 
+        additional argument you can pass is one used to  disable the client side pings:
+        'websocket_kw_args': {"ping_interval": None},
+        """
+        'websocket_kw_args': None
+
+        """
         Setting debug to True, will activate a very verbose logging.
         This also activates the logging for the requests package,
         so you can see every request you send.

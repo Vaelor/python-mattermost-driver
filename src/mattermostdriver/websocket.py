@@ -42,13 +42,27 @@ class Websocket:
 			basepath=self.options['basepath']
 		)
 
-		websocket = await websockets.connect(
-			url,
-			ssl=context,
-		)
-
-		await self._authenticate_websocket(websocket, event_handler)
-		await self._start_loop(websocket, event_handler)
+		while True:
+			try:
+				kw_args = {}
+				if self.options['websocket_kw_args'] is not None:
+					kw_args = self.options['websocket_kw_args']
+				websocket = await websockets.connect(
+					url,
+					ssl=context,
+					**kw_args,
+				)
+				await self._authenticate_websocket(websocket, event_handler)
+				while True:
+					try:
+						await self._start_loop(websocket, event_handler)
+					except websockets.ConnectionClosedError:
+						break
+				if (not self.options['keepalive']) or (not self._alive):
+					break
+			except Exception as e:
+				log.warning(f"Failed to establish websocket connection: {e}")
+				await asyncio.sleep(self.options['keepalive_delay'])
 
 	async def _start_loop(self, websocket, event_handler):
 		"""
