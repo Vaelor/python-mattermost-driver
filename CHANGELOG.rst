@@ -1,3 +1,11 @@
+7.3.0
+''''''
+Added
+ - New keepalive option, `keepalive` and `keepalive_delay`, default `False` #86
+ - New `websocket_kw_args` option which is passed to the websocket library on `connect()` #86
+
+Thanks a lot to @ttuffin and @attzonko for their contribution!
+
 7.2.0
 ''''''
 Requirement changes
