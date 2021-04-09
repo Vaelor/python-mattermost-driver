@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Mattermostdriver documentation &mdash; mattermostdriver 7.2.0 documentation</title>
+  <title>Mattermostdriver documentation &mdash; mattermostdriver 7.3.0 documentation</title>
   
 
   
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                7.2
+                7.3
               </div>
             
           
@@ -226,6 +226,22 @@ you can access them by using <cite>Driver.client.userid</cite>.</p>
 <span class="sd">    request library, too.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="s1">&#39;request_timeout&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    To keep the websocket connection alive even if it gets disconnected for some reason you</span>
+<span class="sd">    can set the  keepalive option to True. The keepalive_delay defines how long to wait in seconds</span>
+<span class="sd">    before attempting to reconnect the websocket.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s1">&#39;keepalive&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="s1">&#39;keepalive_delay&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This option allows you to provide additional keyword arguments when calling websockets.connect()</span>
+<span class="sd">    By default it is None, meaning we will not add any additional arguments. An example of an</span>
+<span class="sd">    additional argument you can pass is one used to  disable the client side pings:</span>
+<span class="sd">    &#39;websocket_kw_args&#39;: {&quot;ping_interval&quot;: None},</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="s1">&#39;websocket_kw_args&#39;</span><span class="p">:</span> <span class="kc">None</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Setting debug to True, will activate a very verbose logging.</span>
@@ -428,7 +444,7 @@ requests library, where you can also read more about that.</p>
 login, logout and initializing a websocket connection.</p>
 <dl class="py attribute">
 <dt id="mattermostdriver.Driver.default_options">
-<code class="sig-name descname"><span class="pre">default_options</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'auth':</span> <span class="pre">None,</span> <span class="pre">'basepath':</span> <span class="pre">'/api/v4',</span> <span class="pre">'debug':</span> <span class="pre">False,</span> <span class="pre">'login_id':</span> <span class="pre">None,</span> <span class="pre">'mfa_token':</span> <span class="pre">None,</span> <span class="pre">'password':</span> <span class="pre">None,</span> <span class="pre">'port':</span> <span class="pre">8065,</span> <span class="pre">'request_timeout':</span> <span class="pre">None,</span> <span class="pre">'scheme':</span> <span class="pre">'https',</span> <span class="pre">'timeout':</span> <span class="pre">30,</span> <span class="pre">'token':</span> <span class="pre">None,</span> <span class="pre">'url':</span> <span class="pre">'localhost',</span> <span class="pre">'verify':</span> <span class="pre">True}</span></em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">default_options</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'auth':</span> <span class="pre">None,</span> <span class="pre">'basepath':</span> <span class="pre">'/api/v4',</span> <span class="pre">'debug':</span> <span class="pre">False,</span> <span class="pre">'keepalive':</span> <span class="pre">False,</span> <span class="pre">'keepalive_delay':</span> <span class="pre">5,</span> <span class="pre">'login_id':</span> <span class="pre">None,</span> <span class="pre">'mfa_token':</span> <span class="pre">None,</span> <span class="pre">'password':</span> <span class="pre">None,</span> <span class="pre">'port':</span> <span class="pre">8065,</span> <span class="pre">'request_timeout':</span> <span class="pre">None,</span> <span class="pre">'scheme':</span> <span class="pre">'https',</span> <span class="pre">'timeout':</span> <span class="pre">30,</span> <span class="pre">'token':</span> <span class="pre">None,</span> <span class="pre">'url':</span> <span class="pre">'localhost',</span> <span class="pre">'verify':</span> <span class="pre">True,</span> <span class="pre">'websocket_kw_args':</span> <span class="pre">None}</span></em><a class="headerlink" href="#mattermostdriver.Driver.default_options" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="simple">
 <dt>Required options</dt><dd><ul class="simple">
 <li><p>url</p></li>
@@ -943,7 +959,7 @@ websocket events mattermost sends.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'7.2.0',
+            VERSION:'7.3.0',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
