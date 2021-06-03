@@ -42,6 +42,8 @@ class Websocket:
 			basepath=self.options['basepath']
 		)
 
+		self._alive = True
+
 		while True:
 			try:
 				kw_args = {}
@@ -53,7 +55,7 @@ class Websocket:
 					**kw_args,
 				)
 				await self._authenticate_websocket(websocket, event_handler)
-				while True:
+				while self._alive:
 					try:
 						await self._start_loop(websocket, event_handler)
 					except websockets.ConnectionClosedError:
@@ -71,7 +73,6 @@ class Websocket:
 		forcing us to reconnect.
 		"""
 		log.debug('Starting websocket loop')
-		self._alive = True
 		while self._alive:
 			try:
 				await asyncio.wait_for(
