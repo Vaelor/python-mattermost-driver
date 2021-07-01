@@ -1,6 +1,15 @@
 Endpoints
 =========
 
+Bots
+----
+
+.. automodule:: mattermostdriver.endpoints.bots
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
 Brand
 -----
 
@@ -73,6 +82,14 @@ Files
     :undoc-members:
     :show-inheritance:
 
+Integration\_actions
+--------------------
+
+.. automodule:: mattermostdriver.endpoints.integration_actions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 LDAP
 ----
 
@@ -105,10 +122,42 @@ Preferences
     :undoc-members:
     :show-inheritance:
 
+Reactions
+---------
+
+.. automodule:: mattermostdriver.endpoints.reactions
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Roles
+-----
+
+.. automodule:: mattermostdriver.endpoints.roles
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 SAML
 ----
 
 .. automodule:: mattermostdriver.endpoints.saml
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Scheme
+------
+
+.. automodule:: mattermostdriver.endpoints.scheme
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Status
+------
+
+.. automodule:: mattermostdriver.endpoints.status
     :members:
     :undoc-members:
     :show-inheritance:
