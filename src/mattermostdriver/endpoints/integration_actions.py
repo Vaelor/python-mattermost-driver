@@ -11,6 +11,6 @@ class IntegrationActions(Base):
 
 	def submit_dialog(self, options):
 		return self.client.post(
-			self.endpoint + '/dialogs/open',
+			self.endpoint + '/dialogs/submit',
 			options=options
 		)
