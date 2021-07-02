@@ -1,5 +1,17 @@
 7.3.0
 ''''''
+Fixed
+ - Missing documentation endpoints #95
+ - Incorrect submit dialog #94
+ - Disconnect not working #91
+
+Requirement changes
+ - websockets bumped from 8.1 to 9.1
+
+Thanks a lot to @unode and @wonsungkang for their contribution!
+
+7.3.0
+''''''
 Added
  - New keepalive option, `keepalive` and `keepalive_delay`, default `False` #86
  - New `websocket_kw_args` option which is passed to the websocket library on `connect()` #86
