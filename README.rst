@@ -18,7 +18,7 @@ The repository will try to keep up with the master of https://github.com/matterm
 
 If something changes, it is most likely to change because the official mattermost api changed.
 
-Python 3.5 or later is required.
+Python 3.6 or later is required.
 
 Installation
 ------------
@@ -97,16 +97,16 @@ Usage
         'request_timeout': None,
 
         """
-        To keep the websocket connection alive even if it gets disconnected for some reason you 
+        To keep the websocket connection alive even if it gets disconnected for some reason you
         can set the  keepalive option to True. The keepalive_delay defines how long to wait in seconds
-        before attempting to reconnect the websocket. 
+        before attempting to reconnect the websocket.
         """
         'keepalive': False,
         'keepalive_delay': 5,
 
         """
         This option allows you to provide additional keyword arguments when calling websockets.connect()
-        By default it is None, meaning we will not add any additional arguments. An example of an 
+        By default it is None, meaning we will not add any additional arguments. An example of an
         additional argument you can pass is one used to  disable the client side pings:
         'websocket_kw_args': {"ping_interval": None},
         """
