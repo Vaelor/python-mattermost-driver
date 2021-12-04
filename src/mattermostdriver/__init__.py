@@ -1,4 +1,4 @@
-__all__ = ['driver', 'client', 'websocket']
+__all__ = ['AsyncClient', 'Driver', 'Client', 'Websocket']
 from .driver import Driver
-from .client import Client
+from .client import Client, AsyncClient
 from .websocket import Websocket
