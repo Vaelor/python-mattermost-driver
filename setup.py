@@ -44,6 +44,6 @@ setup(
 	python_requires=">=3.5",
 	install_requires=[
 		'websockets>=8',
-		'requests>=2.25'
+		'httpx>=0.20.0<1.0.0',
 	],
 )
