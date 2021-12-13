@@ -32,7 +32,6 @@ class BaseClient:
 		self._scheme = options['scheme']
 		self._basepath = options['basepath']
 		self._port = options['port']
-		self._verify = options['verify']
 		self._auth = options['auth']
 		if options['debug']:
 			self.activate_verbose_logging()
@@ -117,9 +116,7 @@ class BaseClient:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	def _build_request(self, options=None, params=None, data=None, files=None, basepath=None):
-		if options is None:
-			options = {}
+	def _build_request(self, method, options=None, params=None, data=None, files=None, basepath=None):
 		if params is None:
 			params = {}
 		if data is None:
@@ -136,18 +133,24 @@ class BaseClient:
 
 		request_params = {
 			'headers': self.auth_header(),
-			'verify': self._verify,
-			'json': options,
-			'params': params,
-			'data': data,
-			'files': files,
 			'timeout': self.request_timeout
 		}
+
+		if params is not None:
+			request_params["params"] = params
+
+		if method in ("post", "put"):
+			if options is not None:
+				request_params["json"] = options
+			if data is not None:
+				request_params["data"] = data
+			if files is not None:
+				request_params["files"] = files
 
 		if self._auth is not None:
 			request_params['auth'] = self._auth()
 
-		return url, request_params
+		return self._get_request_method(method, self.client), url, request_params
 
 	@staticmethod
 	def _check_response(response):
@@ -197,11 +200,10 @@ class BaseClient:
 class Client(BaseClient):
 	def __init__(self, options):
 		super().__init__(options)
-		self.client = httpx.Client(http2=options.get("http2", False))
+		self.client = httpx.Client(http2=options.get("http2", False), verify=options.get("verify", True))
 
 	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
-		url, request_params = self._build_request(options, params, data, files, basepath)
-		request = self._get_request_method(method, self.client)
+		request, url, request_params = self._build_request(method, options, params, data, files, basepath)
 		response = request(
 				url + endpoint,
 				**request_params
@@ -211,11 +213,11 @@ class Client(BaseClient):
 		return response
 
 	def __enter__(self):
-		self.client.__enter__(self)		
+		self.client.__enter__()		
 		return self
 
 	def __exit__(self, *exc_info):
-		return self.client.__exit__(self, *exc_info)
+		return self.client.__exit__(*exc_info)
 
 	def get(self, endpoint, options=None, params=None):
 		response = self.make_request('get', endpoint, options=options, params=params)
@@ -243,18 +245,17 @@ class Client(BaseClient):
 class AsyncClient(BaseClient):
 	def __init__(self, options):
 		super().__init__(options)
-		self.client = httpx.AsyncClient(http2=options.get("http2", False))
+		self.client = httpx.AsyncClient(http2=options.get("http2", False), verify=options.get("verify", True))
 
 	async def __aenter__(self):
-		await self.client.__aenter__(self)		
+		await self.client.__aenter__()		
 		return self
 
 	async def __aexit__(self, *exc_info):
-		return await self.client.__aexit__(self, *exc_info)
+		return await self.client.__aexit__(*exc_info)
 
 	async def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
-		url, request_params = self._build_request(options, params, data, files, basepath)
-		request = self._get_request_method(method, self.client)
+		request, url, request_params = self._build_request(method, options, params, data, files, basepath)
 		response = await request(
 				url + endpoint,
 				**request_params

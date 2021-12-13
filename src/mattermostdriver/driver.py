@@ -314,6 +314,13 @@ class BaseDriver:
 class Driver(BaseDriver):
 	def __init__(self, options=None, client_cls=Client):
 		super().__init__(options, client_cls)
+
+	def __enter__(self):
+		self.client.__enter__()		
+		return self
+
+	def __exit__(self, *exc_info):
+		return self.client.__exit__(*exc_info)
 	
 	def init_websocket(self, event_handler, websocket_cls=Websocket):
 		"""
@@ -397,6 +404,13 @@ class Driver(BaseDriver):
 class AsyncDriver(BaseDriver):
 	def __init__(self, options=None, client_cls=AsyncClient):
 		super().__init__(options, client_cls)
+
+	async def __aenter__(self):
+		await self.client.__aenter__()		
+		return self
+
+	async def __aexit__(self, *exc_info):
+		return await self.client.__aexit__(*exc_info)
 
 	def init_websocket(self, event_handler, websocket_cls=Websocket):
 		"""
