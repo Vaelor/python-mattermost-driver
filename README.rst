@@ -180,8 +180,8 @@ Usage
     # To upload a file you will need to pass a `files` dictionary
     channel_id = foo.channels.get_channel_by_name_and_team_name('team', 'channel')['id']
     file_id = foo.files.upload_file(
-        channel_id=channel_id
-        files={'files': (filename, open(filename))}
+        channel_id=channel_id,
+        files={'files': (filename, open(filename, 'rb'))}
     )['file_infos'][0]['id']
 
 
