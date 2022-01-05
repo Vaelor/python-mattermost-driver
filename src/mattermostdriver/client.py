@@ -4,7 +4,7 @@ and actually makes the requests to the mattermost server
 """
 
 import logging
-import requests
+import httpx
 
 from .exceptions import (
 	InvalidOrMissingParameters,
@@ -21,18 +21,17 @@ log.setLevel(logging.INFO)
 
 
 # pylint: disable=too-many-instance-attributes
-class Client:
+class BaseClient:
 	def __init__(self, options):
-		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
-			scheme=options['scheme'],
-			url=options['url'],
-			port=options['port'],
-			basepath=options['basepath']
+		self._url = self._make_url(
+			options['scheme'],
+			options['url'],
+			options['port'],
+			options['basepath']
 		)
 		self._scheme = options['scheme']
 		self._basepath = options['basepath']
 		self._port = options['port']
-		self._verify = options['verify']
 		self._auth = options['auth']
 		if options['debug']:
 			self.activate_verbose_logging()
@@ -44,14 +43,16 @@ class Client:
 		self._username = ''
 
 	@staticmethod
+	def _make_url(scheme, url, port, basepath):
+		return f'{scheme:s}://{url:s}:{port:d}{basepath:s}'
+
+	@staticmethod
 	def activate_verbose_logging(level=logging.DEBUG):
 		log.setLevel(level)
-		# http://docs.python-requests.org/en/master/api/#api-changes
-		from http.client import HTTPConnection  # pylint: disable=import-outside-toplevel
-		HTTPConnection.debuglevel = 1
-		requests_log = logging.getLogger("requests.packages.urllib3")
-		requests_log.setLevel(level)
-		requests_log.propagate = True
+		# enable trace level logging in httpx
+		httpx_log = logging.getLogger('httpx')
+		httpx_log.setLevel('TRACE')
+		httpx_log.propagate = True
 
 	@property
 	def userid(self):
@@ -115,52 +116,47 @@ class Client:
 			return {}
 		return {"Authorization": "Bearer {token:s}".format(token=self._token)}
 
-	# pylint: disable=too-many-branches
-	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
-		if options is None:
-			options = {}
+	def _build_request(self, method, options=None, params=None, data=None, files=None, basepath=None):
 		if params is None:
 			params = {}
 		if data is None:
 			data = {}
 		if basepath:
-			url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
-				scheme=self._options['scheme'],
-				url=self._options['url'],
-				port=self._options['port'],
-				basepath=basepath
+			url = self._make_url(
+				self._options['scheme'],
+				self._options['url'],
+				self._options['port'], 
+				basepath
 			)
 		else:
 			url = self.url
-		method = method.lower()
-		request = requests.get
-		if method == 'post':
-			request = requests.post
-		elif method == 'put':
-			request = requests.put
-		elif method == 'delete':
-			request = requests.delete
 
 		request_params = {
 			'headers': self.auth_header(),
-			'verify': self._verify,
-			'json': options,
-			'params': params,
-			'data': data,
-			'files': files,
 			'timeout': self.request_timeout
 		}
+
+		if params is not None:
+			request_params["params"] = params
+
+		if method in ("post", "put"):
+			if options is not None:
+				request_params["json"] = options
+			if data is not None:
+				request_params["data"] = data
+			if files is not None:
+				request_params["files"] = files
 
 		if self._auth is not None:
 			request_params['auth'] = self._auth()
 
-		response = request(
-				url + endpoint,
-				**request_params
-			)
+		return self._get_request_method(method, self.client), url, request_params
+
+	@staticmethod
+	def _check_response(response):
 		try:
 			response.raise_for_status()
-		except requests.HTTPError as e:
+		except httpx.HTTPStatusError as e:
 			try:
 				data = e.response.json()
 				message = data.get('message', data)
@@ -187,7 +183,41 @@ class Client:
 				raise
 
 		log.debug(response)
+	
+	@staticmethod
+	def _get_request_method(method, client):
+		method = method.lower()
+		if method == 'post':
+			return client.post
+		elif method == 'put':
+			return client.put
+		elif method == 'delete':
+			return client.delete
+		else:
+			return client.get
+
+
+class Client(BaseClient):
+	def __init__(self, options):
+		super().__init__(options)
+		self.client = httpx.Client(http2=options.get("http2", False), verify=options.get("verify", True))
+
+	def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
+		request, url, request_params = self._build_request(method, options, params, data, files, basepath)
+		response = request(
+				url + endpoint,
+				**request_params
+		)
+
+		self._check_response(response)
 		return response
+
+	def __enter__(self):
+		self.client.__enter__()		
+		return self
+
+	def __exit__(self, *exc_info):
+		return self.client.__exit__(*exc_info)
 
 	def get(self, endpoint, options=None, params=None):
 		response = self.make_request('get', endpoint, options=options, params=params)
@@ -210,3 +240,52 @@ class Client:
 
 	def delete(self, endpoint, options=None, params=None, data=None):
 		return self.make_request('delete', endpoint, options=options, params=params, data=data).json()
+
+
+class AsyncClient(BaseClient):
+	def __init__(self, options):
+		super().__init__(options)
+		self.client = httpx.AsyncClient(http2=options.get("http2", False), verify=options.get("verify", True))
+
+	async def __aenter__(self):
+		await self.client.__aenter__()		
+		return self
+
+	async def __aexit__(self, *exc_info):
+		return await self.client.__aexit__(*exc_info)
+
+	async def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
+		request, url, request_params = self._build_request(method, options, params, data, files, basepath)
+		response = await request(
+				url + endpoint,
+				**request_params
+		)
+
+		self._check_response(response)
+		return response
+
+
+	async def get(self, endpoint, options=None, params=None):
+		response = await self.make_request('get', endpoint, options=options, params=params)
+
+		if response.headers['Content-Type'] != 'application/json':
+			log.debug('Response is not application/json, returning raw response')
+			return response
+
+		try:
+			return response.json()
+		except ValueError:
+			log.debug('Could not convert response to json, returning raw response')
+			return response
+
+	async def post(self, endpoint, options=None, params=None, data=None, files=None):
+		response = await self.make_request('post', endpoint, options=options, params=params, data=data, files=files)
+		return response.json()
+
+	async def put(self, endpoint, options=None, params=None, data=None):
+		response = await self.make_request('put', endpoint, options=options, params=params, data=data)
+		return response.json()
+
+	async def delete(self, endpoint, options=None, params=None, data=None):
+		response = await self.make_request('delete', endpoint, options=options, params=params, data=data)
+		return response.json()

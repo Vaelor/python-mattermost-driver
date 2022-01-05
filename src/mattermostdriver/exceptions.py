@@ -1,4 +1,4 @@
-from requests import HTTPError
+from httpx import HTTPError
 
 
 class InvalidOrMissingParameters(HTTPError):
