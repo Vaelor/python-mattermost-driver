@@ -2,9 +2,7 @@ from .base import Base
 
 
 class Cluster(Base):
-	endpoint = '/cluster'
+    endpoint = "/cluster"
 
-	def get_cluster_status(self):
-		return self.client.get(
-			self.endpoint + '/status'
-		)
+    def get_cluster_status(self):
+        return self.client.get(self.endpoint + "/status")
