@@ -2,6 +2,8 @@ import json
 import ssl
 import asyncio
 import logging
+import time
+
 import websockets
 
 log = logging.getLogger('mattermostdriver.websocket')
@@ -15,6 +17,7 @@ class Websocket:
 			log.setLevel(logging.DEBUG)
 		self._token = token
 		self._alive = False
+		self._last_msg = 0
 
 	async def connect(self, event_handler):
 		"""
@@ -68,21 +71,42 @@ class Websocket:
 
 	async def _start_loop(self, websocket, event_handler):
 		"""
-		We will listen for websockets events, sending a heartbeat/pong everytime
-		we react a TimeoutError. If we don't the webserver would close the idle connection,
+		We will listen for websockets events, sending a heartbeats on a timer.  
+		If we don't the webserver would close the idle connection,
 		forcing us to reconnect.
 		"""
 		log.debug('Starting websocket loop')
+		# TODO: move to create_task when cpython 3.7 is minimum supported python version
+		keep_alive = asyncio.ensure_future(self._do_heartbeats(websocket))
+		log.debug('Waiting for messages on websocket')
 		while self._alive:
-			try:
-				await asyncio.wait_for(
-					self._wait_for_message(websocket, event_handler),
-					timeout=self.options['timeout']
-				)
-			except asyncio.TimeoutError:
+			message = await websocket.recv()
+			self._last_msg = time.time()
+			await event_handler(message)
+		log.debug('cancelling heartbeat task')
+		keep_alive.cancel()
+		try:
+			await keep_alive
+		except asyncio.CancelledError:
+			pass
+	
+	async def _do_heartbeats(self, websocket):
+		"""
+		This is a little complicated, but we only need to pong the websocket if 
+		we haven't recieved a message inside the timeout window. 
+
+		Since messages can be received, while we are waiting we need to check
+		after sleep. 
+		"""
+		timeout = self.options['timeout']
+		while True:
+			since_last_msg = time.time() - self._last_msg
+			next_timeout = timeout - since_last_msg if since_last_msg <= timeout else timeout
+			await asyncio.sleep(next_timeout)
+			if time.time() - self._last_msg >= timeout:
+				log.debug("sending heartbeat...")
 				await websocket.pong()
-				log.debug("Sending heartbeat...")
-				continue
+				self._last_msg = time.time()
 
 	def disconnect(self):
 		"""Sets `self._alive` to False so the loop in `self._start_loop` will finish."""
@@ -116,9 +140,3 @@ class Websocket:
 				log.info('Websocket authentification OK')
 				return True
 			log.error('Websocket authentification failed')
-
-	async def _wait_for_message(self, websocket, event_handler):
-		log.debug('Waiting for messages on websocket')
-		while self._alive:
-			message = await websocket.recv()
-			await event_handler(message)
