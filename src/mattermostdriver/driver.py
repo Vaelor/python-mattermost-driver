@@ -311,6 +311,15 @@ class BaseDriver:
         """
         return IntegrationActions(self.client)
 
+    @property
+    def bots(self):
+        """
+        Api endpoint for bots
+
+        :return: Instance of :class:`~endpoints.bots.Bots`
+        """
+        return Bots(self.client)
+
 
 class Driver(BaseDriver):
     def __init__(self, options=None, client_cls=Client):
