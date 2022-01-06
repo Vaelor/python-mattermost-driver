@@ -2,106 +2,63 @@ from .base import Base
 
 
 class System(Base):
-	"""
-	This endpoint has a mix of different
-	endpoints, not only /system
-	"""
-	def check_system_health(self):
-		return self.client.get(
-			'/system/ping'
-		)
+    """
+    This endpoint has a mix of different
+    endpoints, not only /system
+    """
 
-	def recycle_database_connection(self):
-		return self.client.post(
-			'/database/recycle'
-		)
+    def check_system_health(self):
+        return self.client.get("/system/ping")
 
-	def send_test_email(self, options=None):
-		return self.client.post(
-			'/email/test',
-			options=options
-		)
+    def recycle_database_connection(self):
+        return self.client.post("/database/recycle")
 
-	def get_configuration(self):
-		return self.client.get(
-			'/config'
-		)
+    def send_test_email(self, options=None):
+        return self.client.post("/email/test", options=options)
 
-	def update_configuration(self, options):
-		return self.client.put(
-			'/config',
-			options=options
-		)
+    def get_configuration(self):
+        return self.client.get("/config")
 
-	def reload_configuration(self):
-		return self.client.post(
-			'/config/reload'
-		)
+    def update_configuration(self, options):
+        return self.client.put("/config", options=options)
 
-	def get_client_configuration(self, params):
-		return self.client.get(
-			'/config/client',
-			params=params
-		)
+    def reload_configuration(self):
+        return self.client.post("/config/reload")
 
-	def upload_license_file(self, files):
-		return self.client.post(
-			'/license',
-			files=files
-		)
+    def get_client_configuration(self, params):
+        return self.client.get("/config/client", params=params)
 
-	def remove_license_file(self):
-		return self.client.delete(
-			'/license'
-		)
+    def upload_license_file(self, files):
+        return self.client.post("/license", files=files)
 
-	def get_client_license(self, params):
-		return self.client.get(
-			'/license/client',
-			params=params
-		)
+    def remove_license_file(self):
+        return self.client.delete("/license")
 
-	def get_audits(self, params):
-		return self.client.get(
-			'/audits',
-			params=params
-		)
+    def get_client_license(self, params):
+        return self.client.get("/license/client", params=params)
 
-	def invalidate_all_caches(self):
-		return self.client.post(
-			'/caches/invalidate',
-		)
+    def get_audits(self, params):
+        return self.client.get("/audits", params=params)
 
-	def get_logs(self, params):
-		return self.client.get(
-			'/logs',
-			params=params
-		)
+    def invalidate_all_caches(self):
+        return self.client.post(
+            "/caches/invalidate",
+        )
 
-	def add_log_message(self, options):
-		return self.client.post(
-			'/logs',
-			options=options
-		)
+    def get_logs(self, params):
+        return self.client.get("/logs", params=params)
 
-	def get_webrtc_token(self):
-		return self.client.get(
-			'/webrtc/token'
-		)
+    def add_log_message(self, options):
+        return self.client.post("/logs", options=options)
 
-	def get_analytics(self, params):
-		return self.client.get(
-			'/analytics/old',
-			params=params
-		)
+    def get_webrtc_token(self):
+        return self.client.get("/webrtc/token")
 
-	def get_configuration_environment(self):
-		return self.client.get(
-			'/config/environment'
-		)
+    def get_analytics(self, params):
+        return self.client.get("/analytics/old", params=params)
 
-	def test_aws_s3_connection(self, options=None):
-		return self.client.post(
-			'/file/s3_test',
-			options=options
-		)
+    def get_configuration_environment(self):
+        return self.client.get("/config/environment")
+
+    def test_aws_s3_connection(self, options=None):
+        return self.client.post("/file/s3_test", options=options)

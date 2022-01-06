@@ -1,0 +1,9 @@
+[tool.black]
+line-length = 120
+target-version = ['py36']
+include = 'src\/.*\.py$'
+extend-exclude = '''
+# A regex preceded with ^/ will apply only to files and directories
+# in the root of the project.
+^/foo.py  # exclude a file named foo.py in the root of the project (in addition to the defaults)
+'''
