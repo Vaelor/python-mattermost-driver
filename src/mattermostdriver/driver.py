@@ -96,7 +96,7 @@ class BaseDriver:
             log.setLevel(logging.DEBUG)
             log.warning(
                 "Careful!!\nSetting debug to True, will reveal your password in the log output if you do driver.login()!\nThis is NOT for production!"
-            )  # pylint: disable=line-too-long
+            )
         self.client = client_cls(self.options)
         self.websocket = None
 

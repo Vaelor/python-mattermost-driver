@@ -20,7 +20,6 @@ log = logging.getLogger("mattermostdriver.websocket")
 log.setLevel(logging.INFO)
 
 
-# pylint: disable=too-many-instance-attributes
 class BaseClient:
     def __init__(self, options):
         self._url = self._make_url(options["scheme"], options["url"], options["port"], options["basepath"])
@@ -151,7 +150,7 @@ class BaseClient:
                 log.debug("Could not convert response to json")
                 message = response.text
             log.error(message)
-            # pylint: disable=no-else-raise
+
             if e.response.status_code == 400:
                 raise InvalidOrMissingParameters(message) from None
             elif e.response.status_code == 401:
