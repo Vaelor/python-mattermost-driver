@@ -86,9 +86,9 @@ class Websocket:
         keep_alive.cancel()
         try:
             await keep_alive
-            await websocket.close()
         except asyncio.CancelledError:
             pass
+        await websocket.close()
 
     async def _do_heartbeats(self, websocket):
         """
