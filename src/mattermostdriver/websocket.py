@@ -4,7 +4,7 @@ import asyncio
 import logging
 import time
 
-import websockets
+import aiohttp
 
 log = logging.getLogger("mattermostdriver.websocket")
 log.setLevel(logging.INFO)
@@ -49,21 +49,23 @@ class Websocket:
                 kw_args = {}
                 if self.options["websocket_kw_args"] is not None:
                     kw_args = self.options["websocket_kw_args"]
-                websocket = await websockets.connect(
-                    url,
-                    ssl=context,
-                    **kw_args,
-                )
-                await self._authenticate_websocket(websocket, event_handler)
-                while self._alive:
-                    try:
-                        await self._start_loop(websocket, event_handler)
-                    except websockets.ConnectionClosedError:
+                async with aiohttp.ClientSession() as session:
+                    websocket = await session.ws_connect(
+                        url,
+                        ssl=context,
+                        proxy=self.options["proxy"],
+                        **kw_args,
+                    )
+                    await self._authenticate_websocket(websocket, event_handler)
+                    while self._alive:
+                        try:
+                            await self._start_loop(websocket, event_handler)
+                        except aiohttp.ClientError:
+                            break
+                    if (not self.options["keepalive"]) or (not self._alive):
                         break
-                if (not self.options["keepalive"]) or (not self._alive):
-                    break
             except Exception as e:
-                log.warning(f"Failed to establish websocket connection: {e}")
+                log.exception(f"Failed to establish websocket connection: {type(e)} thrown")
                 await asyncio.sleep(self.options["keepalive_delay"])
 
     async def _start_loop(self, websocket, event_handler):
@@ -77,13 +79,14 @@ class Websocket:
         keep_alive = asyncio.ensure_future(self._do_heartbeats(websocket))
         log.debug("Waiting for messages on websocket")
         while self._alive:
-            message = await websocket.recv()
+            message = await websocket.receive_str()
             self._last_msg = time.time()
             await event_handler(message)
         log.debug("cancelling heartbeat task")
         keep_alive.cancel()
         try:
             await keep_alive
+            await websocket.close()
         except asyncio.CancelledError:
             pass
 
@@ -120,9 +123,9 @@ class Websocket:
         json_data = json.dumps({"seq": 1, "action": "authentication_challenge", "data": {"token": self._token}}).encode(
             "utf8"
         )
-        await websocket.send(json_data)
+        await websocket.send_bytes(json_data)
         while True:
-            message = await websocket.recv()
+            message = await websocket.receive_str()
             status = json.loads(message)
             log.debug(status)
             # We want to pass the events to the event_handler already

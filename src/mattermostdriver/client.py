@@ -35,6 +35,9 @@ class BaseClient:
         self._cookies = None
         self._userid = ""
         self._username = ""
+        self._proxies = None
+        if options["proxy"]:
+            self._proxies = {"all://": options["proxy"]}
 
     @staticmethod
     def _make_url(scheme, url, port, basepath):
@@ -186,7 +189,11 @@ class BaseClient:
 class Client(BaseClient):
     def __init__(self, options):
         super().__init__(options)
-        self.client = httpx.Client(http2=options.get("http2", False), verify=options.get("verify", True))
+        self.client = httpx.Client(
+            http2=options.get("http2", False),
+            proxies=self._proxies,
+            verify=options.get("verify", True),
+        )
 
     def make_request(self, method, endpoint, options=None, params=None, data=None, files=None, basepath=None):
         request, url, request_params = self._build_request(method, options, params, data, files, basepath)
@@ -228,7 +235,11 @@ class Client(BaseClient):
 class AsyncClient(BaseClient):
     def __init__(self, options):
         super().__init__(options)
-        self.client = httpx.AsyncClient(http2=options.get("http2", False), verify=options.get("verify", True))
+        self.client = httpx.AsyncClient(
+            http2=options.get("http2", False),
+            proxies=self._proxies,
+            verify=options.get("verify", True),
+        )
 
     async def __aenter__(self):
         await self.client.__aenter__()
