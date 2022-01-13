@@ -50,20 +50,20 @@ class Websocket:
                 if self.options["websocket_kw_args"] is not None:
                     kw_args = self.options["websocket_kw_args"]
                 async with aiohttp.ClientSession() as session:
-                    websocket = await session.ws_connect(
+                    async with session.ws_connect(
                         url,
                         ssl=context,
                         proxy=self.options["proxy"],
                         **kw_args,
-                    )
-                    await self._authenticate_websocket(websocket, event_handler)
-                    while self._alive:
-                        try:
-                            await self._start_loop(websocket, event_handler)
-                        except aiohttp.ClientError:
+                    ) as websocket:
+                        await self._authenticate_websocket(websocket, event_handler)
+                        while self._alive:
+                            try:
+                                await self._start_loop(websocket, event_handler)
+                            except aiohttp.ClientError:
+                                break
+                        if (not self.options["keepalive"]) or (not self._alive):
                             break
-                    if (not self.options["keepalive"]) or (not self._alive):
-                        break
             except Exception as e:
                 log.exception(f"Failed to establish websocket connection: {type(e)} thrown")
                 await asyncio.sleep(self.options["keepalive_delay"])
@@ -88,7 +88,6 @@ class Websocket:
             await keep_alive
         except asyncio.CancelledError:
             pass
-        await websocket.close()
 
     async def _do_heartbeats(self, websocket):
         """
