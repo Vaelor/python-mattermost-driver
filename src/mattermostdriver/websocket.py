@@ -102,7 +102,7 @@ class Websocket:
 			"data": {
 				"token": self._token
 			}
-		}).encode('utf8')
+		})
 		await websocket.send(json_data)
 		while True:
 			message = await websocket.recv()
