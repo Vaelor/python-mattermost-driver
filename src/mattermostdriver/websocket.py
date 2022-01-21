@@ -117,9 +117,7 @@ class Websocket:
         when connecting to the websocket.
         """
         log.debug("Authenticating websocket")
-        json_data = json.dumps({"seq": 1, "action": "authentication_challenge", "data": {"token": self._token}}).encode(
-            "utf8"
-        )
+        json_data = json.dumps({"seq": 1, "action": "authentication_challenge", "data": {"token": self._token}})
         await websocket.send(json_data)
         while True:
             message = await websocket.recv()
