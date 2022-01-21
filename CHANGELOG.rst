@@ -1,4 +1,11 @@
-7.3.0
+7.3.2
+''''''
+Fixed
+ - Login failed in version 6.3.0 #112
+
+Thanks a lot to @iprok for their contribution!
+
+7.3.1
 ''''''
 Fixed
  - Missing documentation endpoints #95
