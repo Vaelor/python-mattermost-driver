@@ -5,12 +5,14 @@ Added
 - HTTP proxy support for http + websocket calls
   - Websocket calls are now using aiohttp
 
-7.3.1
+7.3.2
 ''''''
+Fixed
+ - Login failed in version 6.3.0 #112
 
-To be added - Seems missed in the realese?
+Thanks a lot to @iprok for their contribution!
 
-7.3.0
+7.3.1
 ''''''
 Fixed
  - Missing documentation endpoints #95
