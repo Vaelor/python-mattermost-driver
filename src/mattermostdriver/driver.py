@@ -57,6 +57,7 @@ class BaseDriver:
         "websocket_kw_args": None,
         "debug": False,
         "http2": False,
+        "proxy": None,
     }
     """
 	Required options
