@@ -65,7 +65,7 @@ class Websocket:
                         if (not self.options["keepalive"]) or (not self._alive):
                             break
             except Exception as e:
-                log.exception(f"Failed to establish websocket connection: {type(e)} thrown")
+                log.exception(f"Failed to establish websocket connection: {e} thrown")
                 await asyncio.sleep(self.options["keepalive_delay"])
 
     async def _start_loop(self, websocket, event_handler):
@@ -120,7 +120,7 @@ class Websocket:
         """
         log.debug("Authenticating websocket")
         json_data = json.dumps({"seq": 1, "action": "authentication_challenge", "data": {"token": self._token}})
-        await websocket.send_bytes(json_data)
+        await websocket.send_str(json_data)
         while True:
             message = await websocket.receive_str()
             status = json.loads(message)
