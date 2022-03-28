@@ -22,6 +22,8 @@ log.setLevel(logging.INFO)
 
 # pylint: disable=too-many-instance-attributes
 class Client:
+	requests = requests.Session()
+
 	def __init__(self, options):
 		self._url = '{scheme:s}://{url:s}:{port:d}{basepath:s}'.format(
 			scheme=options['scheme'],
@@ -133,13 +135,13 @@ class Client:
 		else:
 			url = self.url
 		method = method.lower()
-		request = requests.get
+		request = self.requests.get
 		if method == 'post':
-			request = requests.post
+			request = self.requests.post
 		elif method == 'put':
-			request = requests.put
+			request = self.requests.put
 		elif method == 'delete':
-			request = requests.delete
+			request = self.requests.delete
 
 		request_params = {
 			'headers': self.auth_header(),
