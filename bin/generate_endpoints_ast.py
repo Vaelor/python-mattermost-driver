@@ -422,6 +422,8 @@ def main():
     api = load_json()
     methods = json_to_ast(api)
 
+    filenames = []
+
     for module in methods.keys():
         code = make_ast(methods, module)
         filename = f"src/mattermostdriver/endpoints/{module.lower()}.py"
@@ -429,7 +431,9 @@ def main():
         with open(filename, "w") as fh:
             fh.write(ast.unparse(code))
 
-        run(["black", filename])
+        filenames.append(filename)
+
+    run(["black", "--line-length", "120", *filenames])
 
 
 if __name__ == "__main__":
