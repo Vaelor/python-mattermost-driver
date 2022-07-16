@@ -433,7 +433,7 @@ def main():
 
         filenames.append(filename)
 
-    run(["black", "--line-length", "120", *filenames])
+    run(["black", "--config", "pyproject.toml", *filenames])
 
 
 if __name__ == "__main__":
