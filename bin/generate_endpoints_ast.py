@@ -57,11 +57,7 @@ Parameter = namedtuple(
 
 
 ast_template = """
-import logging
 from .base import Base
-
-log = logging.getLogger('mattermostdriver.api.channels')
-log.setLevel(logging.INFO)
 """
 
 
