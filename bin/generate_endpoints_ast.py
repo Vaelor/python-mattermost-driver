@@ -361,7 +361,7 @@ def prepare_def_keywords(url_params, payload_params, operation_arg, req_body_typ
 
 
 def ast_request(request_type, endpoint, call_params):
-    args = [ast.parse('f"' + endpoint + '"')]
+    args = [ast.parse(('f"' if '{' in endpoint else '"') + endpoint + '"')]
 
     return ast.Return(
         ast.Call(
