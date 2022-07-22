@@ -110,7 +110,7 @@ Usage
         additional argument you can pass is one used to  disable the client side pings:
         'websocket_kw_args': {"ping_interval": None},
         """
-        'websocket_kw_args': None
+        'websocket_kw_args': None,
 
         """
         Setting debug to True, will activate a very verbose logging.
@@ -120,7 +120,7 @@ Usage
         Be careful. This SHOULD NOT be active in production, because this logs a lot!
         Even the password for your account when doing driver.login()!
         """
-        'debug': False,
+        'debug': False
     })
 
     """
