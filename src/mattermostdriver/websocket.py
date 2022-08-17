@@ -29,7 +29,7 @@ class Websocket:
         :type event_handler: Function(message)
         :return:
         """
-        context = ssl.create_default_context(purpose=ssl.Purpose.CLIENT_AUTH)
+        context = ssl.create_default_context(purpose=ssl.Purpose.SERVER_AUTH)
         if not self.options["verify"]:
             context.verify_mode = ssl.CERT_NONE
 
