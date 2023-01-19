@@ -333,9 +333,39 @@ class Driver(BaseDriver):
     def __exit__(self, *exc_info):
         return self.client.__exit__(*exc_info)
 
-    def init_websocket(self, event_handler, websocket_cls=Websocket):
+    def init_websocket(self, event_handler, websocket_cls=Websocket, loop=None):
         """
-        Will initialize the websocket connection to the mattermost server.
+        Will initialize the websocket connection to the mattermost server and start an asyncio loop.
+
+        This should be run after login(), because the websocket needs to make
+        an authentification. This function blocks until the connection with the server is broken.
+
+        See https://api.mattermost.com/v4/#tag/WebSocket for which
+        websocket events mattermost sends.
+
+        Example of a really simple event_handler function
+
+        .. code:: python
+
+                async def my_event_handler(message):
+                        print(message)
+
+
+        :param event_handler: The function to handle the websocket events. Takes one argument.
+        :type event_handler: Function(message)
+        :param loop: The Asyncio loop to use. If left empty, get_event_loop is called.
+        :type loop:  EventLoop, optional
+        :return: The event loop
+        """
+        self.websocket = websocket_cls(self.options, self.client.token)
+        if loop == None:
+            loop = asyncio.get_event_loop()
+        loop.run_until_complete(self.run_websocket(event_handler))
+        return loop
+
+    async def run_websocket(self, event_handler, websocket_cls=Websocket):
+        """
+        Will initialize the websocket connection to the mattermost server and awaits messages.
 
         This should be run after login(), because the websocket needs to make
         an authentification.
@@ -356,9 +386,7 @@ class Driver(BaseDriver):
         :return: The event loop
         """
         self.websocket = websocket_cls(self.options, self.client.token)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(self.websocket.connect(event_handler))
-        return loop
+        await self.websocket.connect(event_handler)
 
     def login(self):
         """

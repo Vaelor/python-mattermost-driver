@@ -3,7 +3,6 @@ import ssl
 import asyncio
 import logging
 import time
-
 import aiohttp
 
 log = logging.getLogger("mattermostdriver.websocket")
@@ -81,7 +80,9 @@ class Websocket:
         while self._alive:
             message = await websocket.receive_str()
             self._last_msg = time.time()
-            await event_handler(message)
+            decoded = json.loads(message)
+            if "event" in decoded:
+                await event_handler(decoded)
         log.debug("cancelling heartbeat task")
         keep_alive.cancel()
         try:
@@ -127,7 +128,8 @@ class Websocket:
             log.debug(status)
             # We want to pass the events to the event_handler already
             # because the hello event could arrive before the authentication ok response
-            await event_handler(message)
+            if "event" in status:
+                await event_handler(status)
             if ("event" in status and status["event"] == "hello") and ("seq" in status and status["seq"] == 0):
                 log.info("Websocket authentification OK")
                 return True
