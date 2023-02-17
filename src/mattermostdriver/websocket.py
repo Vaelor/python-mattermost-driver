@@ -129,6 +129,6 @@ class Websocket:
             # because the hello event could arrive before the authentication ok response
             await event_handler(message)
             if ("event" in status and status["event"] == "hello") and ("seq" in status and status["seq"] == 0):
-                log.info("Websocket authentification OK")
+                log.info("Websocket authentication OK")
                 return True
-            log.error("Websocket authentification failed")
+            log.error("Websocket authentication failed")

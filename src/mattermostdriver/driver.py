@@ -337,8 +337,8 @@ class Driver(BaseDriver):
         """
         Will initialize the websocket connection to the mattermost server.
 
-        This should be run after login(), because the websocket needs to make
-        an authentification.
+        This should be run after login(), because the websocket needs to
+        authenticate.
 
         See https://api.mattermost.com/v4/#tag/WebSocket for which
         websocket events mattermost sends.
@@ -432,8 +432,8 @@ class AsyncDriver(BaseDriver):
         and returns a coroutine that can be awaited.  It will not return
         until shutdown() is called.
 
-        This should be run after login(), because the websocket needs to make
-        an authentification.
+        This should be run after login(), because the websocket needs to
+        authenticate.
 
         See https://api.mattermost.com/v4/#tag/WebSocket for which
         websocket events mattermost sends.
