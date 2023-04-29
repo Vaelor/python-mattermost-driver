@@ -122,3 +122,6 @@ class Users(Base):
 
     def get_stats(self):
         return self.client.get(self.endpoint + "/stats")
+    
+    def get_user_sidebar_categories(self, user_id, team_id):
+        return self.client.get(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories")
