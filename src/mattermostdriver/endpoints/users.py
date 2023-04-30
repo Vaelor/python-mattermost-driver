@@ -125,3 +125,24 @@ class Users(Base):
     
     def get_user_sidebar_categories(self, user_id, team_id):
         return self.client.get(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories")
+    
+    def create_user_sidebar_category(self, user_id, team_id, options=None):
+        return self.client.post(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories", options)
+    
+    def update_user_sidebar_categories(self, user_id, team_id, options=None):
+        return self.client.put(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories", options)
+    
+    def get_user_sidebar_category_order(self, user_id, team_id):
+        return self.client.get(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories/order")
+    
+    def update_user_sidebar_category_order(self, user_id, team_id, options=None):
+        return self.client.put(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories/order", options)
+    
+    def get_user_sidebar_category_by_id(self, user_id, team_id, category_id):
+        return self.client.get(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories/" + category_id)
+    
+    def update_user_sidebar_category(self, user_id, team_id, category_id, options=None):
+        return self.client.put(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories/" + category_id, options)
+    
+    def delete_user_sidebar_category(self, user_id, team_id, category_id):
+        return self.client.delete(self.endpoint + "/" + user_id + "/teams/" + team_id + "/channels/categories/" + category_id)
