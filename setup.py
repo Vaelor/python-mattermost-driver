@@ -44,5 +44,5 @@ setup(
     install_requires=[
         'aiohttp>=3.8.1,<4.0.0',
         'httpx>=0.20.0,<1.0.0'
-    ].
+    ],
 )
