@@ -34,16 +34,16 @@ class Posts(Base):
             self.endpoint + "/" + post_id + "/thread",
         )
 
-    def get_list_of_flagged_posts(self, user_id, params=None):
-        return self.client.get(Users.endpoint + "/" + user_id + "/posts/flagged", params=params)
+    def get_list_of_flagged_posts(self, user_id, params=None, options=None):
+        return self.client.get(Users.endpoint + "/" + user_id + "/posts/flagged", params=params, options=options)
 
     def get_file_info_for_post(self, post_id):
         return self.client.get(
             self.endpoint + "/" + post_id + "/files/info",
         )
 
-    def get_posts_for_channel(self, channel_id, params=None):
-        return self.client.get(Channels.endpoint + "/" + channel_id + "/posts", params=params)
+    def get_posts_for_channel(self, channel_id, params=None, options=None):
+        return self.client.get(Channels.endpoint + "/" + channel_id + "/posts", params=params, options=options)
 
     def search_for_team_posts(self, team_id, options):
         return self.client.post(Teams.endpoint + "/" + team_id + "/posts/search", options=options)
@@ -57,7 +57,7 @@ class Posts(Base):
     def perform_post_action(self, post_id, action_id):
         return self.client.post(self.endpoint + "/" + post_id + "/actions/" + action_id)
 
-    def get_unread_posts_for_channel(self, user_id, channel_id, params=None):
+    def get_unread_posts_for_channel(self, user_id, channel_id, params=None, options=None):
         return self.client.get(
-            Users.endpoint + "/" + user_id + "/channels/" + channel_id + "/posts/unread", params=params
+            Users.endpoint + "/" + user_id + "/channels/" + channel_id + "/posts/unread", params=params, options=options
         )
