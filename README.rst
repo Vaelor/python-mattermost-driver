@@ -1,3 +1,9 @@
+NOTICE
+======
+
+**Please see https://github.com/embl-bio-it/python-mattermost-autodriver for an actually maintained and much better version of this project**
+
+----
 
 .. image:: https://img.shields.io/pypi/v/mattermostdriver.svg
     :target: https://pypi.python.org/pypi/mattermostdriver
